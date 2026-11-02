@@ -1,0 +1,34 @@
+---
+import Base from '@/layouts/Base.astro';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import type { Lang } from '@/i18n';
+interface Props { post: CollectionEntry<'insights'>; lang: Lang }
+const { post, lang } = Astro.props;
+const { Content } = await render(post);
+const minutes = Math.max(1, Math.round((post.body ?? '').split(/\s+/).filter(Boolean).length / 200));
+const d = post.data;
+const date = d.date.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base lang={lang} title={d.title} description={d.description} type="article" ogImage={d.cover?.src}>
+  <article>
+    <header class="section--tight">
+      <div class="wrap">
+        <p class="mute"><time datetime={d.date.toISOString()}>{date}</time>{` · ${minutes} ${lang === 'de' ? 'Min. Lesezeit' : 'min read'}`}</p>
+        <h1 class="title">{d.title}</h1>
+        <p class="lede">{d.description}</p>
+        {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} width="1200" height="675" class="cover" />}
+      </div>
+    </header>
+    <div class="wrap prose"><Content /></div>
+    <footer class="wrap section--tight">
+      <hr class="rule" />
+      <p class="mute">{lang === 'de' ? 'Fragen dazu? ' : 'Questions? '}<a href={lang === 'de' ? '/kontakt' : '/en/contact'}>{lang === 'de' ? 'Schreib mir.' : 'Get in touch.'}</a></p>
+    </footer>
+  </article>
+</Base>
+<style>
+  .title { font-size: var(--fs-6); max-width: 22ch; }
+  .cover { border-radius: var(--radius); margin-top: 2rem; aspect-ratio: 16/9; object-fit: cover; }
+</style>

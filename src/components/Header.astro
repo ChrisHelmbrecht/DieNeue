@@ -1,0 +1,59 @@
+---
+import { nav, t, localePath, switchLang, type Lang } from '@/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = t(lang);
+const other: Lang = lang === 'de' ? 'en' : 'de';
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === localePath(lang, href) || path.startsWith(localePath(lang, href) + '/');
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href={localePath(lang)} aria-label="Die Neue – Start">
+      <img src="/logo.svg" alt="" width="36" height="36" />
+      <span>Die Neue</span>
+    </a>
+    <nav aria-label={lang === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
+      <ul>
+        {nav[lang].map((item) => (
+          <li><a href={localePath(lang, item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <details class="mobile">
+      <summary aria-label={lang === 'de' ? 'Menü' : 'Menu'}><span></span><span></span></summary>
+      <ul>
+        {nav[lang].map((item) => <li><a href={localePath(lang, item.href)}>{item.label}</a></li>)}
+        <li><a href={localePath(lang, ui.contactPath)}>{ui.contact}</a></li>
+        <li><a href={switchLang(Astro.url, other)} hreflang={other} lang={other}>{ui.langSwitch}</a></li>
+      </ul>
+    </details>
+    <div class="actions">
+      <a class="lang" href={switchLang(Astro.url, other)} hreflang={other} lang={other}>{ui.langSwitch}</a>
+      <a class="btn btn--ghost btn--sm" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; gap: 1.5rem; min-height: 4.25rem; }
+  .brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-2); letter-spacing: -0.01em; }
+  nav { margin-left: auto; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.4rem; }
+  nav a { text-decoration: none; font-size: var(--fs-0); padding-block: .4rem; border-bottom: 2px solid transparent; }
+  nav a[aria-current='page'] { border-bottom-color: var(--signal); }
+  .actions { display: flex; align-items: center; gap: 1rem; }
+  .lang { font-size: var(--fs-0); text-decoration: none; color: var(--mute); }
+  .btn--sm { padding: .5rem 1rem; font-size: var(--fs-0); }
+  .mobile { display: none; margin-left: auto; }
+  .mobile summary { list-style: none; cursor: pointer; width: 2.4rem; height: 2.4rem; display: grid; place-content: center; gap: 6px; }
+  .mobile summary::-webkit-details-marker { display: none; }
+  .mobile summary span { display: block; width: 24px; height: 2px; background: currentColor; }
+  .mobile ul { position: absolute; left: 0; right: 0; top: 100%; margin: 0; padding: 1rem var(--gutter) 1.5rem; list-style: none; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .mobile li a { display: block; padding: .6rem 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2); text-decoration: none; }
+  @media (max-width: 900px) {
+    nav, .actions { display: none; }
+    .mobile { display: block; }
+  }
+</style>

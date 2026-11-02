@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import InsightCard from '@/components/InsightCard.astro';
+import type { Lang } from '@/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<div class="grid grid-3">
+  {posts.map((p) => <InsightCard post={p} lang={lang} />)}
+</div>

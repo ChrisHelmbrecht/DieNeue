@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { localePath, type Lang } from '@/i18n';
+interface Props { post: CollectionEntry<'insights'>; lang: Lang }
+const { post, lang } = Astro.props;
+const href = localePath(lang, `/insights/${post.data.slug}`);
+const date = post.data.date.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<article class="card">
+  {post.data.cover && (
+    <a href={href} tabindex="-1" aria-hidden="true">
+      <Image src={post.data.cover} alt={post.data.coverAlt ?? ''} width="640" height="360" />
+    </a>
+  )}
+  <time datetime={post.data.date.toISOString()} class="mute">{date}</time>
+  <h3><a href={href}>{post.data.title}</a></h3>
+  <p>{post.data.description}</p>
+</article>
+
+<style>
+  .card img { aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius); margin-bottom: .8rem; }
+  time { font-size: var(--fs-0); display: block; margin-bottom: .3rem; }
+  h3 { font-size: var(--fs-2); }
+  h3 a { text-decoration: none; }
+  h3 a:hover { text-decoration: underline; }
+</style>

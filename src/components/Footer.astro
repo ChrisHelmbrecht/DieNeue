@@ -1,0 +1,39 @@
+---
+import { nav, t, localePath, type Lang } from '@/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = t(lang);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer on-ink">
+  <div class="wrap grid grid-3">
+    <div>
+      <p class="brand">Die Neue</p>
+      <p class="mute">{ui.tagline}</p>
+      <p class="mute">Chris Helmbrecht · München</p>
+    </div>
+    <div>
+      <ul>
+        {nav[lang].map((i) => <li><a href={localePath(lang, i.href)}>{i.label}</a></li>)}
+        <li><a href={localePath(lang, ui.contactPath)}>{ui.contact}</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/kollektiv" rel="me noopener">LinkedIn</a></li>
+        <li><a href="https://www.chrishelmbrecht.com" rel="me noopener">chrishelmbrecht.com</a></li>
+        {ui.footerLegal.map((label, i) => <li><a href={localePath(lang, ui.footerLegalPaths[i])}>{label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+  <div class="wrap copy mute">© {year} Chris Helmbrecht – Die Neue</div>
+</footer>
+
+<style>
+  .site-footer { padding-block: 3.5rem 1.5rem; margin-top: 0; }
+  .brand { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-3); margin-bottom: .3rem; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin-bottom: .4rem; }
+  a { text-decoration: none; }
+  .copy { margin-top: 2.5rem; font-size: var(--fs-0); }
+</style>

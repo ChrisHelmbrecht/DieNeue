@@ -1,0 +1,9 @@
+---
+import Base from '@/layouts/Base.astro';
+import Home from '@/components/Home.astro';
+import { home } from '@/lib/copy';
+const c = home.de;
+---
+<Base lang="de" title={c.meta.title} description={c.meta.description}>
+  <Home lang="de" />
+</Base>

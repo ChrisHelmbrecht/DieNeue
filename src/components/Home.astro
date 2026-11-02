@@ -1,0 +1,161 @@
+---
+import { getCollection } from 'astro:content';
+import { localePath, t, type Lang } from '@/i18n';
+import { home } from '@/lib/copy';
+import InsightCard from '@/components/InsightCard.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = home[lang];
+const ui = t(lang);
+const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+<!-- HERO: drei Probleme, direkt angesprochen -->
+<section class="hero on-ink">
+  <div class="wrap">
+    <p class="kicker">{c.hero.kicker}</p>
+    <h1>{c.hero.question}</h1>
+    <div class="problems">
+      {c.hero.problems.map((p, i) => (
+        <details class="problem" name="problem" open={i === 0 ? true : undefined}>
+          <summary><span class="statement">{p.statement}</span><span class="toggle" aria-hidden="true"></span></summary>
+          <div class="answer">
+            <p>{p.answer}</p>
+            <a class="btn" href={localePath(lang, p.href)}>{p.cta}</a>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="section">
+  <div class="wrap split">
+    <h2>{c.intro.h}</h2>
+    <div>
+      {c.intro.p.map((p) => <p class="lede">{p}</p>)}
+      <a href={localePath(lang, lang === 'de' ? '/ueber-mich' : '/about')}>{lang === 'de' ? 'Mehr über mich' : 'More about me'}</a>
+    </div>
+  </div>
+</section>
+
+<!-- METHODE -->
+<section class="section alt">
+  <div class="wrap">
+    <h2>{c.method.h}</h2>
+    <p class="lede">{c.method.lede}</p>
+    <ol class="steps">
+      {c.method.steps.map((s, i) => (
+        <li>
+          <span class="num">{i + 1}</span>
+          <h3>{s.name}</h3>
+          <p>{s.what}</p>
+          <p class="out">{s.out}</p>
+        </li>
+      ))}
+    </ol>
+    <a class="btn btn--ghost" href={localePath(lang, c.method.href)}>{c.method.more}</a>
+  </div>
+</section>
+
+<!-- LEISTUNGEN -->
+<section class="section">
+  <div class="wrap">
+    <h2>{c.services.h}</h2>
+    <p class="lede">{c.services.lede}</p>
+    <div class="services">
+      {c.services.items.map((s) => (
+        <a class="service" href={localePath(lang, s.href)}>
+          <h3>{s.name}</h3>
+          <p class="who">{s.who}</p>
+          <p>{s.what}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- NETZWERK -->
+<section class="section on-ink">
+  <div class="wrap split">
+    <h2>{c.network.h}</h2>
+    <div>{c.network.p.map((p) => <p class="lede">{p}</p>)}</div>
+  </div>
+</section>
+
+<!-- KUNDEN -->
+<section class="section">
+  <div class="wrap">
+    <h2>{c.proof.h}</h2>
+    <p class="lede">{c.proof.lede}</p>
+    <ul class="clients">
+      {c.proof.clients.map((n) => <li>{n}</li>)}
+    </ul>
+    <a href={localePath(lang, '/cases')}>{ui.allCases}</a>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+{posts.length > 0 && (
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Insights</h2>
+      <div class="grid grid-3">
+        {posts.map((p) => <InsightCard post={p} lang={lang} />)}
+      </div>
+      <p><a href={localePath(lang, '/insights')}>{ui.allInsights}</a></p>
+    </div>
+  </section>
+)}
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="wrap">
+    <h2>{c.cta.h}</h2>
+    <p class="lede">{c.cta.p}</p>
+    <a class="btn" href={localePath(lang, ui.contactPath)}>{c.cta.button}</a>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem); }
+  .kicker { color: var(--on-ink-mute); font-size: var(--fs-0); margin-bottom: 1.5rem; }
+  .hero h1 { font-size: var(--fs-4); font-weight: 500; color: var(--on-ink-mute); margin-bottom: 2rem; }
+  .problems { border-top: 1px solid var(--ink-2); }
+  .problem { border-bottom: 1px solid var(--ink-2); }
+  .problem summary { list-style: none; cursor: pointer; display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding-block: 1.4rem; }
+  .problem summary::-webkit-details-marker { display: none; }
+  .statement { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-7); line-height: 1.02; letter-spacing: -0.02em; max-width: 20ch; }
+  .problem[open] .statement { color: #fff; }
+  .problem:not([open]) .statement { color: var(--on-ink-mute); }
+  .problem:not([open]) summary:hover .statement { color: var(--on-ink); }
+  .toggle { flex: none; width: 1.4rem; height: 1.4rem; margin-top: .6rem; position: relative; }
+  .toggle::before, .toggle::after { content: ''; position: absolute; inset: 0; margin: auto; background: currentColor; }
+  .toggle::before { width: 100%; height: 2px; }
+  .toggle::after { width: 2px; height: 100%; transition: transform .2s; }
+  .problem[open] .toggle::after { transform: scaleY(0); }
+  .answer { padding-bottom: 2rem; }
+  .answer p { font-size: var(--fs-2); line-height: 1.4; max-width: 52ch; color: var(--on-ink); }
+  @media (max-width: 600px) { .statement { font-size: var(--fs-5); } }
+
+  .steps { max-width: none; list-style: none; counter-reset: step; margin: 2rem 0; padding: 0; display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .steps li { border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .num { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-3); color: var(--signal); display: block; margin-bottom: .5rem; }
+  .out { font-family: var(--font-display); font-weight: 600; }
+
+  .services { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); border-top: 1px solid var(--line); margin-top: 2rem; }
+  .service { text-decoration: none; padding: 1.8rem 1.4rem 1.8rem 0; border-bottom: 1px solid var(--line); }
+  .service + .service { border-left: 1px solid var(--line); padding-left: 1.4rem; }
+  @media (max-width: 700px) { .service + .service { border-left: 0; padding-left: 0; } }
+  .service:hover h3 { color: var(--signal); }
+  .who { color: var(--mute); }
+
+  .clients { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2); max-width: none; }
+
+  .cta { background: var(--signal); color: #fff; }
+  .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }
+  .cta .btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .cta .lede { color: #dfe4ff; }
+</style>
