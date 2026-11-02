@@ -18,5 +18,6 @@ npm run build    # prüft Typen und baut nach dist/
 - `assets-raw/` – Rohmaterial (Fotos, Logos) von der alten Seite, wird nicht ausgeliefert
 - `public/` – wird 1:1 ausgeliefert (Logo, Favicon, robots.txt)
 
-## Deploy
-Push auf `main` baut die Seite und veröffentlicht sie über GitHub Pages (Staging). Für dieneue.social später: DNS auf Pages oder `dist/` per rsync auf den DigitalOcean-Server.
+## Deploy (Plesk)
+Jeder Push auf `main` baut die Seite in GitHub Actions und schreibt das fertige HTML in den Branch **`deploy`** (nur `dist/`-Inhalt, keine Quellen).
+In Plesk: Git-Repository `https://github.com/ChrisHelmbrecht/dieneue.git`, Branch `deploy`, Deploy-Modus „Automatisch“, Zielverzeichnis = Document Root der (Sub-)Domain. Node.js wird auf dem Server nicht benötigt.
