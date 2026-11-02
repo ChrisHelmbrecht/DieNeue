@@ -89,7 +89,7 @@ export const home: Record<Lang, HomeCopy> = {
     proof: {
       h: 'Kunden',
       lede: 'Sportverband, Mittelstand, Start-up, Marke. In Deutschland, Norwegen, den USA und früher in Russland.',
-      clients: ['BLSV Sportcamps', 'VGAN Chocolate', 'DRAPALIN Pharmaceuticals', 'Sportschule Oberhaching', 'Deutsche Schule Moskau', 'Red Bull', 'Volkswagen', 'Volvo', 'New Balance', 'Leopolis Hotel'],
+      clients: ['BLSV Sportcamps', 'VGAN Chocolate', 'Sportschule Oberhaching', 'Deutsche Schule Moskau', 'Red Bull', 'Volkswagen', 'Volvo', 'New Balance', 'Leopolis Hotel'],
     },
     cta: {
       h: 'Erzähl mir dein Problem.',
@@ -169,7 +169,7 @@ export const home: Record<Lang, HomeCopy> = {
     proof: {
       h: 'Clients',
       lede: 'Sports association, mid-sized company, start-up, brand. In Germany, Norway, the US and, earlier, Russia.',
-      clients: ['BLSV Sportcamps', 'VGAN Chocolate', 'DRAPALIN Pharmaceuticals', 'Sportschule Oberhaching', 'German School Moscow', 'Red Bull', 'Volkswagen', 'Volvo', 'New Balance', 'Leopolis Hotel'],
+      clients: ['BLSV Sportcamps', 'VGAN Chocolate', 'Sportschule Oberhaching', 'German School Moscow', 'Red Bull', 'Volkswagen', 'Volvo', 'New Balance', 'Leopolis Hotel'],
     },
     cta: {
       h: 'Tell me your problem.',

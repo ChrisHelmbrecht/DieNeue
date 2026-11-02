@@ -1,0 +1,84 @@
+---
+/* Interaktiver Kreislauf: vier Schritte als Ring, Klick/Hover zeigt Details; läuft von selbst weiter */
+import type { Lang } from '@/i18n';
+interface Props { steps: { name: string; what: string; out: string }[]; lang: Lang }
+const { steps, lang } = Astro.props;
+const r = 150, cx = 200, cy = 200;
+const pos = (i: number) => {
+  const a = (-90 + i * (360 / steps.length)) * Math.PI / 180;
+  return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+};
+---
+<div class="wheel" data-wheel>
+  <svg viewBox="0 0 400 400" role="img" aria-label={lang === 'de' ? 'Kreislauf aus vier Schritten' : 'Cycle of four steps'}>
+    <circle cx={cx} cy={cy} r={r} class="ring" />
+    <circle cx={cx} cy={cy} r={r} class="ring-active" pathLength="100" />
+    {steps.map((s, i) => {
+      const p = pos(i);
+      return (
+        <g class="node" data-i={i} tabindex="0" role="button" aria-pressed={i === 0 ? 'true' : 'false'} transform={`translate(${p.x} ${p.y})`}>
+          <circle r="34" class="dot" />
+          <text class="num" y="7">{i + 1}</text>
+          <text class="label" y="58">{s.name}</text>
+        </g>
+      );
+    })}
+  </svg>
+  <div class="detail">
+    {steps.map((s, i) => (
+      <div class="step" data-i={i} hidden={i !== 0}>
+        <p class="step-num">{i + 1} / {steps.length}</p>
+        <h3>{s.name}</h3>
+        <p>{s.what}</p>
+        <p class="out">{s.out}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-wheel]').forEach((root) => {
+    const nodes = [...root.querySelectorAll<SVGGElement>('.node')];
+    const steps = [...root.querySelectorAll<HTMLElement>('.step')];
+    const ring = root.querySelector<SVGCircleElement>('.ring-active')!;
+    let timer: number | undefined, cur = 0;
+    const show = (i: number) => {
+      cur = i;
+      nodes.forEach((n, j) => n.setAttribute('aria-pressed', String(i === j)));
+      steps.forEach((s, j) => (s.hidden = i !== j));
+      ring.style.strokeDashoffset = String(100 - ((i + 1) / nodes.length) * 100);
+    };
+    const stop = () => { if (timer) { clearInterval(timer); timer = undefined; } };
+    nodes.forEach((n, i) => {
+      n.addEventListener('click', () => { stop(); show(i); });
+      n.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); show(i); } });
+    });
+    show(0);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      timer = window.setInterval(() => show((cur + 1) % nodes.length), 3500);
+      root.addEventListener('pointerenter', stop, { once: true });
+    }
+  });
+</script>
+
+<style>
+  .wheel { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: center; margin-block: 2rem; }
+  @media (min-width: 820px) { .wheel { grid-template-columns: 5fr 6fr; } }
+  svg { width: min(100%, 440px); margin-inline: auto; overflow: visible; }
+  .ring { fill: none; stroke: var(--line); stroke-width: 3; }
+  .ring-active { fill: none; stroke: var(--signal); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 75; transform: rotate(-90deg); transform-origin: center; transition: stroke-dashoffset .5s ease; }
+  .node { cursor: pointer; outline: none; }
+  .dot { fill: var(--paper); stroke: var(--ink); stroke-width: 3; transition: fill .2s, stroke .2s; }
+  .node:hover .dot, .node:focus-visible .dot { stroke: var(--signal); }
+  .node[aria-pressed='true'] .dot { fill: var(--signal); stroke: var(--signal); }
+  .num { font-family: var(--font-display); font-weight: 700; font-size: 22px; text-anchor: middle; fill: var(--ink); }
+  .node[aria-pressed='true'] .num { fill: #fff; }
+  .label { font-family: var(--font-display); font-weight: 600; font-size: 15px; text-anchor: middle; fill: var(--ink); }
+  .node:focus-visible .dot { stroke-width: 5; }
+  .detail { min-height: 12rem; }
+  .step { animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .step { animation: none; } }
+  .step-num { color: var(--signal); font-family: var(--font-display); font-weight: 600; margin-bottom: .2rem; }
+  .out { font-family: var(--font-display); font-weight: 600; }
+</style>

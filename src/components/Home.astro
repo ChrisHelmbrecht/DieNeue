@@ -2,7 +2,11 @@
 import { getCollection } from 'astro:content';
 import { localePath, t, type Lang } from '@/i18n';
 import { home } from '@/lib/copy';
+import { showreel, work } from '@/lib/media';
 import InsightCard from '@/components/InsightCard.astro';
+import MethodWheel from '@/components/MethodWheel.astro';
+import VideoFacade from '@/components/VideoFacade.astro';
+import WorkStrip from '@/components/WorkStrip.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const c = home[lang];
@@ -10,23 +14,39 @@ const ui = t(lang);
 const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e.data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
+const de = lang === 'de';
 ---
-<!-- HERO: drei Probleme, direkt angesprochen -->
+<!-- HERO: Porträt + drei Probleme als Tabs -->
 <section class="hero on-ink">
-  <div class="wrap">
-    <p class="kicker">{c.hero.kicker}</p>
-    <h1>{c.hero.question}</h1>
-    <div class="problems">
-      {c.hero.problems.map((p, i) => (
-        <details class="problem" name="problem" open={i === 0 ? true : undefined}>
-          <summary><span class="statement">{p.statement}</span><span class="toggle" aria-hidden="true"></span></summary>
-          <div class="answer">
-            <p>{p.answer}</p>
-            <a class="btn" href={localePath(lang, p.href)}>{p.cta}</a>
-          </div>
-        </details>
-      ))}
+  <div class="wrap hero-grid">
+    <div class="portrait">
+      <img src="/images/chris-portrait.svg" alt={de ? 'Chris Helmbrecht' : 'Chris Helmbrecht'} width="720" height="900" fetchpriority="high" />
     </div>
+    <div class="hero-text">
+      <p class="kicker">{c.hero.kicker}</p>
+      <p class="question">{c.hero.question}</p>
+      <div class="tabs" data-tabs>
+        <div class="tablist" role="tablist" aria-label={de ? 'Typische Probleme' : 'Typical problems'}>
+          {c.hero.problems.map((p, i) => (
+            <button role="tab" id={`tab-${i}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`panel-${i}`} tabindex={i === 0 ? 0 : -1}>{p.cta}</button>
+          ))}
+        </div>
+        {c.hero.problems.map((p, i) => (
+          <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} hidden={i !== 0}>
+            <h1>{p.statement}</h1>
+            <p class="answer">{p.answer}</p>
+            <a class="btn" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWREEL -->
+<section class="section--tight reel">
+  <div class="wrap">
+    <VideoFacade video={showreel} lang={lang} />
   </div>
 </section>
 
@@ -36,26 +56,17 @@ const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e
     <h2>{c.intro.h}</h2>
     <div>
       {c.intro.p.map((p) => <p class="lede">{p}</p>)}
-      <a href={localePath(lang, lang === 'de' ? '/ueber-mich' : '/about')}>{lang === 'de' ? 'Mehr über mich' : 'More about me'}</a>
+      <a href={localePath(lang, de ? '/ueber-mich' : '/about')}>{de ? 'Mehr über mich' : 'More about me'}</a>
     </div>
   </div>
 </section>
 
-<!-- METHODE -->
+<!-- METHODE: interaktiver Kreis -->
 <section class="section alt">
   <div class="wrap">
     <h2>{c.method.h}</h2>
     <p class="lede">{c.method.lede}</p>
-    <ol class="steps">
-      {c.method.steps.map((s, i) => (
-        <li>
-          <span class="num">{i + 1}</span>
-          <h3>{s.name}</h3>
-          <p>{s.what}</p>
-          <p class="out">{s.out}</p>
-        </li>
-      ))}
-    </ol>
+    <MethodWheel steps={c.method.steps} lang={lang} />
     <a class="btn btn--ghost" href={localePath(lang, c.method.href)}>{c.method.more}</a>
   </div>
 </section>
@@ -77,29 +88,39 @@ const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e
   </div>
 </section>
 
+<!-- ARBEITEN: Bildleiste -->
+<section class="section on-ink work">
+  <div class="wrap">
+    <h2>{de ? 'Arbeiten' : 'Work'}</h2>
+    <p class="lede">{de ? 'Filme, Kampagnen, Webseiten, Social – eine Auswahl aus den letzten Jahren.' : 'Films, campaigns, websites, social – a selection from recent years.'}</p>
+  </div>
+  <WorkStrip items={work[lang]} lang={lang} />
+</section>
+
 <!-- NETZWERK -->
-<section class="section on-ink">
+<section class="section">
   <div class="wrap split">
     <h2>{c.network.h}</h2>
     <div>{c.network.p.map((p) => <p class="lede">{p}</p>)}</div>
   </div>
 </section>
 
-<!-- KUNDEN -->
-<section class="section">
+<!-- KUNDEN: Laufband -->
+<section class="section--tight alt clients-band">
   <div class="wrap">
-    <h2>{c.proof.h}</h2>
     <p class="lede">{c.proof.lede}</p>
-    <ul class="clients">
+  </div>
+  <div class="marquee" aria-label={c.proof.h}>
+    <ul>
       {c.proof.clients.map((n) => <li>{n}</li>)}
+      {c.proof.clients.map((n) => <li aria-hidden="true">{n}</li>)}
     </ul>
-    <a href={localePath(lang, '/cases')}>{ui.allCases}</a>
   </div>
 </section>
 
 <!-- INSIGHTS -->
 {posts.length > 0 && (
-  <section class="section alt">
+  <section class="section">
     <div class="wrap">
       <h2>Insights</h2>
       <div class="grid grid-3">
@@ -119,31 +140,54 @@ const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e
   </div>
 </section>
 
-<style>
-  .hero { padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem); }
-  .kicker { color: var(--on-ink-mute); font-size: var(--fs-0); margin-bottom: 1.5rem; }
-  .hero h1 { font-size: var(--fs-4); font-weight: 500; color: var(--on-ink-mute); margin-bottom: 2rem; }
-  .problems { border-top: 1px solid var(--ink-2); }
-  .problem { border-bottom: 1px solid var(--ink-2); }
-  .problem summary { list-style: none; cursor: pointer; display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding-block: 1.4rem; }
-  .problem summary::-webkit-details-marker { display: none; }
-  .statement { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-7); line-height: 1.02; letter-spacing: -0.02em; max-width: 20ch; }
-  .problem[open] .statement { color: #fff; }
-  .problem:not([open]) .statement { color: var(--on-ink-mute); }
-  .problem:not([open]) summary:hover .statement { color: var(--on-ink); }
-  .toggle { flex: none; width: 1.4rem; height: 1.4rem; margin-top: .6rem; position: relative; }
-  .toggle::before, .toggle::after { content: ''; position: absolute; inset: 0; margin: auto; background: currentColor; }
-  .toggle::before { width: 100%; height: 2px; }
-  .toggle::after { width: 2px; height: 100%; transition: transform .2s; }
-  .problem[open] .toggle::after { transform: scaleY(0); }
-  .answer { padding-bottom: 2rem; }
-  .answer p { font-size: var(--fs-2); line-height: 1.4; max-width: 52ch; color: var(--on-ink); }
-  @media (max-width: 600px) { .statement { font-size: var(--fs-5); } }
+<script>
+  // Tabs im Hero: Klick, Pfeiltasten, und sanfter Auto-Wechsel bis zur ersten Interaktion
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role=tabpanel]')];
+    let timer: number | undefined;
+    const show = (i: number) => {
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
+      panels.forEach((p, j) => { p.hidden = i !== j; });
+    };
+    const stop = () => { if (timer) { clearInterval(timer); timer = undefined; } };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => { stop(); show(i); });
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault(); stop();
+        const n = (i + d + tabs.length) % tabs.length; show(n); tabs[n].focus();
+      });
+    });
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) {
+      let i = 0;
+      timer = window.setInterval(() => { i = (i + 1) % tabs.length; show(i); }, 6000);
+      root.addEventListener('pointerenter', stop, { once: true });
+    }
+  });
+</script>
 
-  .steps { max-width: none; list-style: none; counter-reset: step; margin: 2rem 0; padding: 0; display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
-  .steps li { border-top: 2px solid var(--ink); padding-top: 1rem; }
-  .num { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-3); color: var(--signal); display: block; margin-bottom: .5rem; }
-  .out { font-family: var(--font-display); font-weight: 600; }
+<style>
+  .hero { padding-block: clamp(2.5rem, 6vw, 5rem); overflow: hidden; }
+  .hero-grid { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 4fr 7fr; } }
+  .portrait img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); filter: grayscale(1) contrast(1.05); background: var(--ink-2); }
+  @media (max-width: 899px) { .portrait { max-width: 260px; } .portrait img { aspect-ratio: 1; } }
+  .kicker { color: var(--on-ink-mute); font-size: var(--fs-0); margin-bottom: .4rem; }
+  .question { font-family: var(--font-display); font-size: var(--fs-3); color: var(--on-ink-mute); margin-bottom: 1.2rem; }
+  .tablist { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.6rem; }
+  .tablist button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); color: var(--on-ink-mute); background: transparent; border: 1px solid var(--ink-2); border-radius: 999px; padding: .5rem 1rem; cursor: pointer; }
+  .tablist button[aria-selected='true'] { color: #fff; border-color: var(--signal); background: var(--signal); }
+  .tablist button:hover { color: #fff; }
+  .hero h1 { font-size: var(--fs-7); max-width: 20ch; color: #fff; margin-bottom: 1rem; }
+  .answer { font-size: var(--fs-2); line-height: 1.45; max-width: 50ch; color: var(--on-ink); }
+  [role=tabpanel] { animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { [role=tabpanel] { animation: none; } }
+
+  .reel { background: var(--ink); padding-top: 0; }
 
   .services { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); border-top: 1px solid var(--line); margin-top: 2rem; }
   .service { text-decoration: none; padding: 1.8rem 1.4rem 1.8rem 0; border-bottom: 1px solid var(--line); }
@@ -152,7 +196,11 @@ const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e
   .service:hover h3 { color: var(--signal); }
   .who { color: var(--mute); }
 
-  .clients { list-style: none; padding: 0; margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2); max-width: none; }
+  .marquee { overflow: hidden; margin-top: 1.5rem; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquee ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 3rem; width: max-content; max-width: none; animation: scroll 40s linear infinite; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-3); white-space: nowrap; }
+  .marquee:hover ul { animation-play-state: paused; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee ul { animation: none; flex-wrap: wrap; width: auto; gap: 1rem 2rem; } .marquee { mask-image: none; } }
 
   .cta { background: var(--signal); color: #fff; }
   .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }

@@ -1,0 +1,48 @@
+---
+/* Horizontal scrollbare Bildleiste mit Pfeilen; Bilder/Videos aus src/lib/media.ts */
+import type { Lang } from '@/i18n';
+import type { WorkItem } from '@/lib/media';
+interface Props { items: WorkItem[]; lang: Lang }
+const { items, lang } = Astro.props;
+---
+<div class="strip" data-strip>
+  <ul class="track" tabindex="0" aria-label={lang === 'de' ? 'Ausgewählte Arbeiten' : 'Selected work'}>
+    {items.map((w) => (
+      <li>
+        <a href={w.href ?? '#'} class:list={[{ 'no-link': !w.href }]}>
+          <img src={w.image} alt={w.alt} width="640" height="400" loading="lazy" />
+          <span class="meta"><strong>{w.client}</strong> · {w.kind}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="controls">
+    <button type="button" data-dir="-1" aria-label={lang === 'de' ? 'Zurück' : 'Previous'}>‹</button>
+    <button type="button" data-dir="1" aria-label={lang === 'de' ? 'Weiter' : 'Next'}>›</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-strip]').forEach((s) => {
+    const track = s.querySelector<HTMLElement>('.track')!;
+    s.querySelectorAll<HTMLButtonElement>('[data-dir]').forEach((b) =>
+      b.addEventListener('click', () => track.scrollBy({ left: Number(b.dataset.dir) * track.clientWidth * 0.8, behavior: 'smooth' })),
+    );
+  });
+</script>
+
+<style>
+  .strip { position: relative; margin-top: 1.5rem; }
+  .track { list-style: none; margin: 0; padding: 0 var(--gutter); max-width: none; display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .track::-webkit-scrollbar { display: none; }
+  .track li { flex: 0 0 min(78vw, 420px); scroll-snap-align: start; }
+  .track a { text-decoration: none; display: block; }
+  .track img { aspect-ratio: 16/10; object-fit: cover; border-radius: var(--radius); background: var(--ink-2); transition: transform .25s ease; }
+  .track a:not(.no-link):hover img { transform: translateY(-4px); }
+  .no-link { pointer-events: none; }
+  .meta { display: block; margin-top: .6rem; font-size: var(--fs-0); color: var(--on-ink-mute); }
+  .meta strong { color: var(--on-ink); font-weight: 600; }
+  .controls { display: flex; gap: .5rem; justify-content: flex-end; padding: 1rem var(--gutter) 0; }
+  .controls button { width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 1px solid var(--on-ink-mute); background: transparent; color: var(--on-ink); font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .controls button:hover { border-color: #fff; color: #fff; }
+</style>
