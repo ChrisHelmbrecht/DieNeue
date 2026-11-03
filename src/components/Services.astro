@@ -31,7 +31,10 @@ const L = de
         <h2>{s.name}</h2>
         <p class="problem">{s.problem}</p>
       </div>
-      <img src={s.image} alt={s.imageAlt} width="1200" height="900" loading="lazy" />
+      <figure class="photo">
+        <img src={s.image} alt={s.imageAlt} width="1200" height="900" loading="lazy" />
+        {s.credit && <figcaption>{de ? 'Foto' : 'Photo'}: {s.credit}</figcaption>}
+      </figure>
     </div>
 
     <!-- Mitte: Was passiert + Diagramm -->
@@ -73,7 +76,10 @@ const L = de
   .service.on-ink { background: var(--ink); }
   .head { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: center; }
   @media (min-width: 900px) { .head { grid-template-columns: 6fr 5fr; } }
-  .head img { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; }
+  .photo { margin: 0; }
+  .photo img { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; }
+  .photo figcaption { margin-top: .4rem; font-size: .75rem; color: var(--mute); text-align: right; }
+  .on-ink .photo figcaption { color: var(--on-ink-mute); }
   .kicker { font-size: var(--fs-0); color: var(--mute); max-width: 52ch; }
   .on-ink .kicker { color: var(--on-ink-mute); }
   .head h2 { font-size: var(--fs-6); max-width: 16ch; }
