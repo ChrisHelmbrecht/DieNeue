@@ -28,7 +28,7 @@ const insights = defineCollection({
 
 // Cases: Ausgangslage → Lösung → Tools/Team → Ergebnis
 const cases = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/cases' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/cases', generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, '') }),
   schema: ({ image }) =>
     z.object({
       client: z.string(),

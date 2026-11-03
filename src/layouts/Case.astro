@@ -1,0 +1,63 @@
+---
+import Base from '@/layouts/Base.astro';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { localePath, t, type Lang } from '@/i18n';
+interface Props { entry: CollectionEntry<'cases'>; lang: Lang }
+const { entry, lang } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const de = lang === 'de';
+const ui = t(lang);
+---
+<Base lang={lang} title={`${d.client}: ${d.title}`} description={d.summary} type="article" ogImage={d.cover?.src}>
+  <article>
+    <header class="section--tight">
+      <div class="wrap">
+        <p class="mute">{d.client} · {d.sector}{d.period && ` · ${d.period}`}</p>
+        <h1 class="title">{d.title}</h1>
+        <p class="lede">{d.summary}</p>
+        {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} width="1440" height="810" class="cover" />}
+      </div>
+    </header>
+    {d.results.length > 0 && (
+      <section class="section--tight on-ink">
+        <div class="wrap">
+          <dl class="kpis">
+            {d.results.map((r) => <div><dt>{r.value}</dt><dd>{r.label}</dd></div>)}
+          </dl>
+        </div>
+      </section>
+    )}
+    <div class="wrap layout">
+      <aside>
+        <h2 class="side-h">{de ? 'Leistungen' : 'Services'}</h2>
+        <ul class="tags">{d.services.map((s) => <li>{s}</li>)}</ul>
+        {d.url && <p><a href={d.url} rel="noopener">{d.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></p>}
+      </aside>
+      <div class="prose"><Content /></div>
+    </div>
+    <footer class="section cta">
+      <div class="wrap">
+        <h2>{de ? 'Ähnliches Problem?' : 'Similar problem?'}</h2>
+        <a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
+        <p class="mute"><a href={localePath(lang, '/cases')}>{ui.allCases}</a></p>
+      </div>
+    </footer>
+  </article>
+</Base>
+<style>
+  .title { font-size: var(--fs-6); max-width: 22ch; }
+  .cover { border-radius: var(--radius); margin-top: 2rem; aspect-ratio: 16/9; object-fit: cover; }
+  .kpis { display: grid; gap: 1.5rem var(--gutter); grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); margin: 0; }
+  .kpis dt { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-5); line-height: 1; color: #9fb0ff; }
+  .kpis dd { margin: .3rem 0 0; color: var(--on-ink-mute); font-size: var(--fs-0); }
+  .layout { display: grid; gap: var(--gutter); grid-template-columns: 1fr; padding-block: 3rem; }
+  @media (min-width: 900px) { .layout { grid-template-columns: 3fr 8fr; } aside { position: sticky; top: 6rem; align-self: start; } }
+  .side-h { font-size: var(--fs-0); color: var(--mute); font-weight: 600; margin-bottom: .5rem; }
+  .tags { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tags li { border: 1px solid var(--line); border-radius: 999px; padding: .25rem .7rem; font-size: var(--fs-0); }
+  .cta { background: var(--paper-2); }
+  .cta .mute { margin-top: 1rem; }
+</style>
