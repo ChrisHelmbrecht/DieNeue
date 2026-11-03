@@ -13,12 +13,34 @@ export function langFromUrl(url: URL): Lang {
   return (langs as string[]).includes(first) ? (first as Lang) : defaultLang;
 }
 
-/** Gleicher Pfad in der anderen Sprache (für den Sprachumschalter) */
-export function switchLang(url: URL, to: Lang) {
+/** Seiten, die in den Sprachen unterschiedlich heißen (DE → EN) */
+const routes: Record<string, string> = {
+  leistungen: 'services',
+  methode: 'method',
+  'ueber-mich': 'about',
+  kontakt: 'contact',
+  impressum: 'imprint',
+  datenschutz: 'privacy',
+};
+const routesEnDe = Object.fromEntries(Object.entries(routes).map(([de, en]) => [en, de]));
+
+/**
+ * Gleiche Seite in der anderen Sprache (für Sprachumschalter und hreflang).
+ * `override` erlaubt einer Seite, das Ziel selbst festzulegen (z. B. Artikel ohne Übersetzung → Artikelübersicht).
+ */
+export function switchLang(url: URL, to: Lang, override?: Partial<Record<Lang, string>>) {
+  if (override?.[to]) return override[to]!;
   const current = langFromUrl(url);
   let path = url.pathname;
   if (current !== defaultLang) path = path.replace(/^\/[a-z]{2}(?=\/|$)/, '') || '/';
-  return localePath(to, path);
+  if (current === to) return localePath(to, path);
+  const parts = path.split('/').filter(Boolean);
+  if (parts.length > 0) {
+    const map = to === 'en' ? routes : routesEnDe;
+    parts[0] = map[parts[0]] ?? parts[0];
+  }
+  const translated = '/' + parts.join('/') + (parts.length && path.endsWith('/') ? '/' : '');
+  return localePath(to, translated);
 }
 
 export const nav = {

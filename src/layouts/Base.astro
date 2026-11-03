@@ -14,14 +14,16 @@ interface Props {
   lang?: Lang;
   ogImage?: string;
   type?: 'website' | 'article';
+  alt?: Partial<Record<Lang, string>>;
 }
 const lang = Astro.props.lang ?? langFromUrl(Astro.url);
 const { title, description, ogImage = '/images/og-default.jpg', type = 'website' } = Astro.props;
 const site = 'Die Neue';
 const fullTitle = title === site ? title : `${title} – ${site}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const altDe = new URL(switchLang(Astro.url, 'de'), Astro.site);
-const altEn = new URL(switchLang(Astro.url, 'en'), Astro.site);
+const altOverride = Astro.props.alt;
+const altDe = new URL(switchLang(Astro.url, 'de', altOverride), Astro.site);
+const altEn = new URL(switchLang(Astro.url, 'en', altOverride), Astro.site);
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/en' || Astro.url.pathname === '/en/';
 const orgLd = {
   '@context': 'https://schema.org',
@@ -72,7 +74,7 @@ const orgLd = {
   </head>
   <body>
     <a class="skip" href="#main">{t(lang).skip}</a>
-    <Header lang={lang} />
+    <Header lang={lang} alt={altOverride} />
     <main id="main">
       <slot />
     </main>

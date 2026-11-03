@@ -1,7 +1,7 @@
 ---
 import { nav, t, localePath, switchLang, type Lang } from '@/i18n';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props { lang: Lang; alt?: Partial<Record<Lang, string>> }
+const { lang, alt } = Astro.props;
 const ui = t(lang);
 const other: Lang = lang === 'de' ? 'en' : 'de';
 const path = Astro.url.pathname;
@@ -25,11 +25,11 @@ const isActive = (href: string) => path === localePath(lang, href) || path.start
       <ul>
         {nav[lang].map((item) => <li><a href={localePath(lang, item.href)}>{item.label}</a></li>)}
         <li><a href={localePath(lang, ui.contactPath)}>{ui.contact}</a></li>
-        <li><a href={switchLang(Astro.url, other)} hreflang={other} lang={other}>{ui.langSwitch}</a></li>
+        <li><a href={switchLang(Astro.url, other, alt)} hreflang={other} lang={other}>{ui.langSwitch}</a></li>
       </ul>
     </details>
     <div class="actions">
-      <a class="lang" href={switchLang(Astro.url, other)} hreflang={other} lang={other}>{ui.langSwitch}</a>
+      <a class="lang" href={switchLang(Astro.url, other, alt)} hreflang={other} lang={other}>{ui.langSwitch}</a>
       <a class="btn btn--ghost btn--sm" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
     </div>
   </div>

@@ -43,7 +43,7 @@ const jsonLd = {
   mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
 };
 ---
-<Base lang={lang} title={d.title} description={d.description} type="article" ogImage={d.cover?.src}>
+<Base lang={lang} title={d.title} description={d.description} type="article" ogImage={d.cover?.src} alt={twin ? undefined : { [other]: localePath(other, '/insights') }}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="section--tight">

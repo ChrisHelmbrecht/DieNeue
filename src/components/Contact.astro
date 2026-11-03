@@ -80,5 +80,7 @@ const L = de
   .hp { position: absolute; left: -9999px; }
   .btn { justify-self: start; }
   .small { font-size: var(--fs-0); margin: 0; }
-  .status { margin: 0; font-weight: 500; }
+  .status { margin: 0; color: var(--signal); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-2); line-height: 1.35; }
+  .status:empty { display: none; }
+  .status a { color: inherit; }
 </style>
