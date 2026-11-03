@@ -7,7 +7,8 @@ import { owner as o } from '@/lib/legal';
   <p>{o.name}, {o.street}, {o.city}, Telefon {o.phone}, E-Mail <a href={`mailto:${o.email}`}>{o.email}</a>.</p>
 
   <h2>2. Hosting und Server-Logfiles</h2>
-  <p>Diese Website wird auf einem Server bei DigitalOcean gehostet. Beim Aufruf werden automatisch Server-Logfiles erzeugt: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, übertragene Datenmenge, Browser und Betriebssystem, verweisende Seite. Diese Daten dienen dem sicheren und stabilen Betrieb (Art. 6 Abs. 1 lit. f DSGVO) und werden nach spätestens 14 Tagen gelöscht. Eine Zusammenführung mit anderen Daten findet nicht statt.</p>
+  <p>Diese Website liegt auf einem Server von DigitalOcean, LLC (USA), im Rechenzentrum {o.hostingRegion}. Mit DigitalOcean besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Für den Fall, dass Daten in die USA übermittelt werden, ist DigitalOcean unter dem EU-US Data Privacy Framework zertifiziert (Angemessenheitsbeschluss der EU-Kommission, Art. 45 DSGVO); hilfsweise gelten die EU-Standardvertragsklauseln.</p>
+  <p>Beim Aufruf werden automatisch Server-Logfiles erzeugt: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, übertragene Datenmenge, Browser und Betriebssystem, verweisende Seite. Diese Daten dienen dem sicheren und stabilen Betrieb der Website. Rechtsgrundlage ist mein berechtigtes Interesse daran (Art. 6 Abs. 1 lit. f DSGVO). Die Logfiles werden nach spätestens 14 Tagen gelöscht und nicht mit anderen Daten zusammengeführt.</p>
 
   <h2>3. Keine Cookies, kein Tracking</h2>
   <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste. Schriften werden vom eigenen Server geladen, nicht von Google. Es gibt deshalb kein Cookie-Banner.</p>
@@ -16,10 +17,17 @@ import { owner as o } from '@/lib/legal';
   <p>Auf der Startseite sind Videos von YouTube eingebettet. Bis du auf „Abspielen“ klickst, wird nur ein Vorschaubild von meinem Server geladen und keine Verbindung zu YouTube aufgebaut. Erst mit dem Klick lädt der Player von YouTube (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Irland) im erweiterten Datenschutzmodus (youtube-nocookie.com). Dabei erhält YouTube deine IP-Adresse und kann eigene Cookies setzen. Rechtsgrundlage ist deine Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO). Details: <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</p>
 
   <h2>5. Kontaktformular und E-Mail</h2>
-  <p>Wenn du mir über das Kontaktformular oder per E-Mail schreibst, speichere ich deine Angaben (Name, E-Mail-Adresse, ggf. Firma, Nachricht), um deine Anfrage zu beantworten und für mögliche Anschlussfragen (Art. 6 Abs. 1 lit. b DSGVO, vorvertragliche Maßnahmen). Die Daten werden gelöscht, sobald sie für den Zweck nicht mehr nötig sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Das Formular wird direkt von meinem Server als E-Mail an mich verschickt; es ist kein Drittanbieter beteiligt.</p>
+  <p>Wenn du mir über das Kontaktformular oder per E-Mail schreibst, verarbeite ich deine Angaben (Name, E-Mail-Adresse, ggf. Firma, Thema, Nachricht), um deine Anfrage zu beantworten und für mögliche Anschlussfragen (Art. 6 Abs. 1 lit. b DSGVO, vorvertragliche Maßnahmen). Die Daten werden gelöscht, sobald sie für den Zweck nicht mehr nötig sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+  <p>Das Formular wird von meinem Server als E-Mail an mein Postfach bei IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, verschickt. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung; die Server stehen in Deutschland.</p>
+  <p>Zum Schutz vor Spam und Missbrauch speichert das Formular einen nicht umkehrbaren Hashwert deiner IP-Adresse für höchstens eine Stunde, um mehr als fünf Anfragen pro Stunde zu blockieren. Danach wird er gelöscht. Die IP-Adresse selbst wird nicht an mich übermittelt. Rechtsgrundlage ist mein berechtigtes Interesse an einem missbrauchsfreien Kontaktformular (Art. 6 Abs. 1 lit. f DSGVO).</p>
 
   <h2>6. Externe Links</h2>
   <p>Diese Seite verlinkt auf externe Websites (z. B. LinkedIn, Kunden-Websites). Für deren Datenverarbeitung gelten die Datenschutzerklärungen der jeweiligen Betreiber.</p>
+
+  <aside class="objection">
+    <h2>Widerspruchsrecht nach Art. 21 DSGVO</h2>
+    <p><strong>Soweit ich Daten auf Grundlage meines berechtigten Interesses verarbeite (Server-Logfiles, Spamschutz im Kontaktformular), kannst du dieser Verarbeitung jederzeit aus Gründen, die sich aus deiner besonderen Situation ergeben, widersprechen.</strong> Eine formlose Nachricht an <a href={`mailto:${o.email}`}>{o.email}</a> genügt. Ich verarbeite die Daten dann nicht mehr, es sei denn, ich kann zwingende schutzwürdige Gründe nachweisen, die deine Interessen überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
+  </aside>
 
   <h2>7. Deine Rechte</h2>
   <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Eine erteilte Einwilligung kannst du jederzeit widerrufen. Außerdem kannst du dich bei einer Aufsichtsbehörde beschweren, in Bayern beim Bayerischen Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach.</p>

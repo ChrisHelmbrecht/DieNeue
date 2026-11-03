@@ -27,17 +27,21 @@ const de = lang === 'de';
       </picture>
     </div>
     <div class="hero-text">
-      <p class="kicker">{c.hero.kicker}</p>
+      <h1 class="kicker">{c.hero.kicker}</h1>
       <p class="question">{c.hero.question}</p>
       <div class="tabs" data-tabs>
         <div class="tablist" role="tablist" aria-label={de ? 'Typische Probleme' : 'Typical problems'}>
           {c.hero.problems.map((p, i) => (
             <button role="tab" id={`tab-${i}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`panel-${i}`} tabindex={i === 0 ? 0 : -1}>{p.cta}</button>
           ))}
+          <button type="button" class="pause" data-pause aria-pressed="false" aria-label={de ? 'Automatischen Wechsel anhalten' : 'Pause automatic rotation'} title={de ? 'Anhalten' : 'Pause'}>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-pause"><rect x="3" y="2" width="3.5" height="12" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" fill="currentColor"/></svg>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-play"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
+          </button>
         </div>
         {c.hero.problems.map((p, i) => (
           <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} hidden={i !== 0}>
-            <h1>{p.statement}</h1>
+            <h2 class="statement">{p.statement}</h2>
             <p class="answer">{p.answer}</p>
             <a class="btn" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
           </div>
@@ -71,7 +75,7 @@ const de = lang === 'de';
 <section class="section alt">
   <div class="wrap">
     <h2>{de ? 'Erfahrung' : 'Experience'}</h2>
-    <p class="lede">{de ? 'Dreißig Jahre in Agenturen, Konzernen und eigenen Firmen. New York, Moskau, München.' : 'Thirty years in agencies, corporations and my own companies. New York, Moscow, Munich.'}</p>
+    <p class="lede">{de ? 'Seit 1995 in Agenturen, Konzernen und eigenen Firmen. New York, Moskau, München.' : 'Since 1995 in agencies, corporations and my own companies. New York, Moscow, Munich.'}</p>
     <Experience lang={lang} />
   </div>
 </section>
@@ -107,7 +111,7 @@ const de = lang === 'de';
 <section class="section on-ink work">
   <div class="wrap">
     <h2>{de ? 'Arbeiten' : 'Work'}</h2>
-    <p class="lede">{de ? 'Filme, Kampagnen, Webseiten, Social – eine Auswahl aus den letzten Jahren.' : 'Films, campaigns, websites, social – a selection from recent years.'}</p>
+    <p class="lede">{de ? 'Filme, Kampagnen, Webseiten, Social – eine Auswahl aus drei Jahrzehnten.' : 'Films, campaigns, websites, social – a selection from three decades.'}</p>
   </div>
   <WorkStrip items={work[lang]} lang={lang} />
 </section>
@@ -146,13 +150,14 @@ const de = lang === 'de';
   // Tabs im Hero: Klick, Pfeiltasten, und sanfter Auto-Wechsel bis zur ersten Interaktion
   document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
     const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const pause = root.querySelector<HTMLButtonElement>('[data-pause]');
     const panels = [...root.querySelectorAll<HTMLElement>('[role=tabpanel]')];
     let timer: number | undefined;
     const show = (i: number) => {
       tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
       panels.forEach((p, j) => { p.hidden = i !== j; });
     };
-    const stop = () => { if (timer) { clearInterval(timer); timer = undefined; } };
+    const stop = () => { if (timer) { clearInterval(timer); timer = undefined; } pause?.setAttribute('aria-pressed', 'true'); pause?.setAttribute('aria-label', pause.dataset.playLabel ?? ''); };
     tabs.forEach((t, i) => {
       t.addEventListener('click', () => { stop(); show(i); });
       t.addEventListener('keydown', (e) => {
@@ -163,11 +168,18 @@ const de = lang === 'de';
       });
     });
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduce) {
-      let i = 0;
-      timer = window.setInterval(() => { i = (i + 1) % tabs.length; show(i); }, 6000);
-      root.addEventListener('pointerenter', stop, { once: true });
-    }
+    let i = 0;
+    const start = () => {
+      if (timer) return;
+      timer = window.setInterval(() => { i = (i + 1) % tabs.length; show(i); }, 7000);
+      pause?.setAttribute('aria-pressed', 'false');
+      pause?.setAttribute('aria-label', pause.dataset.pauseLabel ?? '');
+    };
+    if (pause) { pause.dataset.pauseLabel = pause.getAttribute('aria-label') ?? ''; pause.dataset.playLabel = document.documentElement.lang === 'de' ? 'Automatischen Wechsel fortsetzen' : 'Resume automatic rotation'; }
+    pause?.addEventListener('click', () => (timer ? stop() : start()));
+    tabs.forEach((t, j) => t.addEventListener('click', () => { i = j; }));
+    if (reduce) stop(); else start();
+    root.addEventListener('focusin', (e) => { if ((e.target as HTMLElement) !== pause) stop(); });
   });
 </script>
 
@@ -177,14 +189,20 @@ const de = lang === 'de';
   @media (min-width: 900px) { .hero-grid { grid-template-columns: 4fr 7fr; } }
   .portrait img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); background: var(--ink-2); }
   @media (max-width: 899px) { .portrait { max-width: 260px; } .portrait img { aspect-ratio: 1; } }
-  .kicker { color: var(--on-ink-mute); font-size: var(--fs-0); margin-bottom: .4rem; }
+  .kicker { color: var(--on-ink-mute); font-family: var(--font-body); font-weight: 400; font-size: var(--fs-0); line-height: 1.4; letter-spacing: 0; margin-bottom: .4rem; }
   .question { font-family: var(--font-display); font-size: var(--fs-3); color: var(--on-ink-mute); margin-bottom: 1.2rem; }
   .tablist { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.6rem; }
   .tablist button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); color: var(--on-ink-mute); background: transparent; border: 1px solid var(--ink-2); border-radius: 999px; padding: .5rem 1rem; cursor: pointer; }
   .tablist button[aria-selected='true'] { color: #fff; border-color: var(--signal-light); background: var(--signal); }
   .tablist button:hover { color: #fff; }
-  .hero h1 { font-size: var(--fs-7); max-width: 20ch; color: #fff; margin-bottom: 1rem; }
+  .hero .statement { font-size: var(--fs-7); font-weight: 700; max-width: 20ch; color: #fff; margin-bottom: 1rem; }
   .answer { font-size: var(--fs-2); line-height: 1.45; max-width: 50ch; color: var(--on-ink); }
+  .pause { margin-left: auto; width: 2.1rem; height: 2.1rem; border-radius: 50%; border: 1px solid var(--ink-2); background: transparent; color: var(--on-ink-mute); display: grid; place-content: center; cursor: pointer; }
+  .pause:hover { color: #fff; border-color: var(--on-ink-mute); }
+  .pause svg { width: 14px; height: 14px; max-width: none; }
+  .pause .i-play { display: none; }
+  .pause[aria-pressed='true'] .i-play { display: block; }
+  .pause[aria-pressed='true'] .i-pause { display: none; }
   [role=tabpanel] { animation: fade .35s ease; }
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { [role=tabpanel] { animation: none; } }

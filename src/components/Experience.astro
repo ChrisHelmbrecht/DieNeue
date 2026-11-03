@@ -1,7 +1,8 @@
 ---
 /* Erfahrung in drei Reitern: Branchen (für Kunden), Marken (Breite), Agenturen (für Agenturleute) */
 import type { Lang } from '@/i18n';
-import { industries, brands, agencies } from '@/lib/experience';
+import { industries, brands, topBrands, agencies } from '@/lib/experience';
+const rest = brands.filter((b) => !topBrands.includes(b));
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const de = lang === 'de';
@@ -33,10 +34,16 @@ const tabs = [
   </div>
 
   <div role="tabpanel" id="xp-marken" aria-labelledby="xp-tab-marken" hidden>
-    <p class="lede">{de ? 'Dreißig Jahre, drei Länder, eine Auswahl der Marken – Projekte dazu stehen in den Cases und in der Arbeiten-Leiste.' : 'Thirty years, three countries, a selection of brands – the projects are in the cases and the work strip.'}</p>
+    <p class="lede">{de ? 'Seit 1995, drei Länder, eine Auswahl der Marken – Projekte dazu stehen in den Cases und in der Arbeiten-Leiste.' : 'Since 1995, three countries, a selection of brands – the projects are in the cases and the work strip.'}</p>
     <ul class="wall">
-      {brands.map((b) => <li>{b}</li>)}
+      {topBrands.map((b) => <li>{b}</li>)}
     </ul>
+    <details class="more">
+      <summary>{de ? `Alle ${brands.length} Marken zeigen` : `Show all ${brands.length} brands`}</summary>
+      <ul class="wall wall--small">
+        {rest.map((b) => <li>{b}</li>)}
+      </ul>
+    </details>
   </div>
 
   <div role="tabpanel" id="xp-agenturen" aria-labelledby="xp-tab-agenturen" hidden>
@@ -90,6 +97,11 @@ const tabs = [
 
   .wall { list-style: none; margin: 1.5rem 0 0; padding: 0; max-width: none; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-4); letter-spacing: -0.015em; line-height: 1.2; }
   .wall { font-size: var(--fs-3); }
+  .more { margin-top: 1.5rem; }
+  .more summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; color: var(--signal); width: max-content; }
+  .more summary:hover { text-decoration: underline; }
+  .wall--small { font-size: var(--fs-1); font-weight: 600; gap: .3rem 1.2rem; margin-top: 1rem; }
+  .wall--small li { color: var(--ink) !important; }
   .wall li:nth-child(3n) { color: var(--mute); }
   .wall li:nth-child(7n) { color: var(--signal); }
 

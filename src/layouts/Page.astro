@@ -19,4 +19,6 @@ const { title, description, lang, lede } = Astro.props;
 </Base>
 <style>
   .page-title { font-size: var(--fs-6); max-width: 18ch; }
+  :global(.objection) { border-left: 4px solid var(--signal); background: color-mix(in srgb, var(--signal) 6%, transparent); padding: 1rem 1.4rem; margin: 2rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+  :global(.objection h2) { margin-top: 0; }
 </style>

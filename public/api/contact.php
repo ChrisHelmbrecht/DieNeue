@@ -33,8 +33,10 @@ if ($name === '' || $message === '') fail('missing');
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) fail('email');
 if (preg_match('/[\r\n]/', $name . $email . $topic)) fail('header'); // Header-Injection
 
-// Einfache Rate-Limitierung: max. 5 Mails pro IP und Stunde (Datei im Temp-Verzeichnis)
-$bucket = sys_get_temp_dir() . '/dieneue-contact-' . md5($_SERVER['REMOTE_ADDR'] ?? '') . '.txt';
+// Rate-Limit: max. 5 Anfragen pro Stunde. Gespeichert wird nur ein Hash der IP, Dateien älter als 1 h werden gelöscht.
+$dir = sys_get_temp_dir();
+foreach (glob($dir . '/dieneue-contact-*.txt') ?: [] as $old) { if (filemtime($old) < time() - 3600) @unlink($old); }
+$bucket = $dir . '/dieneue-contact-' . hash('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . date('Y-m-d')) . '.txt';
 $hits = is_file($bucket) ? array_filter(array_map('intval', file($bucket)), fn($t) => $t > time() - 3600) : [];
 if (count($hits) >= 5) fail('rate', 429);
 $hits[] = time();
@@ -48,7 +50,7 @@ $body = implode("\n", [
   "",
   $message,
   "",
-  "— gesendet " . date('d.m.Y H:i') . " über das Kontaktformular, IP " . ($_SERVER['REMOTE_ADDR'] ?? '?'),
+  "— gesendet " . date('d.m.Y H:i') . " über das Kontaktformular auf dieneue.social",
 ]);
 
 $headers = [

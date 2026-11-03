@@ -19,7 +19,7 @@ interface Props {
 const lang = Astro.props.lang ?? langFromUrl(Astro.url);
 const { title, description, ogImage = '/images/og-default.jpg', type = 'website' } = Astro.props;
 const site = 'Die Neue';
-const fullTitle = title === site ? title : `${title} – ${site}`;
+const fullTitle = title.includes(site) ? title : `${title} – ${site}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const altOverride = Astro.props.alt;
 const altDe = new URL(switchLang(Astro.url, 'de', altOverride), Astro.site);

@@ -20,12 +20,12 @@ export type HomeCopy = {
 export const home: Record<Lang, HomeCopy> = {
   de: {
     meta: {
-      title: 'Die Neue',
+      title: 'Die Neue – KI-Beratung & Marketing-Management in München | Chris Helmbrecht',
       description:
         'Chris Helmbrecht – Marketing, KI-Beratung und ein Netzwerk, das liefert. Vom Problem zur messbaren Lösung. München, international.',
     },
     hero: {
-      kicker: 'Die Neue · Chris Helmbrecht',
+      kicker: 'KI-Beratung und Marketing-Management in München – Chris Helmbrecht, Die Neue',
       question: 'Welches davon ist deins?',
       problems: [
         {
@@ -100,12 +100,12 @@ export const home: Record<Lang, HomeCopy> = {
 
   en: {
     meta: {
-      title: 'Die Neue',
+      title: 'Die Neue – AI Consulting & Marketing Management, Munich | Chris Helmbrecht',
       description:
         'Chris Helmbrecht – marketing, AI consulting and a network that delivers. From the problem to a measurable solution. Munich, working internationally.',
     },
     hero: {
-      kicker: 'Die Neue · Chris Helmbrecht',
+      kicker: 'AI consulting and marketing management from Munich – Chris Helmbrecht, Die Neue',
       question: 'Which one is yours?',
       problems: [
         {

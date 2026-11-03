@@ -7,7 +7,8 @@ import { owner as o } from '@/lib/legal';
   <p>{o.name}, {o.street}, {o.city}, Germany, phone {o.phone}, email <a href={`mailto:${o.email}`}>{o.email}</a>.</p>
 
   <h2>2. Hosting and server logs</h2>
-  <p>This website is hosted on a server at DigitalOcean. When you visit, server log files are created automatically: IP address, date and time, page requested, data volume, browser and operating system, referring page. This data serves secure and stable operation (Art. 6 (1) (f) GDPR) and is deleted after 14 days at the latest. It is not combined with other data.</p>
+  <p>This website runs on a server of DigitalOcean, LLC (USA), in the {o.hostingRegionEn} data centre. A data processing agreement under Art. 28 GDPR is in place with DigitalOcean. Should data be transferred to the US, DigitalOcean is certified under the EU-US Data Privacy Framework (EU Commission adequacy decision, Art. 45 GDPR); EU Standard Contractual Clauses apply as a fallback.</p>
+  <p>When you visit, server log files are created automatically: IP address, date and time, page requested, data volume, browser and operating system, referring page. This data serves secure and stable operation of the website. The legal basis is my legitimate interest in that (Art. 6 (1) (f) GDPR). The log files are deleted after 14 days at the latest and are not combined with other data.</p>
 
   <h2>3. No cookies, no tracking</h2>
   <p>This website sets no cookies and uses no analytics or tracking services. Fonts are served from my own server, not from Google. That is why there is no cookie banner.</p>
@@ -16,10 +17,17 @@ import { owner as o } from '@/lib/legal';
   <p>The home page embeds videos from YouTube. Until you click “play”, only a preview image is loaded from my server and no connection to YouTube is made. Only on click does the player load from YouTube (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Ireland) in privacy-enhanced mode (youtube-nocookie.com). YouTube then receives your IP address and may set its own cookies. The legal basis is your consent by clicking (Art. 6 (1) (a) GDPR). Details: <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</p>
 
   <h2>5. Contact form and email</h2>
-  <p>If you write to me via the contact form or by email, I store your details (name, email address, company if given, message) to answer your enquiry and for possible follow-up questions (Art. 6 (1) (b) GDPR, pre-contractual measures). The data is deleted once it is no longer needed for this purpose and no statutory retention obligations apply. The form is sent directly from my server to me as an email; no third-party provider is involved.</p>
+  <p>If you write to me via the contact form or by email, I process your details (name, email address, company if given, topic, message) to answer your enquiry and for possible follow-up questions (Art. 6 (1) (b) GDPR, pre-contractual measures). The data is deleted once it is no longer needed for this purpose and no statutory retention obligations apply.</p>
+  <p>The form is sent from my server as an email to my mailbox at IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany. A data processing agreement is in place with IONOS; the servers are in Germany.</p>
+  <p>To protect against spam and abuse, the form stores an irreversible hash of your IP address for no longer than one hour in order to block more than five enquiries per hour. It is then deleted. The IP address itself is not passed on to me. The legal basis is my legitimate interest in an abuse-free contact form (Art. 6 (1) (f) GDPR).</p>
 
   <h2>6. External links</h2>
   <p>This site links to external websites (e.g. LinkedIn, client websites). Their operators’ privacy policies apply to their data processing.</p>
+
+  <aside class="objection">
+    <h2>Right to object under Art. 21 GDPR</h2>
+    <p><strong>Where I process data on the basis of my legitimate interest (server logs, spam protection in the contact form), you can object to this processing at any time on grounds relating to your particular situation.</strong> An informal message to <a href={`mailto:${o.email}`}>{o.email}</a> is enough. I will then stop processing the data unless I can demonstrate compelling legitimate grounds that override your interests, or the processing serves the establishment, exercise or defence of legal claims.</p>
+  </aside>
 
   <h2>7. Your rights</h2>
   <p>You have the right to access (Art. 15 GDPR), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20) and objection (Art. 21). You can withdraw consent at any time. You can also complain to a supervisory authority; in Bavaria this is the Bayerisches Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach, Germany.</p>

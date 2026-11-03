@@ -20,6 +20,9 @@ export const industries: Industry[] = [
   { name: { de: 'Venture Capital & Start-ups', en: 'Venture capital & start-ups' }, brands: ['Netmedia VC', 'Techno Nord', 'AirLST', 'Vaniday', 'Vintigo', 'Cardmine.com', 'Miavita.com', 'Novomind', 'Aikiu'], note: { de: 'Beratung von Investoren, Interim-Management, Go-to-Market', en: 'Advising investors, interim management, go-to-market' } },
 ];
 
+// Die bekanntesten zuerst sichtbar (Markenwand), Rest hinter „Alle zeigen“
+export const topBrands: string[] = ['Volvo', 'Volkswagen', 'Audi', 'BMW', 'Red Bull', 'Sony Music', 'MTV', 'Bosch', 'Intel', 'Philips', 'HSBC', 'Beiersdorf (Nivea)', 'Absolut Vodka', 'The North Face', 'Salomon'];
+
 // Alphabetisch, damit niemand eine Rangfolge hineinliest
 export const brands: string[] = [
   'Absolut Vodka', 'Aikiu', 'AirLST', 'Audi', 'Austrian Trade Commission', 'Averio', 'Axel Springer', 'Bayerischer Landes-Sportverband (BLSV)', 'Bayerisches Wirtschaftsministerium', 'Beiersdorf (Nivea)', 'BM Intelligence', 'BMW', 'Bosch', 'Burda', 'Cardmine.com', 'Choco Boy', 'Clariden Leu', 'Deutsche Schule Ankara', 'Deutsche Schule Moskau', 'Domodedovo Airport', 'Dr. Scholl’s', 'eTravelBroker', 'Evian', 'First USA', 'Fischer', 'Flughafen Bremen', 'G&S Surfboards', 'Germania', 'Glade', 'Hamburg New Media', 'HSBC', 'Intel', 'Intermark Savills', 'KFC', 'Leopolis Hotel', 'Marussia F1 Team', 'Megafon', 'Miavita.com', 'Motul', 'MTV', 'Net2Phone', 'Netmedia VC', 'New Balance', 'Novomind', 'Orion', 'Philips', 'Rad Air Snowboards', 'Red Bull', 'RuNet', 'Russian Railways', 'Salomon', 'SC Johnson', 'Shire', 'Simple Wines', 'Sony Music', 'Sportschule Oberhaching', 'Swiss Tourism', 'Techno Nord', 'The North Face', 'The Vitamin Shoppe', 'Tinactin', 'Überkinger', 'United Nations', 'Vaniday', 'VGAN Chocolate', 'Vintigo', 'Volkswagen', 'Völkl', 'Volvo', 'Worldcom / MCI', 'Zeppelin',
