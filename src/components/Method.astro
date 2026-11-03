@@ -4,6 +4,7 @@ import { localePath, t } from '@/i18n';
 import { method } from '@/lib/method';
 import { home } from '@/lib/copy';
 import MethodWheel from '@/components/MethodWheel.astro';
+import Diagram from '@/components/Diagram.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const m = method[lang];
@@ -45,6 +46,36 @@ const ui = t(lang);
 ))}
 
 <section class="section on-ink">
+  <div class="wrap split-d">
+    <div>
+      <h2>{m.layers.h}</h2>
+      {m.layers.p.map((p) => <p>{p}</p>)}
+    </div>
+    <Diagram kind="loop" lang={lang} />
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split-d">
+    <div>
+      <h2>{m.network.h}</h2>
+      {m.network.p.map((p) => <p>{p}</p>)}
+    </div>
+    <Diagram kind="network" lang={lang} />
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap split-d">
+    <div>
+      <h2>{m.authentic.h}</h2>
+      {m.authentic.p.map((p) => <p>{p}</p>)}
+    </div>
+    <img src="/images/method-workshop.webp" alt={lang === 'de' ? 'Zwei Studentinnen präsentieren – Handyfoto aus dem Raum' : 'Two students presenting – phone photo from the room'} width="1600" height="900" loading="lazy" class="photo" />
+  </div>
+</section>
+
+<section class="section on-ink">
   <div class="wrap">
     <h2>{m.principles.h}</h2>
     <ul class="principles">
@@ -79,6 +110,10 @@ const ui = t(lang);
   .principles li { border-top: 2px solid var(--on-ink-mute); padding-top: .8rem; }
   .principles h3 { font-size: var(--fs-2); }
   .principles p { color: var(--on-ink-mute); margin: 0; }
+  .split-d { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 900px) { .split-d { grid-template-columns: 7fr 5fr; } }
+  .split-d p { max-width: 58ch; }
+  .photo { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; }
   .cta { background: var(--signal); color: #fff; }
   .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }
   .cta .btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }

@@ -15,6 +15,9 @@ export type MethodCopy = {
   why: { h: string; p: string[] };
   phases: Phase[];
   labels: { you: string; out: string; tools: string };
+  layers: { h: string; p: string[] };
+  network: { h: string; p: string[] };
+  authentic: { h: string; p: string[] };
   principles: { h: string; items: { t: string; p: string }[] };
   cta: { h: string; p: string };
 };
@@ -77,6 +80,28 @@ export const method: Record<Lang, MethodCopy> = {
         tools: 'KI für Datenaufbereitung, Anomalie-Erkennung, Reporting. Die Schlussfolgerungen ziehe ich.',
       },
     ],
+    layers: {
+      h: 'KI, wo immer es geht – mit Erfahrung davor und dahinter',
+      p: [
+        'Ich setze KI überall ein, wo sie schneller oder besser ist als der alte Weg: Recherche, Analyse, Entwürfe, Varianten, Übersetzungen, Bildideen, Reporting. Der Unterschied zu „mal ChatGPT fragen“ liegt an zwei Stellen.',
+        'Vorne: Der Prompt. Nach dreißig Jahren Marketing weiß ich, was ein gutes Briefing enthält – Zielgruppe, Ton, Format, Beispiele, Ausschlüsse. Das bekommt die KI genauso wie früher ein Texter oder Art Director. Deshalb ist das erste Ergebnis schon brauchbar, nicht erst das zehnte.',
+        'Dahinter: Die Prüfung in Schichten. Ein zweites Modell prüft das Ergebnis des ersten – auf Fakten, Logik, Ton, Lücken. Daraus wird eine verbesserte Fassung, und die geht wieder durch die Schleife, bis sich nichts mehr verbessert. Erst dann schaue ich selbst drauf. Was rausgeht, hat also mehrere KI-Layer und einen Menschen gesehen, der weiß, wie es im echten Markt ankommt.',
+      ],
+    },
+    network: {
+      h: 'Und für alles andere: Leute, die ich seit Jahren kenne',
+      p: [
+        'Es gibt Dinge, die KI nicht kann und ich nicht gut genug: einen Markenauftritt von Grund auf gestalten, einen Film drehen, eine Plattform entwickeln, eine Media-Kampagne über sechs Länder planen. Dafür habe ich ein Netzwerk aus Spezialisten, das über drei Jahrzehnte in Agenturen und Projekten entstanden ist – in Deutschland, den USA, Osteuropa, Skandinavien.',
+        'Du bekommst nicht „die Agentur“, sondern genau die zwei, drei Leute, die dein Projekt braucht. Ich briefe sie, ich koordiniere, ich bleibe dein Ansprechpartner. Abgerechnet wird transparent, ohne Aufschlag auf Fremdleistungen.',
+      ],
+    },
+    authentic: {
+      h: 'Was heute funktioniert: echt statt Hochglanz',
+      p: [
+        'Für Social Media, Paid Social und Websites gilt gerade eine einfache Regel: Je mehr es nach Werbung aussieht, desto schneller wird weitergescrollt. Das perfekt ausgeleuchtete Bild mit dem Model vor der Kamera braucht noch der TV-Spot. Online gewinnt das Echte – der Mitarbeiter, der erklärt, was er macht; das Handyvideo vom Set; das Foto, auf dem nicht alles sitzt.',
+        'Kleine Fehler und Imperfektionen werden als wahr gelesen. Das ist keine Ausrede für Schlamperei, sondern ein Produktionsprinzip: schneller, günstiger, näher dran – und mit Content, der in der Sprache der Plattform spricht, nicht in der Sprache der Broschüre. Dafür produziere ich lieber zwanzig echte Clips als einen perfekten.',
+      ],
+    },
     principles: {
       h: 'Woran du mich erkennst',
       items: [
@@ -147,6 +172,28 @@ export const method: Record<Lang, MethodCopy> = {
         tools: 'AI for data preparation, anomaly detection, reporting. The conclusions are mine.',
       },
     ],
+    layers: {
+      h: 'AI wherever possible – with experience in front and behind',
+      p: [
+        'I use AI everywhere it is faster or better than the old way: research, analysis, drafts, variants, translations, image ideas, reporting. The difference to “just ask ChatGPT” lies in two places.',
+        'In front: the prompt. After thirty years in marketing I know what a good brief contains – audience, tone, format, examples, exclusions. The AI gets that just like a copywriter or art director used to. That is why the first result is already usable, not the tenth.',
+        'Behind: review in layers. A second model checks the output of the first – facts, logic, tone, gaps. That becomes an improved version, which goes through the loop again until nothing improves any more. Only then do I look at it myself. What goes out has been through several AI layers and one human who knows how it lands in the real market.',
+      ],
+    },
+    network: {
+      h: 'And for everything else: people I have known for years',
+      p: [
+        'There are things AI can’t do and I don’t do well enough: design a brand identity from scratch, shoot a film, build a platform, plan a media campaign across six countries. For that I have a network of specialists built over three decades in agencies and projects – in Germany, the US, Eastern Europe, Scandinavia.',
+        'You don’t get “the agency”, you get exactly the two or three people your project needs. I brief them, I coordinate, I remain your point of contact. Billing is transparent, with no mark-up on third-party work.',
+      ],
+    },
+    authentic: {
+      h: 'What works today: real beats glossy',
+      p: [
+        'For social media, paid social and websites one simple rule applies right now: the more it looks like advertising, the faster people scroll past. The perfectly lit picture with a model in front of the camera is still needed for the TV spot. Online, the real thing wins – the employee explaining what they do; the phone video from the set; the photo where not everything is in place.',
+        'Small mistakes and imperfections read as true. That is not an excuse for sloppiness but a production principle: faster, cheaper, closer – and with content that speaks the language of the platform, not the language of the brochure. I’d rather produce twenty real clips than one perfect one.',
+      ],
+    },
     principles: {
       h: 'How you’ll recognise me',
       items: [

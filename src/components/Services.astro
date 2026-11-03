@@ -2,6 +2,7 @@
 import type { Lang } from '@/i18n';
 import { localePath, t } from '@/i18n';
 import { services } from '@/lib/services';
+import Diagram from '@/components/Diagram.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const de = lang === 'de';
@@ -16,53 +17,85 @@ const L = de
     <h1>{de ? 'Leistungen' : 'Services'}</h1>
     <p class="lede">{de ? 'Drei Dinge, die ich richtig gut kann. Alles andere – Design, Film, Entwicklung, Media – holt mein Netzwerk, und ich koordiniere.' : 'Three things I do really well. Everything else – design, film, development, media – comes from my network, and I coordinate.'}</p>
     <nav class="jump" aria-label={L.jump}>
-      {list.map((s) => <a href={`#${s.id}`}>{s.name}</a>)}
+      {list.map((s, i) => <a href={`#${s.id}`}><span class="n">{i + 1}</span>{s.name}</a>)}
     </nav>
   </div>
 </section>
 
 {list.map((s, i) => (
-  <section class:list={['section', 'service', { alt: i % 2 === 0 }]} id={s.id}>
-    <div class="wrap">
-      <div class="head">
+  <article class:list={['service', { 'on-ink': i === 1 }]} id={s.id}>
+    <!-- Kopf: Bild + Problem -->
+    <div class="wrap head">
+      <div class="head-text">
+        <p class="kicker">{i + 1} / {list.length} · {L.who}: {s.who}</p>
         <h2>{s.name}</h2>
-        <p class="lede">{s.who}</p>
+        <p class="problem">{s.problem}</p>
       </div>
-      <div class="body">
-        <div class="problem">
-          <h3>{L.problem}</h3>
-          <p>{s.problem}</p>
-        </div>
-        <div>
-          <h3>{L.what}</h3>
-          <ul class="what">{s.what.map((w) => <li>{w}</li>)}</ul>
-        </div>
-        <div class="facts">
-          <div><h3>{L.deliver}</h3><ul>{s.deliver.map((d) => <li>{d}</li>)}</ul></div>
-          <div><h3>{L.kpis}</h3><ul>{s.kpis.map((k) => <li>{k}</li>)}</ul></div>
-          <div><h3>{L.formats}</h3><p>{s.formats}</p></div>
-        </div>
-        <a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
-      </div>
+      <img src={s.image} alt={s.imageAlt} width="1200" height="900" loading="lazy" />
     </div>
-  </section>
+
+    <!-- Mitte: Was passiert + Diagramm -->
+    <div class="wrap mid">
+      <div>
+        <h3>{L.what}</h3>
+        <ol class="what">{s.what.map((w) => <li>{w}</li>)}</ol>
+      </div>
+      <Diagram kind={s.diagram} lang={lang} />
+    </div>
+
+    <!-- Box: Datenschutz / Budget / Authentizität -->
+    <div class="wrap">
+      <aside class="box">
+        <h3>{s.box.h}</h3>
+        <p>{s.box.p}</p>
+      </aside>
+    </div>
+
+    <!-- Fakten -->
+    <div class="wrap facts">
+      <div><h3>{L.deliver}</h3><ul>{s.deliver.map((d) => <li>{d}</li>)}</ul></div>
+      <div><h3>{L.kpis}</h3><ul>{s.kpis.map((k) => <li>{k}</li>)}</ul></div>
+      <div><h3>{L.formats}</h3><p>{s.formats}</p><a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a></div>
+    </div>
+  </article>
 ))}
 
 <style>
   .hero h1 { font-size: var(--fs-6); }
-  .jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
-  .jump a { text-decoration: none; border: 1px solid var(--ink); border-radius: 999px; padding: .4rem 1rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
+  .jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
+  .jump a { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; border: 1px solid var(--ink); border-radius: 999px; padding: .4rem 1rem .4rem .4rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
+  .jump .n { display: grid; place-content: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--ink); color: var(--on-ink); font-size: .8rem; }
   .jump a:hover { background: var(--ink); color: var(--on-ink); }
-  .service { scroll-margin-top: 5rem; }
-  .service .wrap { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
-  @media (min-width: 900px) { .service .wrap { grid-template-columns: 4fr 7fr; } .head { position: sticky; top: 6rem; align-self: start; } }
-  .body { display: grid; gap: 2rem; }
-  .body h3 { font-size: var(--fs-1); color: var(--mute); font-weight: 600; margin-bottom: .4rem; }
-  .problem p { font-family: var(--font-display); font-size: var(--fs-2); line-height: 1.4; max-width: 50ch; }
-  .what { list-style: none; padding: 0; margin: 0; max-width: 62ch; }
-  .what li { padding: .7rem 0; border-top: 1px solid var(--line); }
-  .facts { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+  .jump a:hover .n { background: var(--signal); }
+
+  .service { scroll-margin-top: 4.5rem; padding-block: clamp(3rem, 7vw, 6rem); }
+  .service:nth-of-type(2) { background: var(--paper-2); }
+  .service.on-ink { background: var(--ink); }
+  .head { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 900px) { .head { grid-template-columns: 6fr 5fr; } }
+  .head img { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; }
+  .kicker { font-size: var(--fs-0); color: var(--mute); max-width: 52ch; }
+  .on-ink .kicker { color: var(--on-ink-mute); }
+  .head h2 { font-size: var(--fs-6); max-width: 16ch; }
+  .problem { font-family: var(--font-display); font-size: var(--fs-2); line-height: 1.4; max-width: 46ch; }
+
+  .mid { display: grid; gap: var(--gutter); grid-template-columns: 1fr; margin-top: clamp(2.5rem, 5vw, 4rem); align-items: start; }
+  @media (min-width: 900px) { .mid { grid-template-columns: 7fr 5fr; } }
+  .service h3 { font-size: var(--fs-0); color: var(--mute); font-weight: 600; margin-bottom: .5rem; }
+  .on-ink h3 { color: var(--on-ink-mute); }
+  .what { list-style: none; padding: 0; margin: 0; max-width: 60ch; counter-reset: w; }
+  .what li { padding: .8rem 0 .8rem 2.4rem; border-top: 1px solid var(--line); position: relative; counter-increment: w; }
+  .what li::before { content: counter(w); position: absolute; left: 0; top: .75rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 2px solid var(--signal); color: var(--signal); font-family: var(--font-display); font-weight: 700; font-size: .8rem; display: grid; place-content: center; }
+  .on-ink .what li { border-color: var(--ink-2); }
+
+  .box { margin-top: clamp(2rem, 4vw, 3rem); border-left: 4px solid var(--signal); padding: 1.2rem 1.5rem; background: color-mix(in srgb, var(--signal) 6%, transparent); border-radius: 0 var(--radius) var(--radius) 0; max-width: 72ch; }
+  .box h3 { font-family: var(--font-display); font-size: var(--fs-3); color: inherit; font-weight: 600; margin-bottom: .5rem; }
+  .box p { margin: 0; max-width: none; }
+  .on-ink .box { background: color-mix(in srgb, var(--signal) 18%, transparent); }
+
+  .facts { display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin-top: clamp(2rem, 4vw, 3rem); padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .on-ink .facts { border-color: var(--ink-2); }
   .facts ul { padding-left: 1.1rem; margin: 0; }
   .facts li + li { margin-top: .25rem; }
-  .body .btn { justify-self: start; }
+  .facts .btn { margin-top: 1rem; }
 </style>

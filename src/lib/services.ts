@@ -9,6 +9,10 @@ export type Service = {
   deliver: string[];
   kpis: string[];
   formats: string;
+  image: string;
+  imageAlt: string;
+  diagram: 'loop' | 'budget' | 'funnel';
+  box: { h: string; p: string };
 };
 
 export const services: Record<Lang, Service[]> = {
@@ -27,6 +31,8 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Audit-Bericht mit Prioritäten und Aufwand', 'Workshop-Tag(e) mit eurem Team', 'Tool-Setup, Richtlinien, Vorlagen', 'Monatliche Begleitung nach Bedarf'],
       kpis: ['Gesparte Stunden pro Woche und Person', 'Durchlaufzeit von Angeboten, Texten, Reports', 'Anteil des Teams, der die Tools wöchentlich nutzt'],
       formats: 'Audit (2–3 Tage), Workshop-Tag, laufende Begleitung.',
+      image: '/images/svc-ki.webp', imageAlt: 'Chris Helmbrecht erklärt einen Case vor Publikum', diagram: 'loop',
+      box: { h: 'Und der Datenschutz?', p: 'Die häufigste Frage – und der häufigste Grund, warum nichts passiert. Die Antwort ist kein Nein, sondern ein Regelwerk: Welche Daten dürfen in welches Tool, welche nie. Modelle mit EU-Servern und Verträgen zur Auftragsverarbeitung, wo Kundendaten im Spiel sind. Kein Training auf euren Daten. Freigaben, bevor etwas rausgeht. Das richte ich mit euch ein, bevor das erste Team-Mitglied einen Prompt schreibt – damit der Geschäftsführer nachts schläft und das Team trotzdem arbeiten kann.' },
     },
     {
       id: 'marketing',
@@ -43,6 +49,8 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Marketingstrategie und Jahresplan', 'Laufender Betrieb von Content, Social, Website', 'Monatlicher Report in Klartext'],
       kpis: ['Reichweite und Engagement je Kanal', 'Anfragen, Buchungen, Bewerbungen', 'Kosten pro Kontakt'],
       formats: 'Interim (Vollzeit für einige Monate), fester Tag pro Woche, auf Abruf.',
+      image: '/images/svc-marketing.webp', imageAlt: 'Arbeitsrunde am Tisch', diagram: 'budget',
+      box: { h: 'Was es kostet – und wie wir das Meiste rausholen', p: 'Ich arbeite nach Tagessatz oder mit festem Monatsbudget, ohne Agentur-Overhead: kein Account-Manager, kein Junior, der lernt, keine 15 % Handling auf Fremdkosten. Das Marketingbudget selbst wird nach einem einfachen Prinzip verteilt: Erst klein testen, dann messen, dann dorthin umschichten, wo die Zahlen am besten sind. Jeden Monat. Was nicht liefert, wird gestoppt – auch wenn es meine Idee war. So holt ein mittleres Budget mehr raus als ein großes, das einmal im Jahr geplant wird.' },
     },
     {
       id: 'paid',
@@ -58,6 +66,8 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Kampagnenkonzept mit Budgetplan', 'Creatives und Landingpages', 'Laufende Betreuung und Wochenreport'],
       kpis: ['Kosten pro Lead, Anfrage oder Kauf', 'Return on Ad Spend', 'Conversion-Rate der Landingpage'],
       formats: 'Projekt (Kampagne mit Start und Ende) oder laufende Betreuung mit Monatsbudget.',
+      image: '/images/svc-paid.webp', imageAlt: 'Instagram-Profil des BLSV Sportcamps auf dem Handy', diagram: 'funnel',
+      box: { h: 'Hochglanz war gestern', p: 'Für einen TV-Spot braucht es noch das perfekte Licht und das Model. Auf Social Media, in Ads und auf Websites gewinnt heute das Echte: der Mitarbeiter statt des Schauspielers, das Handyvideo vom Set statt der Studioproduktion, der kleine Fehler, der zeigt, dass es wirklich passiert ist. Nutzer erkennen Werbung in einer halben Sekunde und scrollen weiter – Authentizität hält sie. Das heißt nicht schlampig, sondern bewusst: schnell produziert, ehrlich erzählt, in der Sprache der Plattform.' },
     },
   ],
   en: [
@@ -75,6 +85,8 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Audit report with priorities and effort', 'Workshop day(s) with your team', 'Tool setup, guidelines, templates', 'Monthly follow-up as needed'],
       kpis: ['Hours saved per week and person', 'Turnaround time for proposals, copy, reports', 'Share of the team using the tools weekly'],
       formats: 'Audit (2–3 days), workshop day, ongoing support.',
+      image: '/images/svc-ki.webp', imageAlt: 'Chris Helmbrecht explaining a case to an audience', diagram: 'loop',
+      box: { h: 'And data protection?', p: 'The most common question – and the most common reason nothing happens. The answer isn’t “no”, it’s a set of rules: which data may go into which tool, which never. Models with EU servers and data processing agreements where customer data is involved. No training on your data. Approvals before anything goes out. I set this up with you before the first team member writes a prompt – so the CEO sleeps at night and the team can still work.' },
     },
     {
       id: 'marketing',
@@ -91,6 +103,8 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Marketing strategy and annual plan', 'Ongoing operation of content, social, website', 'Monthly report in plain language'],
       kpis: ['Reach and engagement per channel', 'Enquiries, bookings, applications', 'Cost per contact'],
       formats: 'Interim (full time for a few months), one fixed day a week, on call.',
+      image: '/images/svc-marketing.webp', imageAlt: 'Working session at a table', diagram: 'budget',
+      box: { h: 'What it costs – and how we get the most out of it', p: 'I work on a day rate or a fixed monthly budget, without agency overhead: no account manager, no junior learning on your time, no 15% handling on third-party costs. The marketing budget itself is allocated by a simple principle: test small first, then measure, then shift to where the numbers are best. Every month. What doesn’t deliver gets stopped – even if it was my idea. That’s how a medium budget gets more out than a big one planned once a year.' },
     },
     {
       id: 'paid',
@@ -106,6 +120,8 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Campaign concept with budget plan', 'Creatives and landing pages', 'Ongoing management and weekly report'],
       kpis: ['Cost per lead, enquiry or purchase', 'Return on ad spend', 'Landing page conversion rate'],
       formats: 'Project (campaign with a start and an end) or ongoing management with a monthly budget.',
+      image: '/images/svc-paid.webp', imageAlt: 'Instagram profile of the BLSV sports camp on a phone', diagram: 'funnel',
+      box: { h: 'Glossy is over', p: 'A TV spot still needs perfect light and a model. On social media, in ads and on websites, the real thing wins today: the employee instead of the actor, the phone video from the set instead of the studio production, the small mistake that shows it actually happened. Users spot advertising in half a second and scroll on – authenticity holds them. That doesn’t mean sloppy, it means deliberate: produced fast, told honestly, in the language of the platform.' },
     },
   ],
 };
