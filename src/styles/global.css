@@ -7,7 +7,9 @@
   --ink-2: #273242;        /* dunkle Fläche, angehoben */
   --mute: #4f5864;         /* Nebentext */
   --line: #c9ced4;         /* Linien */
-  --signal: #1f3dff;       /* Kobalt – das einzige Signal */
+  --signal: #681611;        /* Chris' Rot – das einzige Signal */
+  --signal-hover: #4e100c;  /* dunkler für Hover */
+  --signal-light: #f0857a;  /* gleiches Rot, aufgehellt für Text/Linien auf Dunkel */
   --signal-ink: #ffffff;
   --on-ink: #eceef1;
   --on-ink-mute: #aeb6c0;
@@ -65,7 +67,8 @@ a:hover { color: var(--signal); }
 .section--tight { padding-block: clamp(2rem, 5vw, 4rem); }
 .on-ink { background: var(--ink); color: var(--on-ink); }
 .on-ink .mute, .on-ink p.lede { color: var(--on-ink-mute); }
-.on-ink a:hover { color: #9fb0ff; }
+.on-ink a:hover { color: var(--signal-light); }
+.on-ink :focus-visible { outline-color: var(--signal-light); }
 .alt { background: var(--paper-2); }
 .mute { color: var(--mute); }
 .lede { font-size: var(--fs-2); line-height: 1.45; max-width: 52ch; }
@@ -85,7 +88,7 @@ a:hover { color: var(--signal); }
   background: var(--signal); color: var(--signal-ink); border: 2px solid var(--signal);
   transition: background .15s ease, border-color .15s ease;
 }
-.btn:hover { background: #1630d6; border-color: #1630d6; color: #fff; }
+.btn:hover { background: var(--signal-hover); border-color: var(--signal-hover); color: #fff; }
 .btn--ghost { background: transparent; color: inherit; border-color: currentColor; }
 .btn--ghost:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
 .on-ink .btn--ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }

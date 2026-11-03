@@ -105,5 +105,5 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src), thumb: v.poster
   .thumbs button { flex: 0 0 auto; display: block; padding: 0; border: 2px solid transparent; border-radius: var(--radius); background: none; cursor: pointer; opacity: .55; transition: opacity .15s, border-color .15s; }
   .thumbs img { width: 120px; aspect-ratio: 16/9; object-fit: cover; border-radius: 2px; }
   .thumbs button:hover { opacity: .85; }
-  .thumbs button[aria-selected='true'] { opacity: 1; border-color: var(--signal); }
+  .thumbs button[aria-selected='true'] { opacity: 1; border-color: var(--signal-light); }
 </style>

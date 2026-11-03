@@ -93,6 +93,7 @@ const L = de
   .what li { padding: .8rem 0 .8rem 2.4rem; border-top: 1px solid var(--line); position: relative; counter-increment: w; }
   .what li::before { content: counter(w); position: absolute; left: 0; top: .75rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 2px solid var(--signal); color: var(--signal); font-family: var(--font-display); font-weight: 700; font-size: .8rem; display: grid; place-content: center; }
   .on-ink .what li { border-color: var(--ink-2); }
+  .on-ink .what li::before { border-color: var(--signal-light); color: var(--signal-light); }
 
   .box { margin-top: clamp(2rem, 4vw, 3rem); border-left: 4px solid var(--signal); padding: 1.2rem 1.5rem; background: color-mix(in srgb, var(--signal) 6%, transparent); border-radius: 0 var(--radius) var(--radius) 0; max-width: 72ch; }
   .box h3 { font-family: var(--font-display); font-size: var(--fs-3); color: inherit; font-weight: 600; margin-bottom: .5rem; }
