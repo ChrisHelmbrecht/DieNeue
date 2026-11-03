@@ -1,0 +1,84 @@
+---
+/*
+ * Kontakt. Das Formular schickt an FORM_ENDPOINT (z. B. Formspree, https://formspree.io – kostenlos bis 50 Mails/Monat).
+ * Solange kein Endpoint gesetzt ist, öffnet der Button das Mailprogramm mit vorausgefülltem Text.
+ */
+import type { Lang } from '@/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const FORM_ENDPOINT = ''; // TODO: z. B. 'https://formspree.io/f/xxxxxxxx'
+const EMAIL = 'chris@dieneue.social'; // TODO: prüfen
+const PHONE = ''; // TODO: optional, z. B. '+49 171 …'
+const L = de
+  ? { h: 'Schreib mir', lede: 'Eine Mail oder ein Anruf reicht. Innerhalb von 48 Stunden sage ich dir, ob und wie ich helfen kann.', name: 'Name', company: 'Firma (optional)', email: 'E-Mail', topic: 'Worum geht es?', topics: ['KI im Unternehmen', 'Marketing-Management', 'Paid Social & Content', 'Website', 'Etwas anderes'], msg: 'Dein Problem in zwei, drei Sätzen', send: 'Abschicken', sent: 'Danke – ich melde mich innerhalb von 48 Stunden.', err: 'Das hat nicht geklappt. Schreib mir bitte direkt an', direct: 'Oder direkt', privacy: 'Deine Angaben nutze ich nur, um dir zu antworten.' }
+  : { h: 'Get in touch', lede: 'An email or a call is enough. Within 48 hours I’ll tell you whether and how I can help.', name: 'Name', company: 'Company (optional)', email: 'Email', topic: 'What is it about?', topics: ['AI in the company', 'Marketing management', 'Paid social & content', 'Website', 'Something else'], msg: 'Your problem in two or three sentences', send: 'Send', sent: 'Thanks – I’ll get back to you within 48 hours.', err: 'That didn’t work. Please email me directly at', direct: 'Or directly', privacy: 'I use your details only to reply to you.' };
+---
+<section class="section">
+  <div class="wrap grid-c">
+    <div>
+      <h1>{L.h}</h1>
+      <p class="lede">{L.lede}</p>
+      <div class="direct">
+        <h2>{L.direct}</h2>
+        <p><a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+        {PHONE && <p><a href={`tel:${PHONE.replace(/\s/g, '')}`}>{PHONE}</a></p>}
+        <p><a href="https://www.linkedin.com/in/kollektiv" rel="me noopener">LinkedIn</a></p>
+        <p class="mute">Chris Helmbrecht · Die Neue · München</p>
+      </div>
+    </div>
+    <form class="form" method="POST" action={FORM_ENDPOINT || undefined} data-endpoint={FORM_ENDPOINT} data-email={EMAIL} data-sent={L.sent} data-err={L.err}>
+      <label>{L.name}<input name="name" required autocomplete="name" /></label>
+      <label>{L.company}<input name="company" autocomplete="organization" /></label>
+      <label>{L.email}<input name="email" type="email" required autocomplete="email" /></label>
+      <label>{L.topic}
+        <select name="topic">{L.topics.map((t) => <option>{t}</option>)}</select>
+      </label>
+      <label>{L.msg}<textarea name="message" rows="5" required></textarea></label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+      <button class="btn" type="submit">{L.send}</button>
+      <p class="mute small">{L.privacy}</p>
+      <p class="status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.form').forEach((f) => {
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(f);
+      const status = f.querySelector<HTMLElement>('.status')!;
+      const endpoint = f.dataset.endpoint;
+      if (!endpoint) {
+        const body = ['name', 'company', 'email', 'topic', 'message'].map((k) => `${k}: ${data.get(k) ?? ''}`).join('\n');
+        location.href = `mailto:${f.dataset.email}?subject=${encodeURIComponent(String(data.get('topic')))}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+      try {
+        const r = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (!r.ok) throw new Error();
+        f.reset(); status.textContent = f.dataset.sent!;
+      } catch {
+        status.innerHTML = `${f.dataset.err} <a href="mailto:${f.dataset.email}">${f.dataset.email}</a>.`;
+      }
+    });
+  });
+</script>
+
+<style>
+  h1 { font-size: var(--fs-6); }
+  .grid-c { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .grid-c { grid-template-columns: 5fr 6fr; } }
+  .direct { margin-top: 2rem; }
+  .direct h2 { font-size: var(--fs-2); }
+  .direct p { margin: 0 0 .3rem; }
+  .form { display: grid; gap: 1rem; background: var(--paper-2); padding: clamp(1.2rem, 3vw, 2rem); border-radius: var(--radius); }
+  label { display: grid; gap: .3rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
+  input, select, textarea { font: inherit; font-family: var(--font-body); font-weight: 400; font-size: var(--fs-1); padding: .6rem .8rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink); }
+  input:focus, select:focus, textarea:focus { outline: 3px solid var(--signal); outline-offset: 1px; border-color: var(--signal); }
+  .hp { position: absolute; left: -9999px; }
+  .btn { justify-self: start; }
+  .small { font-size: var(--fs-0); margin: 0; }
+  .status { margin: 0; font-weight: 500; }
+</style>

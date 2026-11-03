@@ -1,0 +1,86 @@
+---
+import type { Lang } from '@/i18n';
+import { localePath, t } from '@/i18n';
+import { method } from '@/lib/method';
+import { home } from '@/lib/copy';
+import MethodWheel from '@/components/MethodWheel.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const m = method[lang];
+const ui = t(lang);
+---
+<section class="section hero">
+  <div class="wrap">
+    <h1>{m.title}</h1>
+    <p class="lede">{m.lede}</p>
+    <MethodWheel steps={home[lang].method.steps} lang={lang} />
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap split">
+    <h2>{m.why.h}</h2>
+    <div>{m.why.p.map((p) => <p class="lede">{p}</p>)}</div>
+  </div>
+</section>
+
+{m.phases.map((ph, i) => (
+  <section class:list={['section', 'phase', { alt: i % 2 === 1 }]} id={`schritt-${i + 1}`}>
+    <div class="wrap">
+      <div class="head">
+        <span class="num">{i + 1}</span>
+        <h2>{ph.name}</h2>
+        <p class="claim">{ph.claim}</p>
+      </div>
+      <div class="body">
+        <div class="text">{ph.text.map((p) => <p>{p}</p>)}</div>
+        <div class="facts">
+          <div><h3>{m.labels.you}</h3><ul>{ph.you.map((x) => <li>{x}</li>)}</ul></div>
+          <div><h3>{m.labels.out}</h3><ul>{ph.out.map((x) => <li>{x}</li>)}</ul></div>
+          <div class="tools"><h3>{m.labels.tools}</h3><p>{ph.tools}</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+))}
+
+<section class="section on-ink">
+  <div class="wrap">
+    <h2>{m.principles.h}</h2>
+    <ul class="principles">
+      {m.principles.items.map((it) => (
+        <li><h3>{it.t}</h3><p>{it.p}</p></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap">
+    <h2>{m.cta.h}</h2>
+    <p class="lede">{m.cta.p}</p>
+    <a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
+  </div>
+</section>
+
+<style>
+  .hero h1 { font-size: var(--fs-6); }
+  .phase .wrap { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .phase .wrap { grid-template-columns: 4fr 7fr; } .head { position: sticky; top: 6rem; align-self: start; } }
+  .num { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-6); color: var(--signal); line-height: 1; display: block; margin-bottom: .3rem; }
+  .claim { font-family: var(--font-display); font-size: var(--fs-2); line-height: 1.35; max-width: 24ch; }
+  .text p { max-width: 62ch; }
+  .facts { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .facts h3 { font-size: var(--fs-0); color: var(--mute); font-weight: 600; margin-bottom: .4rem; }
+  .facts ul { padding-left: 1.1rem; margin: 0; }
+  .facts li + li { margin-top: .25rem; }
+  .tools p { font-size: var(--fs-0); }
+  .principles { list-style: none; margin: 1.5rem 0 0; padding: 0; max-width: none; display: grid; gap: var(--gutter); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .principles li { border-top: 2px solid var(--on-ink-mute); padding-top: .8rem; }
+  .principles h3 { font-size: var(--fs-2); }
+  .principles p { color: var(--on-ink-mute); margin: 0; }
+  .cta { background: var(--signal); color: #fff; }
+  .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }
+  .cta .btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .cta .lede { color: #dfe4ff; }
+</style>
