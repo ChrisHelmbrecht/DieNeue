@@ -39,13 +39,15 @@ const de = lang === 'de';
             <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-play"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
           </button>
         </div>
+        <div class="stack">
         {c.hero.problems.map((p, i) => (
-          <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} hidden={i !== 0}>
+          <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} class:list={['panel', { active: i === 0 }]} aria-hidden={i !== 0 ? 'true' : undefined} inert={i !== 0 ? true : undefined}>
             <h2 class="statement">{p.statement}</h2>
             <p class="answer">{p.answer}</p>
             <a class="btn" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
           </div>
         ))}
+        </div>
       </div>
     </div>
   </div>
@@ -151,11 +153,12 @@ const de = lang === 'de';
   document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
     const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
     const pause = root.querySelector<HTMLButtonElement>('[data-pause]');
+    const ROTATE_MS = 12000; // Standzeit pro Aussage
     const panels = [...root.querySelectorAll<HTMLElement>('[role=tabpanel]')];
     let timer: number | undefined;
     const show = (i: number) => {
       tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
-      panels.forEach((p, j) => { p.hidden = i !== j; });
+      panels.forEach((p, j) => { const on = i === j; p.classList.toggle('active', on); p.inert = !on; if (on) p.removeAttribute('aria-hidden'); else p.setAttribute('aria-hidden', 'true'); });
     };
     const stop = () => { if (timer) { clearInterval(timer); timer = undefined; } pause?.setAttribute('aria-pressed', 'true'); pause?.setAttribute('aria-label', pause.dataset.playLabel ?? ''); };
     tabs.forEach((t, i) => {
@@ -171,7 +174,7 @@ const de = lang === 'de';
     let i = 0;
     const start = () => {
       if (timer) return;
-      timer = window.setInterval(() => { i = (i + 1) % tabs.length; show(i); }, 7000);
+      timer = window.setInterval(() => { i = (i + 1) % tabs.length; show(i); }, ROTATE_MS);
       pause?.setAttribute('aria-pressed', 'false');
       pause?.setAttribute('aria-label', pause.dataset.pauseLabel ?? '');
     };
@@ -203,9 +206,12 @@ const de = lang === 'de';
   .pause .i-play { display: none; }
   .pause[aria-pressed='true'] .i-play { display: block; }
   .pause[aria-pressed='true'] .i-pause { display: none; }
-  [role=tabpanel] { animation: fade .35s ease; }
-  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { [role=tabpanel] { animation: none; } }
+  /* Alle Aussagen liegen übereinander im selben Rasterfeld: Höhe = längste Aussage, kein Springen */
+  .stack { display: grid; }
+  /* Erst ausblenden (0,9 s), dann einblenden (1,2 s) – nie zwei Texte gleichzeitig */
+  .panel { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .9s ease-in, visibility 0s linear .9s; }
+  .panel.active { opacity: 1; visibility: visible; transition: opacity 1.2s ease-out .9s, visibility 0s linear .9s; }
+  @media (prefers-reduced-motion: reduce) { .panel, .panel.active { transition: none; } }
 
   .reel { padding-top: 0; }
   .hero { padding-bottom: clamp(2rem, 5vw, 4rem); }
