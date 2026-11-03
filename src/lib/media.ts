@@ -1,15 +1,20 @@
 import type { Lang } from '@/i18n';
 
 /*
- * Medien für die Startseite. Bilder liegen in public/images/.
- * Platzhalter (public/images/placeholder-*.svg) werden ersetzt, sobald die Originale da sind.
+ * Medien für die Startseite. Bilder liegen in public/images/ (aus assets-raw/ erzeugt).
+ *
+ * Videos: `src` ist entweder
+ *   - eine YouTube-URL (https://www.youtube.com/watch?v=… oder https://youtu.be/…)
+ *   - eine Vimeo-URL (https://vimeo.com/123456)
+ *   - eine direkte Datei (/videos/name.mp4 oder https://…/name.mp4)
+ * Fehlt `src`, zeigt der Slider nur das Standbild (ohne Play-Button).
  */
 
 export type Video = {
-  provider: 'youtube' | 'vimeo';
-  id: string;            // YouTube-Video-ID oder Vimeo-Nummer
-  poster: string;        // Standbild, 16:9
+  src?: string;
+  poster: string;
   title: Record<Lang, string>;
+  client: string;
 };
 
 export type WorkItem = {
@@ -20,29 +25,43 @@ export type WorkItem = {
   href?: string;
 };
 
-// TODO: echte Video-ID eintragen (YouTube: der Teil nach v= in der URL)
-export const showreel: Video = {
-  provider: 'youtube',
-  id: 'dQw4w9WgXcQ',
-  poster: '/images/placeholder-reel.svg',
-  title: { de: 'Showreel – Filme und Kampagnen', en: 'Showreel – films and campaigns' },
-};
+// TODO: Video-Links eintragen
+export const videos: Video[] = [
+  { poster: '/images/video-dsm-schule.webp', client: 'Deutsche Schule Moskau', title: { de: 'Imagefilm Deutsche Schule Moskau', en: 'Image film, German School Moscow' } },
+  { poster: '/images/video-dsm-kinder.webp', client: 'Deutsche Schule Moskau', title: { de: 'Grundschule – Lernen draußen', en: 'Primary school – learning outdoors' } },
+  { poster: '/images/video-dsm-lehrerin.webp', client: 'Deutsche Schule Moskau', title: { de: 'Lehrerinnen und Lehrer im Porträt', en: 'Teacher portraits' } },
+  { poster: '/images/video-dsm-hoodie.webp', client: 'Deutsche Schule Moskau', title: { de: 'Schul-Merch Kampagne', en: 'School merch campaign' } },
+  { poster: '/images/video-spitzingsee-360.webp', client: 'BLSV Sportcamp Spitzingsee', title: { de: '360°-Rundgang Sportcamp Spitzingsee', en: '360° tour, Sportcamp Spitzingsee' } },
+  { poster: '/images/video-camp-zimmer.webp', client: 'BLSV Sportcamps', title: { de: 'Zimmer und Häuser der Sportcamps', en: 'Rooms and houses of the sports camps' } },
+  { poster: '/images/video-interview.webp', client: 'Camps for Friends', title: { de: 'Interview-Reihe, Episode 2', en: 'Interview series, episode 2' } },
+  { poster: '/images/video-airlst.webp', client: 'Airlst', title: { de: 'Airlst Podcast', en: 'Airlst podcast' } },
+  { poster: '/images/video-vw.webp', client: 'Volkswagen', title: { de: 'VW Service – TV-Spot, Moskau', en: 'VW Service – TV spot, Moscow' } },
+  { src: '/videos/kollektiv-leopolis.mp4', poster: '/images/video-leopolis.webp', client: 'Leopolis Hotel', title: { de: 'Rebranding Hotel Leopolis, Lviv', en: 'Rebranding Hotel Leopolis, Lviv' } },
+];
 
 export const work: Record<Lang, WorkItem[]> = {
   de: [
-    { client: 'VGAN Chocolate', kind: 'Marke, Website, US-Launch', image: '/images/placeholder-work-1.svg', alt: 'VGAN Chocolate Website', href: 'https://vganchocolate.com' },
-    { client: 'BLSV Sportcamp Spitzingsee', kind: 'Social Media, Film, Website', image: '/images/placeholder-work-2.svg', alt: 'BLSV Sportcamp Spitzingsee', href: 'https://blsvsportcampspitzingsee.de' },
-    { client: 'Sportschule Oberhaching', kind: 'Website, Barrierefreiheit', image: '/images/placeholder-work-3.svg', alt: 'Sportschule Oberhaching Website', href: 'https://sportschule-oberhaching.de' },
-    { client: 'Deutsche Schule Moskau', kind: 'Social Media, Film', image: '/images/placeholder-work-4.svg', alt: 'Deutsche Schule Moskau', href: 'https://www.deutscheschulemoskau.de' },
-    { client: 'Volvo / New Balance', kind: 'E-Commerce, New York 2000', image: '/images/placeholder-work-5.svg', alt: 'Volvo Website 2000' },
-    { client: 'Red Bull', kind: 'Web, Events, Digital', image: '/images/placeholder-work-6.svg', alt: 'Red Bull Russkie Vityazi Website' },
+    { client: 'VGAN Chocolate', kind: 'Marke, Website, US-Launch', image: '/images/work-vgan.webp', alt: 'VGAN Chocolate Website', href: 'https://vganchocolate.com' },
+    { client: 'BLSV Sportcamp Spitzingsee', kind: 'Social Media, Film, Website', image: '/images/work-spitzingsee.webp', alt: 'Sportcamp Spitzingsee im Winter', href: 'https://blsvsportcampspitzingsee.de' },
+    { client: 'BI Norwegian Business School', kind: 'Case Competition mit VGAN, Oslo', image: '/images/work-bi-oslo.webp', alt: 'Studierende der BI mit Chris Helmbrecht und Thomas Kraft in Oslo' },
+    { client: 'Sportschule Oberhaching', kind: 'Website, Barrierefreiheit', image: '/images/work-oberhaching.webp', alt: 'Sportschule Oberhaching Website', href: 'https://sportschule-oberhaching.de' },
+    { client: 'Deutsche Schule Moskau', kind: 'Social Media, Film, Website', image: '/images/work-dsm.webp', alt: 'Schulhof der Deutschen Schule Moskau', href: 'https://www.deutscheschulemoskau.de' },
+    { client: 'Volkswagen', kind: 'TV-Spot und Print, Moskau', image: '/images/work-vw.webp', alt: 'VW Service Kampagne' },
+    { client: 'Leopolis Hotel', kind: 'Rebranding, Lviv', image: '/images/work-leopolis.webp', alt: 'Website des Leopolis Hotels' },
+    { client: 'Red Bull', kind: 'Web, Events, Digital', image: '/images/work-redbull.webp', alt: 'Red Bull Russkie Vityazi Website' },
+    { client: 'Volvo', kind: 'E-Commerce-Plattform, New York 2000', image: '/images/work-volvo.webp', alt: 'Volvo Website 2000' },
+    { client: 'New Balance', kind: 'Relaunch, New York 2000', image: '/images/work-newbalance.webp', alt: 'New Balance Website 2000' },
   ],
   en: [
-    { client: 'VGAN Chocolate', kind: 'Brand, website, US launch', image: '/images/placeholder-work-1.svg', alt: 'VGAN Chocolate website', href: 'https://vganchocolate.com' },
-    { client: 'BLSV Sportcamp Spitzingsee', kind: 'Social media, film, website', image: '/images/placeholder-work-2.svg', alt: 'BLSV Sportcamp Spitzingsee', href: 'https://blsvsportcampspitzingsee.de' },
-    { client: 'Sportschule Oberhaching', kind: 'Website, accessibility', image: '/images/placeholder-work-3.svg', alt: 'Sportschule Oberhaching website', href: 'https://sportschule-oberhaching.de' },
-    { client: 'German School Moscow', kind: 'Social media, film', image: '/images/placeholder-work-4.svg', alt: 'German School Moscow', href: 'https://www.deutscheschulemoskau.de' },
-    { client: 'Volvo / New Balance', kind: 'E-commerce, New York 2000', image: '/images/placeholder-work-5.svg', alt: 'Volvo website 2000' },
-    { client: 'Red Bull', kind: 'Web, events, digital', image: '/images/placeholder-work-6.svg', alt: 'Red Bull Russkie Vityazi website' },
+    { client: 'VGAN Chocolate', kind: 'Brand, website, US launch', image: '/images/work-vgan.webp', alt: 'VGAN Chocolate website', href: 'https://vganchocolate.com' },
+    { client: 'BLSV Sportcamp Spitzingsee', kind: 'Social media, film, website', image: '/images/work-spitzingsee.webp', alt: 'Sportcamp Spitzingsee in winter', href: 'https://blsvsportcampspitzingsee.de' },
+    { client: 'BI Norwegian Business School', kind: 'Case competition with VGAN, Oslo', image: '/images/work-bi-oslo.webp', alt: 'BI students with Chris Helmbrecht and Thomas Kraft in Oslo' },
+    { client: 'Sportschule Oberhaching', kind: 'Website, accessibility', image: '/images/work-oberhaching.webp', alt: 'Sportschule Oberhaching website', href: 'https://sportschule-oberhaching.de' },
+    { client: 'German School Moscow', kind: 'Social media, film, website', image: '/images/work-dsm.webp', alt: 'Courtyard of the German School Moscow', href: 'https://www.deutscheschulemoskau.de' },
+    { client: 'Volkswagen', kind: 'TV spot and print, Moscow', image: '/images/work-vw.webp', alt: 'VW Service campaign' },
+    { client: 'Leopolis Hotel', kind: 'Rebranding, Lviv', image: '/images/work-leopolis.webp', alt: 'Leopolis Hotel website' },
+    { client: 'Red Bull', kind: 'Web, events, digital', image: '/images/work-redbull.webp', alt: 'Red Bull Russkie Vityazi website' },
+    { client: 'Volvo', kind: 'E-commerce platform, New York 2000', image: '/images/work-volvo.webp', alt: 'Volvo website 2000' },
+    { client: 'New Balance', kind: 'Relaunch, New York 2000', image: '/images/work-newbalance.webp', alt: 'New Balance website 2000' },
   ],
 };

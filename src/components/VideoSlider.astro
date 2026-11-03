@@ -1,0 +1,106 @@
+---
+/* Video-Slider: großes Bild mit Play, darunter Thumbnails. Lädt Player erst bei Klick. */
+import type { Lang } from '@/i18n';
+import type { Video } from '@/lib/media';
+interface Props { videos: Video[]; lang: Lang }
+const { videos, lang } = Astro.props;
+const de = lang === 'de';
+
+function embedFor(src?: string) {
+  if (!src) return null;
+  const yt = src.match(/(?:youtu\.be\/|v=|\/shorts\/)([\w-]{11})/);
+  if (yt) return { kind: 'iframe', url: `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1&rel=0` };
+  const vm = src.match(/vimeo\.com\/(\d+)/);
+  if (vm) return { kind: 'iframe', url: `https://player.vimeo.com/video/${vm[1]}?autoplay=1&dnt=1` };
+  return { kind: 'file', url: src };
+}
+const items = videos.map((v) => ({ ...v, embed: embedFor(v.src) }));
+---
+<div class="vslider" data-vslider>
+  <div class="stage">
+    {items.map((v, i) => (
+      <figure class="slide" data-i={i} hidden={i !== 0} data-kind={v.embed?.kind} data-url={v.embed?.url}>
+        <img src={v.poster} alt="" width="1280" height="720" loading={i === 0 ? 'eager' : 'lazy'} />
+        {v.embed && (
+          <button type="button" class="play" aria-label={de ? `Abspielen: ${v.title.de}` : `Play: ${v.title.en}`}>
+            <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          </button>
+        )}
+        <figcaption><strong>{v.client}</strong><span>{v.title[lang]}</span></figcaption>
+      </figure>
+    ))}
+    <button type="button" class="nav prev" data-dir="-1" aria-label={de ? 'Vorheriges Video' : 'Previous video'}>‹</button>
+    <button type="button" class="nav next" data-dir="1" aria-label={de ? 'Nächstes Video' : 'Next video'}>›</button>
+  </div>
+  <ul class="thumbs" role="tablist" aria-label={de ? 'Videos' : 'Videos'}>
+    {items.map((v, i) => (
+      <li>
+        <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-i={i} aria-label={v.title[lang]}>
+          <img src={v.poster} alt="" width="240" height="135" loading="lazy" />
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-vslider]').forEach((root) => {
+    const slides = [...root.querySelectorAll<HTMLElement>('.slide')];
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    let cur = 0;
+    const stopPlayback = () => root.querySelectorAll('iframe, video').forEach((el) => el.remove());
+    const show = (i: number) => {
+      stopPlayback();
+      cur = (i + slides.length) % slides.length;
+      slides.forEach((s, j) => { s.hidden = j !== cur; s.querySelector<HTMLElement>('img')!.hidden = false; s.querySelector<HTMLElement>('.play')?.removeAttribute('hidden'); });
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === cur)); if (j === cur) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
+    };
+    tabs.forEach((t) => t.addEventListener('click', () => show(Number(t.dataset.i))));
+    root.querySelectorAll<HTMLButtonElement>('.nav').forEach((b) => b.addEventListener('click', () => show(cur + Number(b.dataset.dir))));
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(cur + 1);
+      if (e.key === 'ArrowLeft') show(cur - 1);
+    });
+    slides.forEach((s) => {
+      s.querySelector('.play')?.addEventListener('click', () => {
+        const { kind, url } = s.dataset;
+        let el: HTMLElement;
+        if (kind === 'iframe') {
+          const f = document.createElement('iframe');
+          f.src = url!; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.title = s.querySelector('figcaption')?.textContent ?? 'Video';
+          el = f;
+        } else {
+          const v = document.createElement('video');
+          v.src = url!; v.controls = true; v.autoplay = true; v.playsInline = true;
+          el = v;
+        }
+        s.querySelector<HTMLElement>('img')!.hidden = true;
+        s.querySelector<HTMLElement>('.play')!.setAttribute('hidden', '');
+        s.prepend(el);
+      });
+    });
+  });
+</script>
+
+<style>
+  .vslider { margin-top: 1.5rem; }
+  .stage { position: relative; aspect-ratio: 16/9; background: var(--ink-2); border-radius: var(--radius); overflow: hidden; }
+  .slide { margin: 0; position: absolute; inset: 0; }
+  .slide img, .slide :global(iframe), .slide :global(video) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; background: #000; }
+  .slide :global(video) { object-fit: contain; }
+  .play { position: absolute; inset: 0; margin: auto; width: 5rem; height: 5rem; border-radius: 50%; border: 0; background: var(--signal); color: #fff; display: grid; place-content: center; cursor: pointer; transition: transform .15s; }
+  .play:hover { transform: scale(1.08); }
+  figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 2.5rem 1.2rem .9rem; background: linear-gradient(transparent, rgba(0,0,0,.65)); color: #fff; pointer-events: none; }
+  figcaption strong { display: block; font-family: var(--font-display); font-weight: 700; }
+  figcaption span { font-size: var(--fs-0); opacity: .9; }
+  .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 0; background: rgba(20,27,38,.7); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; }
+  .nav:hover { background: var(--signal); }
+  .prev { left: .8rem; } .next { right: .8rem; }
+  .thumbs { list-style: none; margin: .8rem 0 0; padding: 0; max-width: none; display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; }
+  .thumbs::-webkit-scrollbar { display: none; }
+  .thumbs li { flex: 0 0 auto; }
+  .thumbs button { display: block; padding: 0; border: 2px solid transparent; border-radius: var(--radius); background: none; cursor: pointer; opacity: .55; transition: opacity .15s, border-color .15s; }
+  .thumbs img { width: 120px; aspect-ratio: 16/9; object-fit: cover; border-radius: 2px; }
+  .thumbs button:hover { opacity: .85; }
+  .thumbs button[aria-selected='true'] { opacity: 1; border-color: var(--signal); }
+</style>

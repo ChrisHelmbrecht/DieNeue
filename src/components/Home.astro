@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 import { localePath, t, type Lang } from '@/i18n';
 import { home } from '@/lib/copy';
-import { showreel, work } from '@/lib/media';
+import { videos, work } from '@/lib/media';
 import InsightCard from '@/components/InsightCard.astro';
 import MethodWheel from '@/components/MethodWheel.astro';
-import VideoFacade from '@/components/VideoFacade.astro';
+import VideoSlider from '@/components/VideoSlider.astro';
 import WorkStrip from '@/components/WorkStrip.astro';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -20,7 +20,10 @@ const de = lang === 'de';
 <section class="hero on-ink">
   <div class="wrap hero-grid">
     <div class="portrait">
-      <img src="/images/chris-portrait.svg" alt={de ? 'Chris Helmbrecht' : 'Chris Helmbrecht'} width="720" height="900" fetchpriority="high" />
+      <picture>
+        <source media="(max-width: 899px)" srcset="/images/chris-portrait-sq.webp" />
+        <img src="/images/chris-portrait.webp" alt="Chris Helmbrecht" width="720" height="900" fetchpriority="high" />
+      </picture>
     </div>
     <div class="hero-text">
       <p class="kicker">{c.hero.kicker}</p>
@@ -43,10 +46,12 @@ const de = lang === 'de';
   </div>
 </section>
 
-<!-- SHOWREEL -->
-<section class="section--tight reel">
+<!-- FILME -->
+<section class="section reel on-ink">
   <div class="wrap">
-    <VideoFacade video={showreel} lang={lang} />
+    <h2>{de ? 'Filme' : 'Films'}</h2>
+    <p class="lede">{de ? 'Imagefilme, Spots, Interviews, Social-Clips – von der Idee bis zum Schnitt.' : 'Image films, spots, interviews, social clips – from idea to final cut.'}</p>
+    <VideoSlider videos={videos} lang={lang} />
   </div>
 </section>
 
@@ -173,7 +178,7 @@ const de = lang === 'de';
   .hero { padding-block: clamp(2.5rem, 6vw, 5rem); overflow: hidden; }
   .hero-grid { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: center; }
   @media (min-width: 900px) { .hero-grid { grid-template-columns: 4fr 7fr; } }
-  .portrait img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); filter: grayscale(1) contrast(1.05); background: var(--ink-2); }
+  .portrait img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius); background: var(--ink-2); }
   @media (max-width: 899px) { .portrait { max-width: 260px; } .portrait img { aspect-ratio: 1; } }
   .kicker { color: var(--on-ink-mute); font-size: var(--fs-0); margin-bottom: .4rem; }
   .question { font-family: var(--font-display); font-size: var(--fs-3); color: var(--on-ink-mute); margin-bottom: 1.2rem; }
@@ -187,7 +192,8 @@ const de = lang === 'de';
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { [role=tabpanel] { animation: none; } }
 
-  .reel { background: var(--ink); padding-top: 0; }
+  .reel { padding-top: 0; }
+  .hero { padding-bottom: clamp(2rem, 5vw, 4rem); }
 
   .services { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); border-top: 1px solid var(--line); margin-top: 2rem; }
   .service { text-decoration: none; padding: 1.8rem 1.4rem 1.8rem 0; border-bottom: 1px solid var(--line); }
