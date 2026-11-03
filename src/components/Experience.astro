@@ -1,0 +1,100 @@
+---
+/* Erfahrung in drei Reitern: Branchen (für Kunden), Marken (Breite), Agenturen (für Agenturleute) */
+import type { Lang } from '@/i18n';
+import { industries, brands, agencies } from '@/lib/experience';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const tabs = [
+  { id: 'branchen', label: de ? 'Branchen' : 'Industries', hint: de ? 'Kenne ich deine Branche?' : 'Do I know your industry?' },
+  { id: 'marken', label: de ? 'Marken' : 'Brands', hint: de ? 'Für wen ich gearbeitet habe' : 'Who I have worked for' },
+  { id: 'agenturen', label: de ? 'Agenturen' : 'Agencies', hint: de ? 'Wo ich das Handwerk gelernt habe' : 'Where I learned the craft' },
+];
+---
+<div class="xp" data-tabs>
+  <div class="tablist" role="tablist" aria-label={de ? 'Erfahrung' : 'Experience'}>
+    {tabs.map((t, i) => (
+      <button role="tab" id={`xp-tab-${t.id}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`xp-${t.id}`} tabindex={i === 0 ? 0 : -1}>
+        <span class="t">{t.label}</span><span class="h">{t.hint}</span>
+      </button>
+    ))}
+  </div>
+
+  <div role="tabpanel" id="xp-branchen" aria-labelledby="xp-tab-branchen">
+    <ul class="industries">
+      {industries.map((ind) => (
+        <li>
+          <h3>{ind.name[lang]}</h3>
+          <p class="note">{ind.note[lang]}</p>
+          {ind.brands.length > 0 && <p class="brands-inline">{ind.brands.join(' · ')}</p>}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div role="tabpanel" id="xp-marken" aria-labelledby="xp-tab-marken" hidden>
+    <p class="lede">{de ? 'Dreißig Jahre, drei Länder, eine Auswahl der Marken – Projekte dazu stehen in den Cases und in der Arbeiten-Leiste.' : 'Thirty years, three countries, a selection of brands – the projects are in the cases and the work strip.'}</p>
+    <ul class="wall">
+      {brands.map((b) => <li>{b}</li>)}
+    </ul>
+  </div>
+
+  <div role="tabpanel" id="xp-agenturen" aria-labelledby="xp-tab-agenturen" hidden>
+    <ol class="agencies">
+      {agencies.map((a) => (
+        <li>
+          <span class="place">{a.place}</span>
+          <h3>{a.name}</h3>
+          <p>{a.role[lang]}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.xp[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[role=tabpanel]')];
+    const show = (i: number) => {
+      tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(i === j)); t.tabIndex = i === j ? 0 : -1; });
+      panels.forEach((p, j) => { p.hidden = i !== j; });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(i));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return; e.preventDefault();
+        const n = (i + d + tabs.length) % tabs.length; show(n); tabs[n].focus();
+      });
+    });
+  });
+</script>
+
+<style>
+  .tablist { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+  .tablist button { font: inherit; text-align: left; background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; padding: .9rem 0 .9rem; cursor: pointer; color: var(--mute); display: grid; gap: .1rem; }
+  .tablist button + button { padding-left: 1.2rem; }
+  .tablist .t { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-3); color: inherit; }
+  .tablist .h { font-size: var(--fs-0); }
+  .tablist button[aria-selected='true'] { color: var(--ink); border-bottom-color: var(--signal); }
+  .tablist button:hover { color: var(--ink); }
+  [role=tabpanel] { animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { [role=tabpanel] { animation: none; } }
+
+  .industries { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; gap: 1.6rem var(--gutter); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+  .industries h3 { font-size: var(--fs-2); margin-bottom: .2rem; }
+  .industries .note { margin-bottom: .3rem; }
+  .brands-inline { color: var(--mute); font-size: var(--fs-0); margin: 0; }
+
+  .wall { list-style: none; margin: 1.5rem 0 0; padding: 0; max-width: none; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-4); letter-spacing: -0.015em; line-height: 1.2; }
+  .wall li:nth-child(3n) { color: var(--mute); }
+  .wall li:nth-child(5n) { color: var(--signal); }
+
+  .agencies { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; gap: 1.2rem var(--gutter); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+  .agencies li { border-top: 2px solid var(--ink); padding-top: .8rem; }
+  .place { font-size: var(--fs-0); color: var(--signal); font-family: var(--font-display); font-weight: 600; }
+  .agencies h3 { font-size: var(--fs-2); margin: .2rem 0; }
+  .agencies p { margin: 0; color: var(--mute); }
+</style>

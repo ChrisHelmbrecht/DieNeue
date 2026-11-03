@@ -4,6 +4,7 @@ import { localePath, t, type Lang } from '@/i18n';
 import { home } from '@/lib/copy';
 import { videos, work } from '@/lib/media';
 import InsightCard from '@/components/InsightCard.astro';
+import Experience from '@/components/Experience.astro';
 import MethodWheel from '@/components/MethodWheel.astro';
 import VideoSlider from '@/components/VideoSlider.astro';
 import WorkStrip from '@/components/WorkStrip.astro';
@@ -66,8 +67,17 @@ const de = lang === 'de';
   </div>
 </section>
 
-<!-- METHODE: interaktiver Kreis -->
+<!-- ERFAHRUNG -->
 <section class="section alt">
+  <div class="wrap">
+    <h2>{de ? 'Erfahrung' : 'Experience'}</h2>
+    <p class="lede">{de ? 'Dreißig Jahre in Agenturen, Konzernen und eigenen Firmen. New York, Moskau, München.' : 'Thirty years in agencies, corporations and my own companies. New York, Moscow, Munich.'}</p>
+    <Experience lang={lang} />
+  </div>
+</section>
+
+<!-- METHODE: interaktiver Kreis -->
+<section class="section">
   <div class="wrap">
     <h2>{c.method.h}</h2>
     <p class="lede">{c.method.lede}</p>
@@ -77,7 +87,7 @@ const de = lang === 'de';
 </section>
 
 <!-- LEISTUNGEN -->
-<section class="section">
+<section class="section alt">
   <div class="wrap">
     <h2>{c.services.h}</h2>
     <p class="lede">{c.services.lede}</p>
@@ -107,19 +117,6 @@ const de = lang === 'de';
   <div class="wrap split">
     <h2>{c.network.h}</h2>
     <div>{c.network.p.map((p) => <p class="lede">{p}</p>)}</div>
-  </div>
-</section>
-
-<!-- KUNDEN: Laufband -->
-<section class="section--tight alt clients-band">
-  <div class="wrap">
-    <p class="lede">{c.proof.lede}</p>
-  </div>
-  <div class="marquee" aria-label={c.proof.h}>
-    <ul>
-      {c.proof.clients.map((n) => <li>{n}</li>)}
-      {c.proof.clients.map((n) => <li aria-hidden="true">{n}</li>)}
-    </ul>
   </div>
 </section>
 
@@ -202,11 +199,6 @@ const de = lang === 'de';
   .service:hover h3 { color: var(--signal); }
   .who { color: var(--mute); }
 
-  .marquee { overflow: hidden; margin-top: 1.5rem; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .marquee ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 3rem; width: max-content; max-width: none; animation: scroll 40s linear infinite; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-3); white-space: nowrap; }
-  .marquee:hover ul { animation-play-state: paused; }
-  @keyframes scroll { to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .marquee ul { animation: none; flex-wrap: wrap; width: auto; gap: 1rem 2rem; } .marquee { mask-image: none; } }
 
   .cta { background: var(--signal); color: #fff; }
   .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }

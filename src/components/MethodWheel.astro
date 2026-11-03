@@ -19,7 +19,7 @@ const pos = (i: number) => {
         <g class="node" data-i={i} tabindex="0" role="button" aria-pressed={i === 0 ? 'true' : 'false'} transform={`translate(${p.x} ${p.y})`}>
           <circle r="34" class="dot" />
           <text class="num" y="7">{i + 1}</text>
-          <text class="label" y="58">{s.name}</text>
+          <text class="label" y="60">{s.name}</text>
         </g>
       );
     })}
@@ -73,7 +73,7 @@ const pos = (i: number) => {
   .node[aria-pressed='true'] .dot { fill: var(--signal); stroke: var(--signal); }
   .num { font-family: var(--font-display); font-weight: 700; font-size: 22px; text-anchor: middle; fill: var(--ink); }
   .node[aria-pressed='true'] .num { fill: #fff; }
-  .label { font-family: var(--font-display); font-weight: 600; font-size: 15px; text-anchor: middle; fill: var(--ink); }
+  .label { font-family: var(--font-display); font-weight: 600; font-size: 15px; text-anchor: middle; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 6px; stroke-linejoin: round; }
   .node:focus-visible .dot { stroke-width: 5; }
   .detail { min-height: 12rem; }
   .step { animation: fade .3s ease; }
