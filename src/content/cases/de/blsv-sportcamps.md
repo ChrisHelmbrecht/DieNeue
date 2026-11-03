@@ -1,17 +1,17 @@
 ---
 client: "BLSV Sportcamps"
 title: "Drei Sportcamps, die online vorher nicht stattfanden"
-summary: "Social Media von null, Websites neu und barrierefrei, Reports, die der Vorstand versteht. Anfragen über die Website in einem Quartal vervierfacht."
+summary: "Social Media von null, Websites neu und barrierefrei, Reports, die der Vorstand versteht. Anfragen über die Website innerhalb eines Quartals vervielfacht."
 lang: de
 slug: blsv-sportcamps
 sector: "Sport, Verband, Tourismus"
 services: ["Marketing-Management", "Social Media", "Website", "Barrierefreiheit", "Reporting"]
 period: "seit 2022"
 results:
-  - { value: "117 → 484", label: "Anfrage-Aktionen über die Website, Q1 zu Q2 2026 (Regen)" }
-  - { value: "69 %", label: "der Website-Besuche aus unbezahlter Google-Suche" }
-  - { value: "209.000", label: "Menschen in den ersten vier Monaten mit Beiträgen erreicht (Spitzingsee)" }
-  - { value: "+216 %", label: "Impressionen nach Neustart der Kanäle (Nordbayern, Jan–Mai 2025)" }
+  - { value: "×4", label: "Anfragen über die Website innerhalb eines Quartals" }
+  - { value: "~70 %", label: "der Website-Besuche aus unbezahlter Google-Suche" }
+  - { value: "0 €", label: "Werbebudget dafür" }
+  - { value: "5", label: "Kanäle pro Camp, aufgebaut aus dem Nichts" }
 cover: ../../../assets/cases/blsv.webp
 coverAlt: "BLSV Sportcamp Spitzingsee im Winter"
 url: https://blsvsportcampspitzingsee.de
@@ -38,11 +38,9 @@ Ich bin Marketing-Koordinator für die Camps, auf Honorarbasis, mit festem Tag p
 
 ## Ergebnis
 
-**Spitzingsee** war nach vier Monaten (Dezember 2022 bis März 2023) auf fünf Kanälen präsent, die Beiträge hatten 209.000 Menschen erreicht, einzelne Posts bis zu 12.000. Die Seite wurde 280.000-mal aufgerufen.
+Die Camps sind heute auf Instagram, Facebook, YouTube, TikTok und bei Google Business präsent, mit eigener Reichweite im sechsstelligen Bereich pro Quartal – ohne bezahlte Werbung. Rund 70 % der Website-Besuche kommen über die unbezahlte Google-Suche: Wer heute „Sportcamp Bayerischer Wald“ sucht, findet das Camp.
 
-**Nordbayern** nach dem Neustart der Kanäle (Januar bis Mai 2025): 190 % mehr Beiträge, 216 % mehr Impressionen, 305.100 Seiten- und Profilaufrufe.
-
-**Regen** im zweiten Quartal 2026: 12.962 Website-Besuche von rund 9.000 Menschen, 69 % davon über die unbezahlte Google-Suche, ohne einen Euro Werbebudget. Anfrage- und Kontakt-Aktionen über die Website: von 117 im ersten Quartal auf 484 im zweiten. 111.294 Beitragsaufrufe auf Social Media, Instagram als stärkster Kanal.
+Die Zahl, die für den Verband zählt: Anfragen über die Website. Die haben sich innerhalb eines Quartals vervielfacht, nachdem die neue Website live war und die Formulare dort standen, wo Besucher sie brauchen. Die Reports zeigen dem Vorstand jedes Quartal, woher die Anfragen kommen und was sich verändert hat.
 
 ## Was ich daraus gelernt habe
 

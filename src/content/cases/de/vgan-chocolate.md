@@ -1,7 +1,7 @@
 ---
 client: "VGAN Chocolate"
 title: "Eine norwegische Schokolade auf dem Weg in die USA"
-summary: "Head of Marketing für ein Start-up, das seine Marke neu aufstellt: vom „plant-based“-Regal in die Premium-Schokolade. Marke, Website, Content, US-Launch 2027."
+summary: "Head of Marketing (fractional) für ein Start-up, das seine Marke neu aufstellt: vom „plant-based“-Regal in die Premium-Schokolade. Marke, Website, Content, US-Launch 2027."
 lang: de
 slug: vgan-chocolate
 sector: "Lebensmittel, Start-up, USA"
@@ -26,7 +26,7 @@ Dazu die üblichen Start-up-Bedingungen: kleines Team in Norwegen, großer Markt
 
 Umzug ins Premium-Regal. Neuer Name, neue Identität, die Schokolade bleibt, wie sie ist. US-Einführung 2027, bei der bestehende Kunden und Händler mitgenommen werden müssen.
 
-Mein Part als Head of Marketing: Positionierung und Markenarchitektur, Website und Content, Social Media, Vorbereitung des Launches – und die Frage, wie man das mit einem Budget macht, das keine Agentur anrühren würde.
+Mein Part als Head of Marketing (fractional): Positionierung und Markenarchitektur, Website und Content, Social Media, Vorbereitung des Launches – und die Frage, wie man das mit einem Budget macht, das keine Agentur anrühren würde.
 
 ## Umsetzung
 

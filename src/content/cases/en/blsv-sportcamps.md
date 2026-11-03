@@ -1,17 +1,17 @@
 ---
 client: "BLSV Sports Camps"
 title: "Three sports camps that didn’t exist online before"
-summary: "Social media from zero, new accessible websites, reports the board understands. Website enquiries quadrupled in one quarter."
+summary: "Social media from zero, new accessible websites, reports the board understands. Website enquiries multiplied within one quarter."
 lang: en
 slug: blsv-sportcamps
 sector: "Sports, association, tourism"
 services: ["Marketing management", "Social media", "Website", "Accessibility", "Reporting"]
 period: "since 2022"
 results:
-  - { value: "117 → 484", label: "enquiry actions via the website, Q1 to Q2 2026 (Regen)" }
-  - { value: "69%", label: "of website visits from unpaid Google search" }
-  - { value: "209,000", label: "people reached with posts in the first four months (Spitzingsee)" }
-  - { value: "+216%", label: "impressions after relaunching the channels (Nordbayern, Jan–May 2025)" }
+  - { value: "×4", label: "website enquiries within one quarter" }
+  - { value: "~70%", label: "of website visits from unpaid Google search" }
+  - { value: "€0", label: "ad budget for it" }
+  - { value: "5", label: "channels per camp, built from nothing" }
 cover: ../../../assets/cases/blsv.webp
 coverAlt: "BLSV Sportcamp Spitzingsee in winter"
 url: https://blsvsportcampspitzingsee.de
@@ -38,11 +38,9 @@ I’m the marketing coordinator for the camps on a freelance basis, one fixed da
 
 ## Result
 
-**Spitzingsee** was present on five channels after four months (December 2022 to March 2023); posts had reached 209,000 people, single posts up to 12,000. The page was viewed 280,000 times.
+The camps are now present on Instagram, Facebook, YouTube, TikTok and Google Business, with six-figure organic reach per quarter – without paid advertising. Around 70% of website visits come via unpaid Google search: anyone searching for “sports camp Bavarian Forest” today finds the camp.
 
-**Nordbayern** after relaunching the channels (January to May 2025): 190% more posts, 216% more impressions, 305,100 page and profile views.
-
-**Regen** in Q2 2026: 12,962 website visits by around 9,000 people, 69% via unpaid Google search, without a single euro of ad budget. Enquiry and contact actions via the website: from 117 in Q1 to 484 in Q2. 111,294 post views on social media, Instagram the strongest channel.
+The number that counts for the association: enquiries via the website. They multiplied within one quarter once the new website was live and the forms sat where visitors need them. The reports show the board every quarter where enquiries come from and what has changed.
 
 ## What I learned
 

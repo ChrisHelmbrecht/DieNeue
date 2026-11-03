@@ -1,7 +1,7 @@
 ---
 client: "VGAN Chocolate"
 title: "A Norwegian chocolate on its way to the US"
-summary: "Head of marketing for a start-up repositioning its brand: from the plant-based shelf to premium chocolate. Brand, website, content, US launch 2027."
+summary: "Fractional head of marketing for a start-up repositioning its brand: from the plant-based shelf to premium chocolate. Brand, website, content, US launch 2027."
 lang: en
 slug: vgan-chocolate
 sector: "Food, start-up, US"
@@ -26,7 +26,7 @@ Plus the usual start-up conditions: small team in Norway, big market in the US, 
 
 Move to the premium shelf. New name, new identity, the chocolate stays as it is. US launch in 2027, taking existing customers and retailers along.
 
-My part as head of marketing: positioning and brand architecture, website and content, social media, launch preparation – and the question of how to do that with a budget no agency would touch.
+My part as fractional head of marketing: positioning and brand architecture, website and content, social media, launch preparation – and the question of how to do that with a budget no agency would touch.
 
 ## Execution
 
