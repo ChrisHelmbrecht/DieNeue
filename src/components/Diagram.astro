@@ -15,8 +15,8 @@ const T = {
     ? { title: 'Wo Paid Social meistens scheitert', steps: ['Reichweite', 'Aufmerksamkeit', 'Klick', 'Anfrage', 'Kunde'], marks: [1, 3], note: 'Reichweite ist leicht zu kaufen. Aufmerksamkeit entscheidet der Content, die Anfrage entscheidet die Landingpage.' }
     : { title: 'Where paid social usually fails', steps: ['Reach', 'Attention', 'Click', 'Enquiry', 'Customer'], marks: [1, 3], note: 'Reach is easy to buy. Attention is decided by the content, the enquiry by the landing page.' },
   network: de
-    ? { title: 'Wer mitarbeitet', center: 'Chris', ring: ['KI-Modelle', 'Art Director', 'Film & Foto', 'Entwicklung', 'Text', 'Media-Planung', 'Branding', 'Recht & Datenschutz'], note: 'Ein Ansprechpartner. Dahinter Werkzeuge und Leute, je nach Aufgabe.' }
-    : { title: 'Who is involved', center: 'Chris', ring: ['AI models', 'Art director', 'Film & photo', 'Development', 'Copy', 'Media planning', 'Branding', 'Legal & privacy'], note: 'One point of contact. Behind it, tools and people depending on the task.' },
+    ? { title: 'Wer mitarbeitet', center: 'Chris', ring: ['KI-Modelle', 'Art Director', 'Film & Foto', 'Entwicklung', 'Text', 'Media', 'Branding', 'Recht'], note: 'Ein Ansprechpartner. Dahinter Werkzeuge und Leute, je nach Aufgabe.' }
+    : { title: 'Who is involved', center: 'Chris', ring: ['AI models', 'Art director', 'Film & photo', 'Development', 'Copy', 'Media', 'Branding', 'Legal'], note: 'One point of contact. Behind it, tools and people depending on the task.' },
 };
 ---
 {kind === 'loop' && (() => { const t = T.loop; const n = t.steps.length; const cx = 200, cy = 190, r = 140; const pos = (i: number) => { const a = (-90 + i * 360 / n) * Math.PI / 180; return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) }; }; return (
@@ -74,7 +74,7 @@ const T = {
       {t.ring.map((s, i) => { const a = (-90 + i * 360 / n) * Math.PI / 180; const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a); return (
         <g>
           <line x1={cx} y1={cy} x2={x} y2={y} class="spoke" />
-          <circle cx={x} cy={y} r="34" class:list={['node', { ai: i === 0 }]} />
+          <circle cx={x} cy={y} r="38" class:list={['node', { ai: i === 0 }]} />
           <text x={x} y={y + 4} class="ring-lbl">{s}</text>
         </g>
       ); })}
