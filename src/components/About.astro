@@ -10,18 +10,28 @@ const ui = t(lang);
 
 const stations = de
   ? [
-      { when: '1995', what: 'Erste Webseiten, nebenbei. Zwei Jahre später hauptberuflich.' },
-      { when: 'bis 2000', what: 'Bundespolizei, Crew Chief und Flugeinsatzplaner. Dazu juristische Ausbildung.' },
-      { when: '2000–2001', what: 'New York. Technischer Leiter bei Euro RSCG MVBMS: Volvo USA mit E-Commerce (4,5 Mio. $), New Balance Relaunch (2,5 Mio. $). Tech-Start-ups.' },
-      { when: '2002–2020', what: 'Moskau. Eigene Agentur Kollektiv: Volkswagen, Red Bull, Leopolis Hotel, Deutsche Schule Moskau. TV, Print, Web, Events, Film.' },
-      { when: 'seit 2021', what: 'München. Die Neue: Marketing, KI-Beratung, Web und Film für Verbände, Mittelstand, Start-ups und Marken. Head of Marketing bei VGAN Chocolate (Norwegen/USA).' },
+      { when: '1989–1997', what: 'Bundespolizei, Hubschrauberstaffel München. Crew Chief, Navigator, Flugeinsatzplanung – auch für Kanzler und Minister. Über 560 Flugstunden. Nebenbei ab 1995 die ersten Webseiten.' },
+      { when: '1997–1998', what: 'Lead-Webdesigner bei AIKIU in München (u. a. MTV Germany), dann für die Kunst-Community „The Thing“ in New York.' },
+      { when: '1998–2000', what: 'New York. CTO und Senior Technical Director New Media bei Compelling Content / MVBMS / Euro RSCG (Havas). Team von über 120 Designern und Entwicklern. Volvo USA mit E-Commerce, New Balance, Worldcom, Intel, Schering-Plough.' },
+      { when: '2000–2002', what: 'Gründer Cyber Generation Network, New York. Entwicklung und Design für Euro RSCG, Sony, Red Bull und Start-ups. Nach 9/11: Restrukturierung, Kosten runter, weitermachen.' },
+      { when: '2002–2003', what: 'Teneriffa. Interim-Manager bei eTravelBroker für den Investor DEBIS: IT-Leitung, acht Websites, Anbindung an Amadeus und Sabre, Partnerschaft mit Bild.de.' },
+      { when: '2004–2008', what: 'Moskau. Cyber Generation Network Russia: Websites und New-Media-Kampagnen für Agenturen in den USA und Deutschland – Shire, Völkl, Atomic, Salomon. Vor Ort Red Bull, KFC, HSBC.' },
+      { when: '2008–2013', what: 'Gründer und Geschäftsführer von Kollektiv, Moskau. TV-Spots und Filme für Red Bull und Volkswagen, Print, Web, Rebranding des Leopolis Hotels. Events für Marussia F1 und Ru-Center.' },
+      { when: '2013–2021', what: 'Unternehmer in Moskau. TV-Produktion für Welt, N24, Pro7, ARD, RTL, Sat.1, Vox und DMAX. Imagefilme und Social Media für die Deutsche Schule Moskau. Dazu Events und Concierge-Service – ein Buch über diese Jahre gibt es auch.' },
+      { when: '2021–2022', what: 'Executive Marketing Director bei BM Intelligence, einer Investment-Boutique in Moskau: Branding, Website, Prospekte, Social Media.' },
+      { when: 'seit 2022', what: 'München. Die Neue: Marketing, KI-Beratung, Web und Film für Verbände, Mittelstand, Start-ups und Marken. Head of Marketing bei VGAN Chocolate (Norwegen/USA).' },
     ]
   : [
-      { when: '1995', what: 'First websites, on the side. Full time two years later.' },
-      { when: 'until 2000', what: 'German Federal Police, crew chief and flight operations planner. Plus legal training.' },
-      { when: '2000–2001', what: 'New York. Technical director at Euro RSCG MVBMS: Volvo USA with e-commerce ($4.5m), New Balance relaunch ($2.5m). Tech start-ups.' },
-      { when: '2002–2020', what: 'Moscow. My own agency, Kollektiv: Volkswagen, Red Bull, Leopolis Hotel, German School Moscow. TV, print, web, events, film.' },
-      { when: 'since 2021', what: 'Munich. Die Neue: marketing, AI consulting, web and film for associations, mid-sized companies, start-ups and brands. Head of marketing at VGAN Chocolate (Norway/US).' },
+      { when: '1989–1997', what: 'German Federal Police, helicopter squadron Munich. Crew chief, navigator, flight operations planning – including for the chancellor and ministers. Over 560 flight hours. First websites on the side from 1995.' },
+      { when: '1997–1998', what: 'Lead web designer at AIKIU in Munich (incl. MTV Germany), then for the art community “The Thing” in New York.' },
+      { when: '1998–2000', what: 'New York. CTO and senior technical director new media at Compelling Content / MVBMS / Euro RSCG (Havas). Team of 120+ designers and developers. Volvo USA with e-commerce, New Balance, Worldcom, Intel, Schering-Plough.' },
+      { when: '2000–2002', what: 'Founder of Cyber Generation Network, New York. Development and design for Euro RSCG, Sony, Red Bull and start-ups. After 9/11: restructure, cut costs, carry on.' },
+      { when: '2002–2003', what: 'Tenerife. Interim manager at eTravelBroker for the investor DEBIS: IT lead, eight websites, Amadeus and Sabre integrations, partnership with Bild.de.' },
+      { when: '2004–2008', what: 'Moscow. Cyber Generation Network Russia: websites and new-media campaigns for agencies in the US and Germany – Shire, Völkl, Atomic, Salomon. Locally Red Bull, KFC, HSBC.' },
+      { when: '2008–2013', what: 'Founder and managing director of Kollektiv, Moscow. TV spots and films for Red Bull and Volkswagen, print, web, rebranding of the Leopolis Hotel. Events for Marussia F1 and Ru-Center.' },
+      { when: '2013–2021', what: 'Entrepreneur in Moscow. TV production for Welt, N24, Pro7, ARD, RTL, Sat.1, Vox and DMAX. Image films and social media for the German School Moscow. Plus events and a concierge service – there is a book about those years, too.' },
+      { when: '2021–2022', what: 'Executive marketing director at BM Intelligence, an investment boutique in Moscow: branding, website, prospectuses, social media.' },
+      { when: 'since 2022', what: 'Munich. Die Neue: marketing, AI consulting, web and film for associations, mid-sized companies, start-ups and brands. Head of marketing at VGAN Chocolate (Norway/US).' },
     ];
 ---
 <section class="section hero">
@@ -60,7 +70,7 @@ const stations = de
 <section class="section alt">
   <div class="wrap">
     <h2>{de ? 'Was ich kann' : 'What I do'}</h2>
-    <ul class="skills">{skills.map((s) => <li>{s}</li>)}</ul>
+    <ul class="skills">{skills[lang].map((s) => <li>{s}</li>)}</ul>
   </div>
 </section>
 
@@ -89,7 +99,7 @@ const stations = de
   @media (min-width: 820px) { .grid-hero { grid-template-columns: 7fr 4fr; } }
   .grid-hero img { border-radius: var(--radius); max-width: 420px; width: 100%; }
   .timeline { list-style: none; margin: 1.5rem 0 0; padding: 0; max-width: 70ch; }
-  .timeline li { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+  .timeline li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
   .when { font-family: var(--font-display); font-weight: 700; color: var(--signal); }
   .timeline p { margin: 0; }
   .skills { list-style: none; margin: 1rem 0 0; padding: 0; max-width: none; display: flex; flex-wrap: wrap; gap: .5rem; }

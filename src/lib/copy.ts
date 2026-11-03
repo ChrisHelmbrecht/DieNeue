@@ -54,7 +54,7 @@ export const home: Record<Lang, HomeCopy> = {
     intro: {
       h: 'Seit 1995 online. Seit 1997 davon leben.',
       p: [
-        'Webdesigner, Technischer Leiter in New Yorker Agenturen, eigene Agentur in Moskau, Marketingleitung für Marken in Deutschland, Norwegen und den USA. Dazwischen Red Bull, Volkswagen, Volvo, New Balance und ein paar Start-ups.',
+        'Webdesigner, CTO bei Euro RSCG in New York, eigene Agenturen in New York und Moskau, TV-Produktion, Marketingleitung für Marken in Deutschland, Norwegen und den USA. Dazwischen Red Bull, Volkswagen, Volvo, New Balance und ein paar Start-ups.',
         'Heute arbeite ich mit Verbänden, Mittelständlern, Start-ups und Marken, die ein konkretes Problem haben und keine Lust auf Agentur-Theater. Ich komme rein, analysiere, schlage eine Lösung vor und setze sie um – mit KI, wo sie hilft, und mit Leuten aus meinem Netzwerk, wo sie besser sind als ich.',
       ],
     },
@@ -134,7 +134,7 @@ export const home: Record<Lang, HomeCopy> = {
     intro: {
       h: 'Online since 1995. Making a living from it since 1997.',
       p: [
-        'Web designer, technical director at New York agencies, my own agency in Moscow, head of marketing for brands in Germany, Norway and the US. Along the way: Red Bull, Volkswagen, Volvo, New Balance and a few start-ups.',
+        'Web designer, CTO at Euro RSCG in New York, my own agencies in New York and Moscow, TV production, head of marketing for brands in Germany, Norway and the US. Along the way: Red Bull, Volkswagen, Volvo, New Balance and a few start-ups.',
         'Today I work with associations, mid-sized companies, start-ups and brands that have a concrete problem and no appetite for agency theatre. I come in, analyse, propose a solution and build it – with AI where it helps, and with people from my network where they are better than me.',
       ],
     },
