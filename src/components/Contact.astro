@@ -1,13 +1,13 @@
 ---
 /*
- * Kontakt. Das Formular schickt an FORM_ENDPOINT (z. B. Formspree, https://formspree.io – kostenlos bis 50 Mails/Monat).
- * Solange kein Endpoint gesetzt ist, öffnet der Button das Mailprogramm mit vorausgefülltem Text.
+ * Kontakt. Das Formular schickt an /api/contact.php (PHP auf dem Plesk-Server, Versand per mail()).
+ * Ist der Endpoint leer, öffnet der Button stattdessen das Mailprogramm mit vorausgefülltem Text.
  */
 import type { Lang } from '@/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const de = lang === 'de';
-const FORM_ENDPOINT = ''; // TODO: z. B. 'https://formspree.io/f/xxxxxxxx'
+const FORM_ENDPOINT = '/api/contact.php';
 const EMAIL = 'info@dieneue.social';
 const PHONE = '+49 176 843 93190';
 const L = de
