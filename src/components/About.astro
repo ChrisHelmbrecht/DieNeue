@@ -1,0 +1,100 @@
+---
+import type { Lang } from '@/i18n';
+import { localePath, t } from '@/i18n';
+import Experience from '@/components/Experience.astro';
+import { skills } from '@/lib/experience';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const ui = t(lang);
+
+const stations = de
+  ? [
+      { when: '1995', what: 'Erste Webseiten, nebenbei. Zwei Jahre später hauptberuflich.' },
+      { when: 'bis 2000', what: 'Bundespolizei, Crew Chief und Flugeinsatzplaner. Dazu juristische Ausbildung.' },
+      { when: '2000–2001', what: 'New York. Technischer Leiter bei Euro RSCG MVBMS: Volvo USA mit E-Commerce (4,5 Mio. $), New Balance Relaunch (2,5 Mio. $). Tech-Start-ups.' },
+      { when: '2002–2020', what: 'Moskau. Eigene Agentur Kollektiv: Volkswagen, Red Bull, Leopolis Hotel, Deutsche Schule Moskau. TV, Print, Web, Events, Film.' },
+      { when: 'seit 2021', what: 'München. Die Neue: Marketing, KI-Beratung, Web und Film für Verbände, Mittelstand, Start-ups und Marken. Head of Marketing bei VGAN Chocolate (Norwegen/USA).' },
+    ]
+  : [
+      { when: '1995', what: 'First websites, on the side. Full time two years later.' },
+      { when: 'until 2000', what: 'German Federal Police, crew chief and flight operations planner. Plus legal training.' },
+      { when: '2000–2001', what: 'New York. Technical director at Euro RSCG MVBMS: Volvo USA with e-commerce ($4.5m), New Balance relaunch ($2.5m). Tech start-ups.' },
+      { when: '2002–2020', what: 'Moscow. My own agency, Kollektiv: Volkswagen, Red Bull, Leopolis Hotel, German School Moscow. TV, print, web, events, film.' },
+      { when: 'since 2021', what: 'Munich. Die Neue: marketing, AI consulting, web and film for associations, mid-sized companies, start-ups and brands. Head of marketing at VGAN Chocolate (Norway/US).' },
+    ];
+---
+<section class="section hero">
+  <div class="wrap grid-hero">
+    <div>
+      <h1>{de ? 'Marketingmensch, Medienmacher, Technikfan.' : 'Marketing person, media maker, tech enthusiast.'}</h1>
+      <p class="lede">{de
+        ? 'Ich bin Chris Helmbrecht. Mein Weg: Crew Chief bei der Bundespolizei, Tech-Start-ups in New York, eigene Agentur in Moskau, TV-Produktionen und Markenprojekte quer durch Europa. Heute in München, mit Kunden in Deutschland, Norwegen und den USA.'
+        : 'I’m Chris Helmbrecht. My route: crew chief in the German Federal Police, tech start-ups in New York, my own agency in Moscow, TV productions and brand projects across Europe. Today in Munich, with clients in Germany, Norway and the US.'}</p>
+      <p class="lede">{de
+        ? 'Was mich ausmacht: Neugier, Struktur und eine große Portion Hands-on. Ich mag es, Dinge wirklich zu bewegen – nicht nur Konzepte dazu zu schreiben.'
+        : 'What defines me: curiosity, structure and a large dose of hands-on. I like actually moving things – not just writing concepts about them.'}</p>
+    </div>
+    <img src="/images/chris-cap.webp" alt="Chris Helmbrecht" width="600" height="600" />
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>{de ? 'Stationen' : 'Stations'}</h2>
+    <ol class="timeline">
+      {stations.map((s) => (
+        <li><span class="when">{s.when}</span><p>{s.what}</p></li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2>{de ? 'Erfahrung' : 'Experience'}</h2>
+    <Experience lang={lang} />
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2>{de ? 'Was ich kann' : 'What I do'}</h2>
+    <ul class="skills">{skills.map((s) => <li>{s}</li>)}</ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <h2>{de ? 'Jenseits vom Marketing' : 'Beyond marketing'}</h2>
+    <div>
+      <p class="lede">{de
+        ? 'Ich habe ein Buch über meine Moskauer Jahre geschrieben (Heyne Verlag), lege als DJ auf und führe im Winter Gruppen am Spitzingsee durch den Schnee. Drei Sprachen: Deutsch, Englisch, Russisch.'
+        : 'I wrote a book about my Moscow years (Heyne Verlag), DJ, and guide groups through the snow at Spitzingsee in winter. Three languages: German, English, Russian.'}</p>
+      <p><a href="https://www.chrishelmbrecht.com" rel="me noopener">chrishelmbrecht.com</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section cta">
+  <div class="wrap">
+    <h2>{de ? 'Lass uns reden.' : 'Let’s talk.'}</h2>
+    <a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
+  </div>
+</section>
+
+<style>
+  .hero h1 { font-size: var(--fs-6); max-width: 16ch; }
+  .grid-hero { display: grid; gap: var(--gutter); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 820px) { .grid-hero { grid-template-columns: 7fr 4fr; } }
+  .grid-hero img { border-radius: var(--radius); max-width: 420px; width: 100%; }
+  .timeline { list-style: none; margin: 1.5rem 0 0; padding: 0; max-width: 70ch; }
+  .timeline li { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+  .when { font-family: var(--font-display); font-weight: 700; color: var(--signal); }
+  .timeline p { margin: 0; }
+  .skills { list-style: none; margin: 1rem 0 0; padding: 0; max-width: none; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .skills li { border: 1px solid var(--ink); border-radius: 999px; padding: .35rem .9rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
+  .cta { background: var(--signal); color: #fff; }
+  .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }
+  .cta .btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+</style>

@@ -1,0 +1,68 @@
+---
+import type { Lang } from '@/i18n';
+import { localePath, t } from '@/i18n';
+import { services } from '@/lib/services';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const de = lang === 'de';
+const ui = t(lang);
+const list = services[lang];
+const L = de
+  ? { who: 'Für wen', problem: 'Das typische Problem', what: 'Was passiert', deliver: 'Was du bekommst', kpis: 'Woran wir Erfolg messen', formats: 'Formate', jump: 'Direkt zu' }
+  : { who: 'For whom', problem: 'The typical problem', what: 'What happens', deliver: 'What you get', kpis: 'How we measure success', formats: 'Formats', jump: 'Jump to' };
+---
+<section class="section hero">
+  <div class="wrap">
+    <h1>{de ? 'Leistungen' : 'Services'}</h1>
+    <p class="lede">{de ? 'Drei Dinge, die ich richtig gut kann. Alles andere – Design, Film, Entwicklung, Media – holt mein Netzwerk, und ich koordiniere.' : 'Three things I do really well. Everything else – design, film, development, media – comes from my network, and I coordinate.'}</p>
+    <nav class="jump" aria-label={L.jump}>
+      {list.map((s) => <a href={`#${s.id}`}>{s.name}</a>)}
+    </nav>
+  </div>
+</section>
+
+{list.map((s, i) => (
+  <section class:list={['section', 'service', { alt: i % 2 === 0 }]} id={s.id}>
+    <div class="wrap">
+      <div class="head">
+        <h2>{s.name}</h2>
+        <p class="lede">{s.who}</p>
+      </div>
+      <div class="body">
+        <div class="problem">
+          <h3>{L.problem}</h3>
+          <p>{s.problem}</p>
+        </div>
+        <div>
+          <h3>{L.what}</h3>
+          <ul class="what">{s.what.map((w) => <li>{w}</li>)}</ul>
+        </div>
+        <div class="facts">
+          <div><h3>{L.deliver}</h3><ul>{s.deliver.map((d) => <li>{d}</li>)}</ul></div>
+          <div><h3>{L.kpis}</h3><ul>{s.kpis.map((k) => <li>{k}</li>)}</ul></div>
+          <div><h3>{L.formats}</h3><p>{s.formats}</p></div>
+        </div>
+        <a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
+      </div>
+    </div>
+  </section>
+))}
+
+<style>
+  .hero h1 { font-size: var(--fs-6); }
+  .jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .jump a { text-decoration: none; border: 1px solid var(--ink); border-radius: 999px; padding: .4rem 1rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
+  .jump a:hover { background: var(--ink); color: var(--on-ink); }
+  .service { scroll-margin-top: 5rem; }
+  .service .wrap { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .service .wrap { grid-template-columns: 4fr 7fr; } .head { position: sticky; top: 6rem; align-self: start; } }
+  .body { display: grid; gap: 2rem; }
+  .body h3 { font-size: var(--fs-1); color: var(--mute); font-weight: 600; margin-bottom: .4rem; }
+  .problem p { font-family: var(--font-display); font-size: var(--fs-2); line-height: 1.4; max-width: 50ch; }
+  .what { list-style: none; padding: 0; margin: 0; max-width: 62ch; }
+  .what li { padding: .7rem 0; border-top: 1px solid var(--line); }
+  .facts { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+  .facts ul { padding-left: 1.1rem; margin: 0; }
+  .facts li + li { margin-top: .25rem; }
+  .body .btn { justify-self: start; }
+</style>
