@@ -14,13 +14,13 @@ function embedFor(src?: string) {
   if (vm) return { kind: 'iframe', url: `https://player.vimeo.com/video/${vm[1]}?autoplay=1&dnt=1` };
   return { kind: 'file', url: src };
 }
-const items = videos.map((v) => ({ ...v, embed: embedFor(v.src) }));
+const items = videos.map((v) => ({ ...v, embed: embedFor(v.src), thumb: v.poster.replace(/\.webp$/, '-thumb.webp') }));
 ---
 <div class="vslider" data-vslider>
   <div class="stage">
     {items.map((v, i) => (
       <figure class="slide" data-i={i} hidden={i !== 0} data-kind={v.embed?.kind} data-url={v.embed?.url}>
-        <img src={v.poster} alt="" width="1280" height="720" loading={i === 0 ? 'eager' : 'lazy'} />
+        <img src={v.poster} alt="" width="1280" height="720" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
         {v.embed && (
           <button type="button" class="play" aria-label={de ? `Abspielen: ${v.title.de}` : `Play: ${v.title.en}`}>
             <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
@@ -32,15 +32,13 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src) }));
     <button type="button" class="nav prev" data-dir="-1" aria-label={de ? 'Vorheriges Video' : 'Previous video'}>‹</button>
     <button type="button" class="nav next" data-dir="1" aria-label={de ? 'Nächstes Video' : 'Next video'}>›</button>
   </div>
-  <ul class="thumbs" role="tablist" aria-label={de ? 'Videos' : 'Videos'}>
+  <div class="thumbs" role="tablist" aria-label="Videos">
     {items.map((v, i) => (
-      <li>
-        <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-i={i} aria-label={v.title[lang]}>
-          <img src={v.poster} alt="" width="240" height="135" loading="lazy" />
-        </button>
-      </li>
+      <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-i={i} aria-label={v.title[lang]} tabindex={i === 0 ? 0 : -1}>
+        <img src={v.thumb} alt="" width="240" height="135" loading="lazy" />
+      </button>
     ))}
-  </ul>
+  </div>
 </div>
 
 <script>
@@ -56,6 +54,8 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src) }));
       tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === cur)); if (j === cur) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
     };
     tabs.forEach((t) => t.addEventListener('click', () => show(Number(t.dataset.i))));
+    const focusTab = (i: number) => { tabs.forEach((t, j) => (t.tabIndex = j === i ? 0 : -1)); tabs[i].focus(); };
+    root.querySelector('.thumbs')?.addEventListener('keydown', (e) => { const k = (e as KeyboardEvent).key; if (k !== 'ArrowRight' && k !== 'ArrowLeft') return; e.preventDefault(); e.stopPropagation(); const n = (cur + (k === 'ArrowRight' ? 1 : -1) + slides.length) % slides.length; show(n); focusTab(n); });
     root.querySelectorAll<HTMLButtonElement>('.nav').forEach((b) => b.addEventListener('click', () => show(cur + Number(b.dataset.dir))));
     root.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') show(cur + 1);
@@ -96,10 +96,9 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src) }));
   .nav { position: absolute; top: 50%; transform: translateY(-50%); width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 0; background: rgba(20,27,38,.7); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; }
   .nav:hover { background: var(--signal); }
   .prev { left: .8rem; } .next { right: .8rem; }
-  .thumbs { list-style: none; margin: .8rem 0 0; padding: 0; max-width: none; display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; }
+  .thumbs { margin: .8rem 0 0; display: flex; gap: .5rem; overflow-x: auto; scrollbar-width: none; }
   .thumbs::-webkit-scrollbar { display: none; }
-  .thumbs li { flex: 0 0 auto; }
-  .thumbs button { display: block; padding: 0; border: 2px solid transparent; border-radius: var(--radius); background: none; cursor: pointer; opacity: .55; transition: opacity .15s, border-color .15s; }
+  .thumbs button { flex: 0 0 auto; display: block; padding: 0; border: 2px solid transparent; border-radius: var(--radius); background: none; cursor: pointer; opacity: .55; transition: opacity .15s, border-color .15s; }
   .thumbs img { width: 120px; aspect-ratio: 16/9; object-fit: cover; border-radius: 2px; }
   .thumbs button:hover { opacity: .85; }
   .thumbs button[aria-selected='true'] { opacity: 1; border-color: var(--signal); }

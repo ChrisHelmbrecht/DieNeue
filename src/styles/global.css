@@ -5,12 +5,12 @@
   --paper-2: #e2e5e9;      /* leicht dunkler, für Wechselflächen */
   --ink: #141b26;          /* Blauschwarz – Text, dunkle Flächen */
   --ink-2: #273242;        /* dunkle Fläche, angehoben */
-  --mute: #5f6974;         /* Nebentext */
+  --mute: #4f5864;         /* Nebentext */
   --line: #c9ced4;         /* Linien */
   --signal: #1f3dff;       /* Kobalt – das einzige Signal */
   --signal-ink: #ffffff;
   --on-ink: #eceef1;
-  --on-ink-mute: #a3acb7;
+  --on-ink-mute: #aeb6c0;
 
   /* Typo */
   --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;

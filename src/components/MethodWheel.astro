@@ -10,7 +10,7 @@ const pos = (i: number) => {
 };
 ---
 <div class="wheel" data-wheel>
-  <svg viewBox="0 0 400 400" role="img" aria-label={lang === 'de' ? 'Kreislauf aus vier Schritten' : 'Cycle of four steps'}>
+  <svg viewBox="-60 0 520 400" role="img" aria-label={lang === 'de' ? 'Kreislauf aus vier Schritten' : 'Cycle of four steps'}>
     <circle cx={cx} cy={cy} r={r} class="ring" />
     <circle cx={cx} cy={cy} r={r} class="ring-active" pathLength="100" />
     {steps.map((s, i) => {
