@@ -1,6 +1,29 @@
 ---
 import Page from '@/layouts/Page.astro';
+import { owner as o } from '@/lib/legal';
 ---
-<Page lang="de" title="Datenschutz" description="Datenschutzerklärung von Die Neue – Chris Helmbrecht, München." lede="">
-  <p><em>Wird an die neue, cookiefreie Seite angepasst.</em></p>
+<Page lang="de" title="Datenschutz" description="Datenschutzerklärung von Die Neue – Christian Helmbrecht, München." lede="Kurzfassung: Diese Seite setzt keine Cookies, nutzt keine Analyse-Tools und lädt nichts von Google, Meta oder anderen Werbenetzwerken. Was gespeichert wird, steht hier.">
+  <h2>1. Verantwortlicher</h2>
+  <p>{o.name}, {o.street}, {o.city}, Telefon {o.phone}, E-Mail <a href={`mailto:${o.email}`}>{o.email}</a>.</p>
+
+  <h2>2. Hosting und Server-Logfiles</h2>
+  <p>Diese Website wird auf einem Server bei DigitalOcean gehostet. Beim Aufruf werden automatisch Server-Logfiles erzeugt: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, übertragene Datenmenge, Browser und Betriebssystem, verweisende Seite. Diese Daten dienen dem sicheren und stabilen Betrieb (Art. 6 Abs. 1 lit. f DSGVO) und werden nach spätestens 14 Tagen gelöscht. Eine Zusammenführung mit anderen Daten findet nicht statt.</p>
+
+  <h2>3. Keine Cookies, kein Tracking</h2>
+  <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste. Schriften werden vom eigenen Server geladen, nicht von Google. Es gibt deshalb kein Cookie-Banner.</p>
+
+  <h2>4. Eingebettete Videos</h2>
+  <p>Auf der Startseite sind Videos von YouTube eingebettet. Bis du auf „Abspielen“ klickst, wird nur ein Vorschaubild von meinem Server geladen und keine Verbindung zu YouTube aufgebaut. Erst mit dem Klick lädt der Player von YouTube (Google Ireland Ltd., Gordon House, Barrow Street, Dublin 4, Irland) im erweiterten Datenschutzmodus (youtube-nocookie.com). Dabei erhält YouTube deine IP-Adresse und kann eigene Cookies setzen. Rechtsgrundlage ist deine Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO). Details: <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</p>
+
+  <h2>5. Kontaktformular und E-Mail</h2>
+  <p>Wenn du mir über das Kontaktformular oder per E-Mail schreibst, speichere ich deine Angaben (Name, E-Mail-Adresse, ggf. Firma, Nachricht), um deine Anfrage zu beantworten und für mögliche Anschlussfragen (Art. 6 Abs. 1 lit. b DSGVO, vorvertragliche Maßnahmen). Die Daten werden gelöscht, sobald sie für den Zweck nicht mehr nötig sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Das Formular wird über einen Dienstleister übermittelt, mit dem ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO besteht; welcher das ist, trage ich hier nach, sobald er eingerichtet ist.</p>
+
+  <h2>6. Externe Links</h2>
+  <p>Diese Seite verlinkt auf externe Websites (z. B. LinkedIn, Kunden-Websites). Für deren Datenverarbeitung gelten die Datenschutzerklärungen der jeweiligen Betreiber.</p>
+
+  <h2>7. Deine Rechte</h2>
+  <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Eine erteilte Einwilligung kannst du jederzeit widerrufen. Außerdem kannst du dich bei einer Aufsichtsbehörde beschweren, in Bayern beim Bayerischen Landesamt für Datenschutzaufsicht, Promenade 18, 91522 Ansbach.</p>
+
+  <h2>8. Stand</h2>
+  <p>November 2026. Diese Erklärung passe ich an, wenn sich an der Technik etwas ändert.</p>
 </Page>

@@ -1,6 +1,22 @@
 ---
 import Page from '@/layouts/Page.astro';
+import { owner as o } from '@/lib/legal';
 ---
-<Page lang="de" title="Impressum" description="Impressum von Die Neue – Chris Helmbrecht, München." lede="">
-  <p><em>Wird von der bestehenden Seite übernommen.</em></p>
+<Page lang="de" title="Impressum" description="Impressum von Die Neue – Christian Helmbrecht, München.">
+  <h2>Angaben gemäß § 5 DDG</h2>
+  <p>{o.name}<br />{o.brand}<br />{o.street}<br />{o.city}<br />{o.country}</p>
+  <h2>Kontakt</h2>
+  <p>Telefon: <a href={`tel:${o.phone.replace(/\s/g, '')}`}>{o.phone}</a><br />E-Mail: <a href={`mailto:${o.email}`}>{o.email}</a></p>
+  <h2>Umsatzsteuer-ID</h2>
+  <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: {o.vatId}</p>
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>{o.name}, Anschrift wie oben.</p>
+  <h2>EU-Streitschlichtung</h2>
+  <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" rel="noopener">https://ec.europa.eu/consumers/odr/</a>. Meine E-Mail-Adresse findest du oben im Impressum.</p>
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  <h2>Haftung für Inhalte und Links</h2>
+  <p>Die Inhalte dieser Seite wurden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität übernehme ich keine Gewähr. Für die Inhalte verlinkter externer Seiten sind ausschließlich deren Betreiber verantwortlich; zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar.</p>
+  <h2>Urheberrecht</h2>
+  <p>Texte, Bilder und Filme auf dieser Seite unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung. Soweit Inhalte nicht von mir erstellt wurden, sind die Rechte Dritter gekennzeichnet.</p>
 </Page>

@@ -1,6 +1,22 @@
 ---
 import Page from '@/layouts/Page.astro';
+import { owner as o } from '@/lib/legal';
 ---
-<Page lang="en" title="Imprint" description="Imprint of Die Neue – Chris Helmbrecht, Munich." lede="">
-  <p><em>To be taken over from the existing site.</em></p>
+<Page lang="en" title="Imprint" description="Imprint of Die Neue – Christian Helmbrecht, Munich.">
+  <h2>Information pursuant to § 5 DDG (German Digital Services Act)</h2>
+  <p>{o.name}<br />{o.brand}<br />{o.street}<br />{o.city}<br />Germany</p>
+  <h2>Contact</h2>
+  <p>Phone: <a href={`tel:${o.phone.replace(/\s/g, '')}`}>{o.phone}</a><br />Email: <a href={`mailto:${o.email}`}>{o.email}</a></p>
+  <h2>VAT ID</h2>
+  <p>VAT identification number pursuant to § 27a German VAT Act: {o.vatId}</p>
+  <h2>Responsible for content pursuant to § 18 (2) MStV</h2>
+  <p>{o.name}, address as above.</p>
+  <h2>EU dispute resolution</h2>
+  <p>The European Commission provides a platform for online dispute resolution: <a href="https://ec.europa.eu/consumers/odr/" rel="noopener">https://ec.europa.eu/consumers/odr/</a>. My email address is given above.</p>
+  <h2>Consumer dispute resolution</h2>
+  <p>I am neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+  <h2>Liability for content and links</h2>
+  <p>The content of this site has been prepared with care. I accept no liability for its accuracy, completeness or currency. The operators of linked external sites are solely responsible for their content; no legal violations were apparent at the time of linking.</p>
+  <h2>Copyright</h2>
+  <p>Texts, images and films on this site are subject to German copyright law. Reproduction, editing and distribution beyond the limits of copyright require written consent. Where content was not created by me, third-party rights are indicated.</p>
 </Page>
