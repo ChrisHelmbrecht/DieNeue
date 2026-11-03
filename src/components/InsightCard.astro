@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { localePath, type Lang } from '@/i18n';
+import { tagLabel } from '@/lib/tags';
 interface Props { post: CollectionEntry<'insights'>; lang: Lang }
 const { post, lang } = Astro.props;
 const href = localePath(lang, `/insights/${post.data.slug}`);
@@ -13,14 +14,14 @@ const date = post.data.date.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB'
       <Image src={post.data.cover} alt={post.data.coverAlt ?? ''} width="640" height="360" />
     </a>
   )}
-  <time datetime={post.data.date.toISOString()} class="mute">{date}</time>
+  <p class="meta"><time datetime={post.data.date.toISOString()}>{date}</time>{post.data.tags.length > 0 && <span> · {post.data.tags.map((t) => tagLabel(t, lang)).join(', ')}</span>}</p>
   <h3><a href={href}>{post.data.title}</a></h3>
   <p>{post.data.description}</p>
 </article>
 
 <style>
   .card img { aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius); margin-bottom: .8rem; }
-  time { font-size: var(--fs-0); display: block; margin-bottom: .3rem; }
+  .meta { font-size: var(--fs-0); color: var(--mute); margin-bottom: .3rem; }
   h3 { font-size: var(--fs-2); }
   h3 a { text-decoration: none; }
   h3 a:hover { text-decoration: underline; }

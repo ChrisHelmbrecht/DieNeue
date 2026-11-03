@@ -4,7 +4,7 @@ description: "Ab Mitte 2025 wird Barrierefreiheit im Web für viele Unternehmen 
 date: 2025-05-23
 lang: de
 slug: "barrierefreiheit-web"
-tags: []
+tags: [web, recht]
 cover: ../../../assets/insights/barrierefreiheit-web/Barrierefreiheit.webp
 coverAlt: "Weißes Symbol einer stilisierten Person mit ausgestreckten Armen in einem Kreis auf blauem Hintergrund, daneben der Text \"dienue.social\"."
 draft: false

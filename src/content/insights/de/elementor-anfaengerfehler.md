@@ -4,7 +4,7 @@ description: "Elementor ist ein starkes Tool – aber Anfänger machen oft typis
 date: 2025-04-15
 lang: de
 slug: "elementor-anfaengerfehler"
-tags: []
+tags: [web]
 cover: ../../../assets/insights/elementor-anfaengerfehler/ElementorHeader.webp
 coverAlt: "Dynamischer Farbverlauf von Blau zu Rot mit dem Wort \"ELEMENTOR.\" in großer, weißer Schrift und der URL \"dienue.social\" in kleinerer Größe darunter."
 draft: false

@@ -4,7 +4,7 @@ description: "KI schreibt heute Social-Media-Posts, die perfekt zum Algorithmus 
 date: 2025-05-11
 lang: de
 slug: "ki-social-media-algorithmus"
-tags: []
+tags: [ki, social-media]
 cover: ../../../assets/insights/ki-social-media-algorithmus/KISocialmedia.webp
 coverAlt: "Pastellfarbener Hintergrund mit dem Text \"K.I. & SOCIALMEDIA\" in einem dunkelvioletten Sprechblasen-Symbol, darunter kleiner der Schriftzug \"dieneue.social\"."
 draft: false

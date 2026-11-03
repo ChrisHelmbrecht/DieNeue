@@ -4,7 +4,7 @@ description: "Was passiert, wenn VGAN Chocolate sein echtes US-Rebranding-Proble
 date: 2026-11-02
 lang: de
 slug: "bi-case-competition"
-tags: []
+tags: [marketing, ki, case]
 cover: ../../../assets/insights/bi-case-competition/image-scaled.webp
 coverAlt: "Students of BI Norwegian Business School with Chris Helmbrecht and Thomas Kraft after the VGAN Chocolate case competition in Oslo"
 draft: false

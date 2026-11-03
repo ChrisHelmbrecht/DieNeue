@@ -4,7 +4,7 @@ description: "Wie funktionieren die Algorithmen von Instagram, TikTok, Facebook,
 date: 2025-07-03
 lang: de
 slug: "social-media-algorithmen-2025"
-tags: []
+tags: [social-media]
 cover: ../../../assets/insights/social-media-algorithmen-2025/SocialMediaHeader2.webp
 coverAlt: "Unschärfer Hintergrund mit Farbverläufen von Blau und Rot. Überlagert von großen weißen Buchstaben: \"SOCIALMEDIA\" und darunter kleiner \"dieneue.social\"."
 draft: false

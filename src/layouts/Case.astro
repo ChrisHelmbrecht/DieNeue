@@ -10,8 +10,11 @@ const { Content } = await render(entry);
 const d = entry.data;
 const de = lang === 'de';
 const ui = t(lang);
+const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: `${d.client}: ${d.title}`, description: d.summary, inLanguage: lang, about: d.client, keywords: d.services.join(', '),
+  image: d.cover ? new URL(d.cover.src, Astro.site).href : undefined, author: { '@type': 'Person', name: 'Chris Helmbrecht' }, publisher: { '@type': 'Organization', name: 'Die Neue', url: Astro.site?.href }, mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href };
 ---
 <Base lang={lang} title={`${d.client}: ${d.title}`} description={d.summary} type="article" ogImage={d.cover?.src}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="section--tight">
       <div class="wrap">

@@ -2,35 +2,85 @@
 import Base from '@/layouts/Base.astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
-import type { Lang } from '@/i18n';
+import { getCollection, render } from 'astro:content';
+import InsightCard from '@/components/InsightCard.astro';
+import { localePath, t, type Lang } from '@/i18n';
+import { tagLabel } from '@/lib/tags';
 interface Props { post: CollectionEntry<'insights'>; lang: Lang }
 const { post, lang } = Astro.props;
 const { Content } = await render(post);
-const minutes = Math.max(1, Math.round((post.body ?? '').split(/\s+/).filter(Boolean).length / 200));
 const d = post.data;
-const date = d.date.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const de = lang === 'de';
+const ui = t(lang);
+const minutes = Math.max(1, Math.round((post.body ?? '').split(/\s+/).filter(Boolean).length / 200));
+const date = d.date.toLocaleDateString(de ? 'de-DE' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const backHref = localePath(lang, '/insights');
+
+// Verwandte Artikel: gleiche Sprache, meiste gemeinsame Tags, dann neueste
+const all = await getCollection('insights', (e) => e.data.lang === lang && !e.data.draft && e.data.slug !== d.slug);
+const related = all
+  .map((e) => ({ e, score: e.data.tags.filter((x) => d.tags.includes(x)).length }))
+  .sort((a, b) => b.score - a.score || b.e.data.date.valueOf() - a.e.data.date.valueOf())
+  .slice(0, 3)
+  .map((x) => x.e);
+
+// Gibt es den Artikel in der anderen Sprache?
+const other: Lang = de ? 'en' : 'de';
+const twin = (await getCollection('insights', (e) => e.data.lang === other && e.data.slug === d.slug && !e.data.draft))[0];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: d.title,
+  description: d.description,
+  datePublished: d.date.toISOString(),
+  dateModified: (d.updated ?? d.date).toISOString(),
+  inLanguage: lang,
+  keywords: d.tags.map((x) => tagLabel(x, lang)).join(', '),
+  image: d.cover ? new URL(d.cover.src, Astro.site).href : undefined,
+  author: { '@type': 'Person', name: 'Chris Helmbrecht', url: new URL(localePath(lang, de ? '/ueber-mich' : '/about'), Astro.site).href },
+  publisher: { '@type': 'Organization', name: 'Die Neue', url: Astro.site?.href },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
 ---
 <Base lang={lang} title={d.title} description={d.description} type="article" ogImage={d.cover?.src}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <article>
     <header class="section--tight">
       <div class="col">
-        <p class="mute"><time datetime={d.date.toISOString()}>{date}</time>{` · ${minutes} ${lang === 'de' ? 'Min. Lesezeit' : 'min read'}`}</p>
+        <p class="crumbs"><a href={backHref}>← Insights</a></p>
+        <p class="mute"><time datetime={d.date.toISOString()}>{date}</time> · {minutes} {de ? 'Min. Lesezeit' : 'min read'}</p>
         <h1 class="title">{d.title}</h1>
         <p class="lede">{d.description}</p>
+        {d.tags.length > 0 && <ul class="tags">{d.tags.map((x) => <li><a href={`${backHref}#${x}`}>{tagLabel(x, lang)}</a></li>)}</ul>}
         {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} width="1200" height="675" class="cover" />}
       </div>
     </header>
     <div class="col prose"><Content /></div>
     <footer class="col section--tight">
       <hr class="rule" />
-      <p class="mute">{lang === 'de' ? 'Fragen dazu? ' : 'Questions? '}<a href={lang === 'de' ? '/kontakt' : '/en/contact'}>{lang === 'de' ? 'Schreib mir.' : 'Get in touch.'}</a></p>
+      <p class="mute">{de ? 'Fragen dazu? ' : 'Questions? '}<a href={localePath(lang, ui.contactPath)}>{de ? 'Schreib mir.' : 'Get in touch.'}</a>{twin && <> · <a href={localePath(other, `/insights/${d.slug}`)} hreflang={other} lang={other}>{de ? 'Read in English' : 'Auf Deutsch lesen'}</a></>}</p>
     </footer>
   </article>
+  {related.length > 0 && (
+    <section class="section alt">
+      <div class="wrap">
+        <h2>{de ? 'Auch interessant' : 'Also worth reading'}</h2>
+        <div class="grid grid-3">{related.map((p) => <InsightCard post={p} lang={lang} />)}</div>
+        <p><a href={backHref}>{ui.allInsights}</a></p>
+      </div>
+    </section>
+  )}
 </Base>
 <style>
   .col { width: min(100% - 2 * var(--gutter), 72ch); margin-inline: auto; }
   .prose { max-width: none; }
+  .crumbs { font-size: var(--fs-0); margin-bottom: 1.2rem; }
+  .crumbs a { text-decoration: none; color: var(--mute); }
+  .crumbs a:hover { color: var(--signal); }
   .title { font-size: var(--fs-6); max-width: 22ch; }
-  .cover { border-radius: var(--radius); margin-top: 2rem; aspect-ratio: 16/9; object-fit: cover; }
+  .tags { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tags a { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: .2rem .7rem; font-size: var(--fs-0); text-decoration: none; }
+  .tags a:hover { border-color: var(--signal); }
+  .cover { border-radius: var(--radius); margin-top: 1.5rem; aspect-ratio: 16/9; object-fit: cover; }
 </style>

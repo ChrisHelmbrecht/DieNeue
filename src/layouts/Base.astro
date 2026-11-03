@@ -22,6 +22,26 @@ const fullTitle = title === site ? title : `${title} – ${site}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const altDe = new URL(switchLang(Astro.url, 'de'), Astro.site);
 const altEn = new URL(switchLang(Astro.url, 'en'), Astro.site);
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/en' || Astro.url.pathname === '/en/';
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService', '@id': `${Astro.site}#org`, name: 'Die Neue', url: Astro.site?.href, logo: new URL('/apple-touch-icon.png', Astro.site).href,
+      description: lang === 'de' ? 'Marketing, KI-Beratung, Paid Social und Web – Chris Helmbrecht, München. Für Verbände, Mittelstand, Start-ups und Marken.' : 'Marketing, AI consulting, paid social and web – Chris Helmbrecht, Munich. For associations, mid-sized companies, start-ups and brands.',
+      founder: { '@id': `${Astro.site}#chris` }, areaServed: ['DE', 'EU', 'US', 'NO'], email: 'info@dieneue.social', telephone: '+49 176 843 93190',
+      address: { '@type': 'PostalAddress', streetAddress: 'Hauzenberger Str. 6', postalCode: '80687', addressLocality: 'München', addressCountry: 'DE' },
+      knowsAbout: ['AI consulting', 'Marketing management', 'Paid social', 'Content production', 'Social media', 'Web design', 'SEO', 'GEO', 'Accessibility'],
+      sameAs: ['https://www.linkedin.com/in/kollektiv', 'https://www.instagram.com/chrishelmbrecht'],
+    },
+    {
+      '@type': 'Person', '@id': `${Astro.site}#chris`, name: 'Chris Helmbrecht', alternateName: 'Christian Helmbrecht', jobTitle: lang === 'de' ? 'Marketing- und KI-Berater' : 'Marketing and AI consultant',
+      worksFor: { '@id': `${Astro.site}#org` }, url: new URL(lang === 'de' ? '/ueber-mich' : '/en/about', Astro.site).href, image: new URL('/images/chris-portrait.webp', Astro.site).href,
+      knowsLanguage: ['de', 'en', 'ru'], sameAs: ['https://www.linkedin.com/in/kollektiv', 'https://www.instagram.com/chrishelmbrecht', 'https://www.chrishelmbrecht.de', 'https://www.chrishelmbrecht.com'],
+    },
+    { '@type': 'WebSite', url: Astro.site?.href, name: 'Die Neue', inLanguage: ['de', 'en'], publisher: { '@id': `${Astro.site}#org` } },
+  ],
+};
 ---
 <!doctype html>
 <html lang={lang}>
@@ -47,6 +67,7 @@ const altEn = new URL(switchLang(Astro.url, 'en'), Astro.site);
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}
     <slot name="head" />
   </head>
   <body>

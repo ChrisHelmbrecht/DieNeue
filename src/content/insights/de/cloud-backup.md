@@ -4,7 +4,7 @@ description: "Liegen deine Firmendaten nur in der Cloud? Dann hast du kein Backu
 date: 2026-10-12
 lang: de
 slug: "cloud-backup"
-tags: []
+tags: [technik, recht]
 cover: ../../../assets/insights/cloud-backup/76f95fbd-6dc2-45da-adbe-a8612c6df00c.webp
 coverAlt: "Daten & Backup"
 draft: false

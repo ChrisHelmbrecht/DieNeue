@@ -4,7 +4,7 @@ description: "2025 entscheidet eine klare Social-Media-Strategie über Sichtbark
 date: 2025-04-10
 lang: de
 slug: "social-media-strategie-2025"
-tags: []
+tags: [social-media, marketing]
 cover: ../../../assets/insights/social-media-strategie-2025/SocialMediaHeader2.webp
 coverAlt: "Unschärfer Hintergrund mit Farbverläufen von Blau und Rot. Überlagert von großen weißen Buchstaben: \"SOCIALMEDIA\" und darunter kleiner \"dieneue.social\"."
 draft: false

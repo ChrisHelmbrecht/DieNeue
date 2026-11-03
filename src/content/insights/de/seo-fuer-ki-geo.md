@@ -4,7 +4,7 @@ description: "Künstliche Intelligenz verändert die Online-Suche grundlegend. P
 date: 2025-05-10
 lang: de
 slug: "seo-fuer-ki-geo"
-tags: []
+tags: [ki, seo-geo]
 cover: ../../../assets/insights/seo-fuer-ki-geo/GEOHEader.webp
 coverAlt: "Blauer und grüner Hintergrund mit dem Wort \"GEO\" in großen weißen Buchstaben in der Mitte und dem Text \"dieneue.social\" in kleineren Buchstaben unten rechts."
 draft: false

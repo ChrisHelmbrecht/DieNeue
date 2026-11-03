@@ -1,12 +1,55 @@
 ---
 import { getCollection } from 'astro:content';
 import InsightCard from '@/components/InsightCard.astro';
+import { tagLabel } from '@/lib/tags';
 import type { Lang } from '@/i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const de = lang === 'de';
 const posts = (await getCollection('insights', (e) => e.data.lang === lang && !e.data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const counts = new Map<string, number>();
+posts.forEach((p) => p.data.tags.forEach((t) => counts.set(t, (counts.get(t) ?? 0) + 1)));
+const tags = [...counts.entries()].sort((a, b) => b[1] - a[1]);
 ---
-<div class="grid grid-3">
-  {posts.map((p) => <InsightCard post={p} lang={lang} />)}
+<div class="filter" data-filter>
+  <p class="filter-h">{de ? 'Thema' : 'Topic'}</p>
+  <div class="chips" role="group" aria-label={de ? 'Nach Thema filtern' : 'Filter by topic'}>
+    <button type="button" data-tag="" aria-pressed="true">{de ? 'Alle' : 'All'} <span>{posts.length}</span></button>
+    {tags.map(([t, n]) => <button type="button" data-tag={t} aria-pressed="false">{tagLabel(t, lang)} <span>{n}</span></button>)}
+  </div>
 </div>
+<div class="grid grid-3" data-list>
+  {posts.map((p) => <div class="item" data-tags={p.data.tags.join(' ')}><InsightCard post={p} lang={lang} /></div>)}
+</div>
+<p class="empty" hidden>{de ? 'Dazu gibt es noch keinen Artikel.' : 'No article on that yet.'}</p>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-filter]').forEach((f) => {
+    const buttons = [...f.querySelectorAll<HTMLButtonElement>('button')];
+    const items = [...document.querySelectorAll<HTMLElement>('[data-list] .item')];
+    const empty = document.querySelector<HTMLElement>('.empty');
+    const apply = (tag: string) => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tag === tag)));
+      let n = 0;
+      items.forEach((it) => { const show = !tag || (it.dataset.tags ?? '').split(' ').includes(tag); it.hidden = !show; if (show) n++; });
+      if (empty) empty.hidden = n > 0;
+      history.replaceState(null, '', tag ? `#${tag}` : location.pathname);
+    };
+    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.tag ?? '')));
+    const initial = location.hash.slice(1);
+    if (initial && buttons.some((b) => b.dataset.tag === initial)) apply(initial);
+  });
+</script>
+
+<style>
+  .filter { margin-bottom: 2rem; }
+  .filter-h { font-size: var(--fs-0); color: var(--mute); margin-bottom: .4rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chips button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; padding: .35rem .9rem; cursor: pointer; }
+  .chips button span { color: var(--mute); font-weight: 400; margin-left: .2rem; }
+  .chips button:hover { background: var(--paper-2); }
+  .chips button[aria-pressed='true'] { background: var(--ink); color: var(--on-ink); }
+  .chips button[aria-pressed='true'] span { color: var(--on-ink-mute); }
+  .empty { color: var(--mute); }
+</style>

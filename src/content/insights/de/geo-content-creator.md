@@ -4,7 +4,7 @@ description: "Die Suchlandschaft revolutioniert sich: KI-Modelle wie Gemini, Cha
 date: 2025-05-30
 lang: de
 slug: "geo-content-creator"
-tags: []
+tags: [ki, seo-geo]
 cover: ../../../assets/insights/geo-content-creator/GEOHEader.webp
 coverAlt: "Blauer und grüner Hintergrund mit dem Wort \"GEO\" in großen weißen Buchstaben in der Mitte und dem Text \"dieneue.social\" in kleineren Buchstaben unten rechts."
 draft: false

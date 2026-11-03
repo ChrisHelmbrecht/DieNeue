@@ -4,7 +4,7 @@ description: "Musik macht Reels emotional – und genau das wird für viele Acco
 date: 2026-03-09
 lang: de
 slug: "abmahnwelle-musik-reels"
-tags: []
+tags: [social-media, recht]
 cover: ../../../assets/insights/abmahnwelle-musik-reels/CopyrightHeader.webp
 coverAlt: "Header des Blogartikels Abmahnwelle Socialmedia Musikverwendung in Reels"
 draft: false

@@ -4,7 +4,7 @@ description: "Gute Usability ist der Schlüssel zu mehr Anfragen und zufriedenen
 date: 2025-04-25
 lang: de
 slug: "usability-besucher-kunden"
-tags: []
+tags: [web, marketing]
 cover: ../../../assets/insights/usability-besucher-kunden/UsabilityHeader.png
 coverAlt: "Bunter Farbverlauf-Hintergrund von Blau zu Rosa mit großem, weißem Text \"USABILITY\" und kleinerem Text \"dieneue.social\"."
 draft: false

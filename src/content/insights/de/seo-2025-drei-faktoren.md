@@ -4,7 +4,7 @@ description: "SEO 2025 dreht sich nicht mehr nur um Keywords. Erfahre, welche dr
 date: 2025-04-27
 lang: de
 slug: "seo-2025-drei-faktoren"
-tags: []
+tags: [seo-geo]
 cover: ../../../assets/insights/seo-2025-drei-faktoren/SEO.webp
 coverAlt: "Roter Hintergrund mit gewellten Linien. In der Mitte ein dunkelroter Kreis mit dem Wort \"SEO\" in weißer Schrift. Unten rechts der Schriftzug \"dieneue.social\" in Weiß."
 draft: false

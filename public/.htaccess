@@ -1,0 +1,50 @@
+# Die Neue – Apache-Regeln (Plesk). Erzeugt aus dem Repo, nicht auf dem Server editieren.
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# www -> ohne www (und http -> https), sobald die Domain final ist
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# Alte WordPress-URLs -> neue Adressen
+Redirect 301 /wer-bin-ich/ /ueber-mich/
+Redirect 301 /wer-bin-ich /ueber-mich/
+Redirect 301 /cookie-richtlinie-eu/ /datenschutz/
+Redirect 301 /wir-haben-den-studenten-der-bi-unser-echtes-problem-gegeben-sie-haben-uns-unseren-eigenen-plan-zurueckgegeben/ /insights/bi-case-competition/
+Redirect 301 /we-gave-bis-students-our-real-problem-they-handed-us-back-our-own-plan/ /en/insights/bi-case-competition/
+Redirect 301 /die-cloud-ist-auch-nur-ein-keller-voller-server/ /insights/cloud-backup/
+Redirect 301 /abmahnwelle-wegen-musik-in-reels/ /insights/abmahnwelle-musik-reels/
+Redirect 301 /social-media-algorithmen-2025-tiktok-instagram-facebook-x-und-linkedin-im-ueberblick/ /insights/social-media-algorithmen-2025/
+Redirect 301 /ki-ersetzt-suchmaschinen-wie-content-creator-jetzt-geo-optimieren-muessen/ /insights/geo-content-creator/
+Redirect 301 /barrierefreiheit-im-web-pflicht-oder-chance/ /insights/barrierefreiheit-web/
+Redirect 301 /ki-in-social-media-zaehlt-der-algorithmus-mehr-als-der-mensch/ /insights/ki-social-media-algorithmus/
+Redirect 301 /seo-fuer-ki-applikationen-wie-du-deine-inhalte-fuer-chatgpt-perplexity-co-optimierst-geo/ /insights/seo-fuer-ki-geo/
+Redirect 301 /seo-2025-diese-3-faktoren-sind-wichtiger-als-keywords/ /insights/seo-2025-drei-faktoren/
+Redirect 301 /usability-entscheidet-so-machst-du-aus-besuchern-kunden/ /insights/usability-besucher-kunden/
+Redirect 301 /die-5-groessten-anfaengerfehler-beim-arbeiten-mit-elementor-und-wie-du-sie-vermeidest/ /insights/elementor-anfaengerfehler/
+Redirect 301 /warum-2025-social-media-ohne-echte-strategie-keine-chance-mehr-hat/ /insights/social-media-strategie-2025/
+Redirect 301 /en/home/ /en/
+Redirect 301 /en/who-am-i/ /en/about/
+
+# Caching: Assets mit Hash lange, HTML kurz
+<IfModule mod_headers.c>
+<FilesMatch "\.(css|js|webp|jpg|png|svg|woff2|mp4)$">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+<FilesMatch "\.html$">
+Header set Cache-Control "public, max-age=600"
+</FilesMatch>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Komprimierung
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain
+</IfModule>
