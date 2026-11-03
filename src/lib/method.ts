@@ -87,7 +87,7 @@ export const method: Record<Lang, MethodCopy> = {
         { t: 'Ohne mich weiterlaufen', p: 'Was ich baue, dokumentiere ich so, dass dein Team es übernehmen kann.' },
       ],
     },
-    cta: { h: 'Schritt eins dauert ein Gespräch.', p: 'Erzähl mir, wo es hakt. Ich sage dir innerhalb von 48 Stunden, ob und wie ich helfen kann.' },
+    cta: { h: 'Schritt eins dauert ein Gespräch.', p: 'Erzähl mir, wo es hakt. Ich sage dir innerhalb von 24 Stunden, ob und wie ich helfen kann.' },
   },
 
   en: {
@@ -157,6 +157,6 @@ export const method: Record<Lang, MethodCopy> = {
         { t: 'Runs without me', p: 'What I build, I document so your team can take it over.' },
       ],
     },
-    cta: { h: 'Step one takes one conversation.', p: 'Tell me where it’s stuck. Within 48 hours I’ll tell you whether and how I can help.' },
+    cta: { h: 'Step one takes one conversation.', p: 'Tell me where it’s stuck. Within 24 hours I’ll tell you whether and how I can help.' },
   },
 };

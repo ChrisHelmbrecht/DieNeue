@@ -4,7 +4,7 @@ export const owner = {
   street: 'Hauzenberger Str. 6',
   city: '80687 München',
   country: 'Deutschland',
-  phone: '+49 176 84393190',
-  email: 'noytechmedia@gmail.com', // TODO: ggf. auf chris@dieneue.social umstellen
+  phone: '+49 176 843 93190',
+  email: 'info@dieneue.social',
   vatId: 'DE356631724',
 };

@@ -8,11 +8,11 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const de = lang === 'de';
 const FORM_ENDPOINT = ''; // TODO: z. B. 'https://formspree.io/f/xxxxxxxx'
-const EMAIL = 'chris@dieneue.social'; // TODO: prüfen
-const PHONE = ''; // TODO: optional, z. B. '+49 171 …'
+const EMAIL = 'info@dieneue.social';
+const PHONE = '+49 176 843 93190';
 const L = de
-  ? { h: 'Schreib mir', lede: 'Eine Mail oder ein Anruf reicht. Innerhalb von 48 Stunden sage ich dir, ob und wie ich helfen kann.', name: 'Name', company: 'Firma (optional)', email: 'E-Mail', topic: 'Worum geht es?', topics: ['KI im Unternehmen', 'Marketing-Management', 'Paid Social & Content', 'Website', 'Etwas anderes'], msg: 'Dein Problem in zwei, drei Sätzen', send: 'Abschicken', sent: 'Danke – ich melde mich innerhalb von 48 Stunden.', err: 'Das hat nicht geklappt. Schreib mir bitte direkt an', direct: 'Oder direkt', privacy: 'Deine Angaben nutze ich nur, um dir zu antworten.' }
-  : { h: 'Get in touch', lede: 'An email or a call is enough. Within 48 hours I’ll tell you whether and how I can help.', name: 'Name', company: 'Company (optional)', email: 'Email', topic: 'What is it about?', topics: ['AI in the company', 'Marketing management', 'Paid social & content', 'Website', 'Something else'], msg: 'Your problem in two or three sentences', send: 'Send', sent: 'Thanks – I’ll get back to you within 48 hours.', err: 'That didn’t work. Please email me directly at', direct: 'Or directly', privacy: 'I use your details only to reply to you.' };
+  ? { h: 'Was kann ich für deine Firma tun?', lede: 'Eine Mail oder ein Anruf reicht. Innerhalb von 24 Stunden sage ich dir, ob und wie ich helfen kann.', name: 'Name', company: 'Firma (optional)', email: 'E-Mail', topic: 'Worum geht es?', topics: ['KI im Unternehmen', 'Marketing-Management', 'Paid Social & Content', 'Website', 'Etwas anderes'], msg: 'Dein Problem in zwei, drei Sätzen', send: 'Abschicken', sent: 'Danke – ich melde mich innerhalb von 24 Stunden.', err: 'Das hat nicht geklappt. Schreib mir bitte direkt an', direct: 'Oder direkt', privacy: 'Deine Angaben nutze ich nur, um dir zu antworten.' }
+  : { h: 'What can I do for your company?', lede: 'An email or a call is enough. Within 24 hours I’ll tell you whether and how I can help.', name: 'Name', company: 'Company (optional)', email: 'Email', topic: 'What is it about?', topics: ['AI in the company', 'Marketing management', 'Paid social & content', 'Website', 'Something else'], msg: 'Your problem in two or three sentences', send: 'Send', sent: 'Thanks – I’ll get back to you within 24 hours.', err: 'That didn’t work. Please email me directly at', direct: 'Or directly', privacy: 'I use your details only to reply to you.' };
 ---
 <section class="section">
   <div class="wrap grid-c">
@@ -22,7 +22,7 @@ const L = de
       <div class="direct">
         <h2>{L.direct}</h2>
         <p><a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
-        {PHONE && <p><a href={`tel:${PHONE.replace(/\s/g, '')}`}>{PHONE}</a></p>}
+        <p><a href={`tel:${PHONE.replace(/\s/g, '')}`}>{PHONE}</a></p>
         <p><a href="https://www.linkedin.com/in/kollektiv" rel="me noopener">LinkedIn</a></p>
         <p class="mute">Chris Helmbrecht · Die Neue · München</p>
       </div>

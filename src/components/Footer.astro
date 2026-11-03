@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
     <div>
       <p class="brand">Die Neue</p>
       <p class="mute">{ui.tagline}</p>
-      <p class="mute">Chris Helmbrecht · München</p>
+      <p class="mute">Chris Helmbrecht · München<br /><a href="mailto:info@dieneue.social">info@dieneue.social</a><br /><a href="tel:+4917684393190">+49 176 843 93190</a></p>
     </div>
     <div>
       <ul>
@@ -21,7 +21,8 @@ const year = new Date().getFullYear();
     <div>
       <ul>
         <li><a href="https://www.linkedin.com/in/kollektiv" rel="me noopener">LinkedIn</a></li>
-        <li><a href="https://www.chrishelmbrecht.com" rel="me noopener">chrishelmbrecht.com</a></li>
+        <li><a href={lang === 'de' ? 'https://www.chrishelmbrecht.de' : 'https://www.chrishelmbrecht.com'} rel="me noopener">{lang === 'de' ? 'chrishelmbrecht.de' : 'chrishelmbrecht.com'}</a></li>
+        <li><a href="https://www.instagram.com/chrishelmbrecht" rel="me noopener">Instagram</a></li>
         {ui.footerLegal.map((label, i) => <li><a href={localePath(lang, ui.footerLegalPaths[i])}>{label}</a></li>)}
       </ul>
     </div>

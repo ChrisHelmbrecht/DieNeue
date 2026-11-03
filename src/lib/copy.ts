@@ -82,7 +82,7 @@ export const home: Record<Lang, HomeCopy> = {
     network: {
       h: 'KI und Menschen mit Jahrzehnten Erfahrung',
       p: [
-        'Ich arbeite täglich mit Claude, ChatGPT, Gemini, Firefly und einer Reihe weiterer Werkzeuge. Nicht, weil es modern ist, sondern weil es Recherche, Produktion und Reporting schneller und billiger macht.',
+        'Ich arbeite täglich mit Claude, ChatGPT, Gemini, Perplexity, Firefly, Runway und einer Reihe weiterer Werkzeuge. Nicht, weil es modern ist, sondern weil es Recherche, Produktion und Reporting schneller und billiger macht.',
         'Und ich arbeite mit Leuten, die ihr Handwerk seit zwanzig, dreißig Jahren machen: Art Directors, Filmer, Entwickler, Texter, Media-Planer – in Deutschland und international. Du bekommst das Passende, nicht das, was gerade im Büro sitzt.',
       ],
     },
@@ -92,8 +92,8 @@ export const home: Record<Lang, HomeCopy> = {
       clients: ['BLSV Sportcamps', 'VGAN Chocolate', 'Sportschule Oberhaching', 'Deutsche Schule Moskau', 'Red Bull', 'Volkswagen', 'Volvo', 'New Balance', 'Leopolis Hotel'],
     },
     cta: {
-      h: 'Erzähl mir dein Problem.',
-      p: 'Eine Mail oder ein Anruf reicht. Innerhalb von 48 Stunden sage ich dir, ob und wie ich helfen kann.',
+      h: 'Was kann ich für deine Firma tun?',
+      p: 'Eine Mail oder ein Anruf reicht. Innerhalb von 24 Stunden sage ich dir, ob und wie ich helfen kann.',
       button: 'Schreib mir',
     },
   },
@@ -162,7 +162,7 @@ export const home: Record<Lang, HomeCopy> = {
     network: {
       h: 'AI, plus people with decades of experience',
       p: [
-        'I work with Claude, ChatGPT, Gemini, Firefly and a range of other tools every day. Not because it is fashionable, but because it makes research, production and reporting faster and cheaper.',
+        'I work with Claude, ChatGPT, Gemini, Perplexity, Firefly, Runway and a range of other tools every day. Not because it is fashionable, but because it makes research, production and reporting faster and cheaper.',
         'And I work with people who have practised their craft for twenty or thirty years: art directors, filmmakers, developers, copywriters, media planners – in Germany and internationally. You get the right fit, not whoever happens to be in the office.',
       ],
     },
@@ -172,8 +172,8 @@ export const home: Record<Lang, HomeCopy> = {
       clients: ['BLSV Sportcamps', 'VGAN Chocolate', 'Sportschule Oberhaching', 'German School Moscow', 'Red Bull', 'Volkswagen', 'Volvo', 'New Balance', 'Leopolis Hotel'],
     },
     cta: {
-      h: 'Tell me your problem.',
-      p: 'An email or a call is enough. Within 48 hours I’ll tell you whether and how I can help.',
+      h: 'What can I do for your company?',
+      p: 'An email or a call is enough. Within 24 hours I’ll tell you whether and how I can help.',
       button: 'Get in touch',
     },
   },
