@@ -50,7 +50,7 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Marketingstrategie und Jahresplan', 'Laufender Betrieb von Content, Social, Website', 'Monatlicher Report in Klartext'],
       kpis: ['Reichweite und Engagement je Kanal', 'Anfragen, Buchungen, Bewerbungen', 'Kosten pro Kontakt'],
       formats: 'Interim (Vollzeit für einige Monate), fester Tag pro Woche, auf Abruf.',
-      image: '/images/svc-marketing.webp', imageAlt: 'Arbeitsrunde am Tisch', credit: 'BI Norwegian Business School', diagram: 'budget',
+      image: '/images/svc-marketing.webp', imageAlt: 'Workshop im Seminarraum des BLSV Sportcamps Nordbayern', credit: 'Flo Hagena / BLSV Sportcamp Nordbayern', diagram: 'budget',
       box: { h: 'Was es kostet – und wie wir das Meiste rausholen', p: 'Ich arbeite nach Tagessatz oder mit festem Monatsbudget, ohne Agentur-Overhead: kein Account-Manager, kein Junior, der lernt, keine 15 % Handling auf Fremdkosten. Das Marketingbudget selbst wird nach einem einfachen Prinzip verteilt: Erst klein testen, dann messen, dann dorthin umschichten, wo die Zahlen am besten sind. Jeden Monat. Was nicht liefert, wird gestoppt – auch wenn es meine Idee war. So holt ein mittleres Budget mehr raus als ein großes, das einmal im Jahr geplant wird.' },
     },
     {
@@ -104,7 +104,7 @@ export const services: Record<Lang, Service[]> = {
       deliver: ['Marketing strategy and annual plan', 'Ongoing operation of content, social, website', 'Monthly report in plain language'],
       kpis: ['Reach and engagement per channel', 'Enquiries, bookings, applications', 'Cost per contact'],
       formats: 'Interim (full time for a few months), one fixed day a week, on call.',
-      image: '/images/svc-marketing.webp', imageAlt: 'Working session at a table', credit: 'BI Norwegian Business School', diagram: 'budget',
+      image: '/images/svc-marketing.webp', imageAlt: 'Workshop in the seminar room of the BLSV Sportcamp Nordbayern', credit: 'Flo Hagena / BLSV Sportcamp Nordbayern', diagram: 'budget',
       box: { h: 'What it costs – and how we get the most out of it', p: 'I work on a day rate or a fixed monthly budget, without agency overhead: no account manager, no junior learning on your time, no 15% handling on third-party costs. The marketing budget itself is allocated by a simple principle: test small first, then measure, then shift to where the numbers are best. Every month. What doesn’t deliver gets stopped – even if it was my idea. That’s how a medium budget gets more out than a big one planned once a year.' },
     },
     {
