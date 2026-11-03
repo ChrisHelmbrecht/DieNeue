@@ -50,7 +50,7 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src), thumb: v.poster
     const show = (i: number) => {
       stopPlayback();
       cur = (i + slides.length) % slides.length;
-      slides.forEach((s, j) => { s.hidden = j !== cur; s.querySelector<HTMLElement>('img')!.hidden = false; s.querySelector<HTMLElement>('.play')?.removeAttribute('hidden'); });
+      slides.forEach((s, j) => { s.hidden = j !== cur; s.classList.remove('playing'); s.querySelector<HTMLElement>('img')!.hidden = false; s.querySelector<HTMLElement>('.play')?.removeAttribute('hidden'); });
       tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === cur)); if (j === cur) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
     };
     tabs.forEach((t) => t.addEventListener('click', () => show(Number(t.dataset.i))));
@@ -76,7 +76,9 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src), thumb: v.poster
         }
         s.querySelector<HTMLElement>('img')!.hidden = true;
         s.querySelector<HTMLElement>('.play')!.setAttribute('hidden', '');
-        s.prepend(el);
+        s.classList.add('playing');
+        s.appendChild(el);
+        el.focus();
       });
     });
   });
@@ -88,6 +90,8 @@ const items = videos.map((v) => ({ ...v, embed: embedFor(v.src), thumb: v.poster
   .slide { margin: 0; position: absolute; inset: 0; }
   .slide img, .slide :global(iframe), .slide :global(video) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; background: #000; }
   .slide :global(video) { object-fit: contain; }
+  .slide.playing figcaption { display: none; }
+  .slide :global(iframe), .slide :global(video) { z-index: 1; }
   .play { position: absolute; inset: 0; margin: auto; width: 5rem; height: 5rem; border-radius: 50%; border: 0; background: var(--signal); color: #fff; display: grid; place-content: center; cursor: pointer; transition: transform .15s; }
   .play:hover { transform: scale(1.08); }
   figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 2.5rem 1.2rem .9rem; background: linear-gradient(transparent, rgba(0,0,0,.65)); color: #fff; pointer-events: none; }
