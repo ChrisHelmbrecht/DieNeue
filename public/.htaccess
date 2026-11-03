@@ -33,8 +33,13 @@ Redirect 301 /en/who-am-i/ /en/about/
 
 # Caching: Assets mit Hash lange, HTML kurz
 <IfModule mod_headers.c>
-<FilesMatch "\.(css|js|webp|jpg|png|svg|woff2|mp4)$">
+# Dateien mit Fingerabdruck im Namen (/_astro/…) dürfen ewig im Cache bleiben
+<If "%{REQUEST_URI} =~ m#^/_astro/#">
 Header set Cache-Control "public, max-age=31536000, immutable"
+</If>
+# Bilder, Videos, Logo: höchstens einen Tag, damit Austausch schnell ankommt
+<FilesMatch "\.(webp|jpg|jpeg|png|svg|gif|mp4|ico)$">
+Header set Cache-Control "public, max-age=86400"
 </FilesMatch>
 <FilesMatch "\.php$">
 Header set Cache-Control "no-store"
