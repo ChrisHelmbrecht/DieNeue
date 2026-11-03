@@ -4,7 +4,13 @@ import { glob } from 'astro/loaders';
 // Artikel ("Insights"). Ein Ordner pro Sprache: src/content/insights/de/*.md, /en/*.md
 // Deutsche und englische Fassung desselben Artikels teilen sich den gleichen `slug`.
 const insights = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/insights' }),
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/insights',
+    // Entry-ID aus dem Dateipfad (de/xxx, en/xxx) – sonst überschreibt der Glob-Loader
+    // die ID mit dem Frontmatter-`slug` und DE/EN-Fassungen kollidieren.
+    generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, ''),
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
