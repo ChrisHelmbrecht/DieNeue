@@ -12,7 +12,7 @@ const pos = (i: number) => {
 <div class="wheel" data-wheel>
   <svg viewBox="-60 0 520 400" role="img" aria-label={lang === 'de' ? 'Kreislauf aus vier Schritten' : 'Cycle of four steps'}>
     <circle cx={cx} cy={cy} r={r} class="ring" />
-    <circle cx={cx} cy={cy} r={r} class="ring-active" pathLength="100" />
+    <circle cx={cx} cy={cy} r={r} class="ring-active" pathLength="100" transform={`rotate(-90 ${cx} ${cy})`} />
     {steps.map((s, i) => {
       const p = pos(i);
       return (
@@ -66,7 +66,7 @@ const pos = (i: number) => {
   @media (min-width: 820px) { .wheel { grid-template-columns: 5fr 6fr; } }
   svg { width: min(100%, 440px); margin-inline: auto; overflow: visible; }
   .ring { fill: none; stroke: var(--line); stroke-width: 3; }
-  .ring-active { fill: none; stroke: var(--signal); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 75; transform: rotate(-90deg); transform-origin: center; transition: stroke-dashoffset .5s ease; }
+  .ring-active { fill: none; stroke: var(--signal); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 75; transition: stroke-dashoffset .5s ease; }
   .node { cursor: pointer; outline: none; }
   .dot { fill: var(--paper); stroke: var(--ink); stroke-width: 3; transition: fill .2s, stroke .2s; }
   .node:hover .dot, .node:focus-visible .dot { stroke: var(--signal); }
