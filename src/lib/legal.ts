@@ -7,6 +7,6 @@ export const owner = {
   phone: '+49 176 843 93190',
   email: 'info@dieneue.social',
   vatId: 'DE356631724',
-  hostingRegion: 'Frankfurt am Main (Deutschland)', // TODO: bei DigitalOcean prüfen (FRA1?)
+  hostingRegion: 'Frankfurt am Main (Deutschland)',
   hostingRegionEn: 'Frankfurt (Germany)',
 };
