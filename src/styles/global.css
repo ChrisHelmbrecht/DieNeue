@@ -1,18 +1,18 @@
 /* ---------- Tokens ---------- */
 :root {
   /* Farben */
-  --paper: #eceef1;        /* Papiergrau – Grundfläche */
-  --paper-2: #e2e5e9;      /* leicht dunkler, für Wechselflächen */
-  --ink: #141b26;          /* Blauschwarz – Text, dunkle Flächen */
-  --ink-2: #273242;        /* dunkle Fläche, angehoben */
-  --mute: #4f5864;         /* Nebentext */
-  --line: #c9ced4;         /* Linien */
+  --paper: #efefed;        /* helles, neutrales Grau – Grundfläche */
+  --paper-2: #e5e5e2;      /* leicht dunkler, für Wechselflächen */
+  --ink: #222222;          /* dunkles Grau – Text, dunkle Flächen */
+  --ink-2: #363636;        /* dunkle Fläche, angehoben */
+  --mute: #575754;         /* Nebentext */
+  --line: #cfcfcb;         /* Linien */
   --signal: #681611;        /* Chris' Rot – das einzige Signal */
   --signal-hover: #4e100c;  /* dunkler für Hover */
   --signal-light: #f0857a;  /* gleiches Rot, aufgehellt für Text/Linien auf Dunkel */
   --signal-ink: #ffffff;
-  --on-ink: #eceef1;
-  --on-ink-mute: #aeb6c0;
+  --on-ink: #efefed;
+  --on-ink-mute: #b5b5b1;
 
   /* Typo */
   --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
