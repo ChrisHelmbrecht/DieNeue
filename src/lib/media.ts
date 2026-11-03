@@ -25,16 +25,14 @@ export type WorkItem = {
   href?: string;
 };
 
-// VW-Spot: Link fehlt noch
 export const videos: Video[] = [
   { src: 'https://www.youtube.com/watch?v=WtZyykEicC8', poster: '/images/video-dsm-schule.webp', client: 'Deutsche Schule Moskau', title: { de: 'Imagefilm Deutsche Schule Moskau', en: 'Image film, German School Moscow' } },
-  { src: 'https://www.youtube.com/watch?v=3AUhU3jhoRI', poster: '/images/video-dsm-kinder.webp', client: 'Deutsche Schule Moskau', title: { de: 'Grundschule – Lernen draußen', en: 'Primary school – learning outdoors' } },
-  { src: 'https://www.youtube.com/watch?v=bA8rlucw3BQ', poster: '/images/video-dsm-lehrerin.webp', client: 'Deutsche Schule Moskau', title: { de: 'Lehrerinnen und Lehrer im Porträt', en: 'Teacher portraits' } },
-  { src: 'https://www.youtube.com/watch?v=lbe4CjYXzqU', poster: '/images/video-dsm-hoodie.webp', client: 'Deutsche Schule Moskau', title: { de: 'Schul-Merch Kampagne', en: 'School merch campaign' } },
-  { src: 'https://www.youtube.com/watch?v=FLmj72lXcyI', poster: '/images/video-spitzingsee-360.webp', client: 'BLSV Sportcamp Spitzingsee', title: { de: '360°-Rundgang Sportcamp Spitzingsee', en: '360° tour, Sportcamp Spitzingsee' } },
-  { src: 'https://www.youtube.com/watch?v=FnaEe4RJKDo', poster: '/images/video-interview.webp', client: 'Camps for Friends', title: { de: 'Interview-Reihe, Episode 2', en: 'Interview series, episode 2' } },
-  { src: 'https://www.youtube.com/watch?v=PyxVRN1C2T0', poster: '/images/video-airlst.webp', client: 'Airlst', title: { de: 'Airlst Podcast', en: 'Airlst podcast' } },
-  { poster: '/images/video-vw.webp', client: 'Volkswagen', title: { de: 'VW Service – TV-Spot, Moskau', en: 'VW Service – TV spot, Moscow' } },
+  { src: 'https://www.youtube.com/watch?v=3AUhU3jhoRI', poster: '/images/video-dsm-kinder.webp', client: 'Deutsche Schule Moskau', title: { de: 'Kindergarten', en: 'Kindergarten' } },
+  { src: 'https://www.youtube.com/watch?v=bA8rlucw3BQ', poster: '/images/video-dsm-lehrerin.webp', client: 'Deutsche Schule Moskau', title: { de: 'Grundschule', en: 'Primary school' } },
+  { src: 'https://www.youtube.com/watch?v=lbe4CjYXzqU', poster: '/images/video-dsm-hoodie.webp', client: 'Camps for Friends', title: { de: 'Imagefilm Camps for Friends', en: 'Image film, Camps for Friends' } },
+  { src: 'https://www.youtube.com/watch?v=8wQxmkyxMIU', poster: '/images/video-spitzingsee.webp', client: 'BLSV Sportcamp Spitzingsee', title: { de: 'Imagefilm Sportcamp Spitzingsee', en: 'Image film, Sportcamp Spitzingsee' } },
+  { src: 'https://www.youtube.com/watch?v=hC2Sogj5cag', poster: '/images/video-airlst.webp', client: 'AirLST', title: { de: 'AirLST Podcast', en: 'AirLST podcast' } },
+  { src: 'https://www.youtube.com/watch?v=QDIxcilR76U', poster: '/images/video-vw.webp', client: 'Kollektiv, Moskau', title: { de: 'Volkswagen Service – TV-Spot', en: 'Volkswagen Service – TV spot' } },
   { src: '/videos/kollektiv-leopolis.mp4', poster: '/images/video-leopolis.webp', client: 'Leopolis Hotel', title: { de: 'Rebranding Hotel Leopolis, Lviv', en: 'Rebranding Hotel Leopolis, Lviv' } },
 ];
 
