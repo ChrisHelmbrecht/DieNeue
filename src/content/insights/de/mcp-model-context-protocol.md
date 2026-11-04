@@ -1,6 +1,6 @@
 ---
 title: "MCP: Warum deine Software bald kein Frontend mehr braucht"
-description: "Was ein MCP ist, wie du deine KI damit an Mail, Kalender, CRM und Werbekonto anschließt – und warum die Oberfläche, wie wir sie kennen, gerade ausstirbt."
+description: "Was ein MCP ist, wie du deine KI an Mail, Office, Buchhaltung und Werbekonto anschließt, wo die Grenzen liegen – und warum die Oberfläche, wie wir sie kennen, ausstirbt."
 date: 2026-11-04
 lang: de
 slug: mcp-model-context-protocol
@@ -34,7 +34,11 @@ In Claude heißen die Dinger Konnektoren, in ChatGPT Apps oder Connectors. Du ge
 
 Bei Programmen, die noch nicht in der Liste stehen, braucht es einen Schritt mehr: Du trägst die Adresse ihres MCP-Servers selbst ein. Das ist eine URL, die der Anbieter in seiner Hilfe angibt. Zwei Minuten, wenn man weiß, wo man klicken muss. Zwei Stunden, wenn nicht.
 
-Bei mir hängen inzwischen Gmail, Kalender, Google Drive, das Meta-Werbekonto, Mailchimp, Planable für Social Media und Adobe dran. Die Website, die du gerade liest, habe ich übrigens mit KI gebaut, die direkt in GitHub schreibt und auf meinen Server ausliefert. Kein einziges Mal habe ich dafür ein Entwicklerprogramm geöffnet.
+Bei mir hängen inzwischen Gmail, Kalender, Google Drive, das Meta-Werbekonto, Mailchimp, Planable für Social Media, Adobe und mein Geschäftskonto bei Qonto dran.
+
+Die Website, die du gerade liest, habe ich übrigens mit KI gebaut, die direkt in GitHub schreibt und auf meinen Server ausliefert. Kein einziges Mal habe ich dafür ein Entwicklerprogramm geöffnet. WordPress und Elementor? Gehören für mich der Vergangenheit an. Keine Plugins mehr, die sich gegenseitig zerschießen, keine Sicherheitsupdates jeden zweiten Dienstag, kein Baukasten, der die Seite langsam macht.
+
+Und das Ergebnis ist nicht schlechter, sondern besser: Die Seite ist für Google optimiert, wird von KI-Suchen wie ChatGPT oder Perplexity sauber gelesen und verstanden, sieht auf dem Handy und dem Tablet so gut aus wie am Rechner und lässt sich mit ein paar Anweisungen barrierefrei machen – seit 2025 für viele Unternehmen Pflicht. Was früher ein Agenturprojekt über Wochen war, ist heute ein paar konzentrierte Tage.
 
 ## Was kann man damit machen?
 
@@ -43,14 +47,32 @@ Ein paar Beispiele aus dem echten Leben, nicht aus der Werbung:
 - **Posteingang:** „Welche Anfragen der letzten Woche habe ich noch nicht beantwortet? Schreib mir zu jeder einen Antwortentwurf.“ Die Entwürfe landen in Gmail. Lesen, anpassen, abschicken musst du immer noch selbst. Gut so.
 - **Werbung:** „Wie liefen die Meta-Kampagnen im Oktober im Vergleich zum September? Wo verbrennen wir Geld?“ Statt durch zwölf Reiter im Werbeanzeigenmanager zu klicken, bekommst du eine Antwort in Klartext.
 - **Termine:** „Finde nächste Woche zwei Stunden für den Workshop mit Team X, die beiden passen.“ Die KI schaut in die Kalender und schlägt vor.
+- **Buchhaltung:** „Welche Kundenrechnungen sind seit mehr als 30 Tagen offen? Und welche Belege fehlen mir noch für den Oktober?“ Bei mir läuft das über Qonto. Die KI sucht, sortiert und erinnert. Freigeben und überweisen musst du selbst – und das ist auch richtig so.
+- **Office:** „Mach aus dem Quartalsbericht in Word eine Präsentation in PowerPoint, zehn Folien, für die Geschäftsführung.“ Oder: „Was steht in der Excel-Liste mit den Messekontakten, und wer davon hat sich seitdem gemeldet?“ Microsoft 365 mit Outlook, Word, Excel und PowerPoint lässt sich inzwischen genauso anbinden wie Google.
 - **Dokumente:** „Such im Drive das Angebot für Kunde Y von letztem Jahr und mach daraus eine neue Version mit den Preisen von heute.“
 - **Social Media:** „Plan mir fünf LinkedIn-Posts zu diesem Artikel und leg sie als Entwurf in Planable ab.“
 
 Das Muster ist immer gleich: Du sagst, was du willst. Die KI holt sich, was sie braucht, aus den Programmen, in denen es liegt. Und legt das Ergebnis dort ab, wo es hingehört.
 
+## Was die KI (noch) nicht kann
+
+Ein Punkt, über den in den Erfolgsgeschichten selten jemand spricht: Fotos und Videos beurteilen kann die KI bis jetzt nicht zuverlässig. Sie erkennt, was auf einem Bild ist. Aber ob genau dieses Foto die Leute zum Stehenbleiben bringt, ob das Video in den ersten zwei Sekunden packt, ob das Bild zur Marke passt – das kann sie nicht.
+
+Für Websites, Social Media und Anzeigen heißt das: Die Auswahl von Bildern und Videos bleibt deine Aufgabe. Und den passenden Content musst du sowieso haben. Ohne gutes Material hilft dir auch der beste MCP nichts.
+
+Was die KI dir dafür abnimmt, ist der langweilige und oft komplizierte Teil. Kampagne anlegen, Zielgruppen einstellen, Budgets verteilen, Anzeigentexte in fünf Varianten, die Posts in den Planer legen, den Bericht zusammenstellen. Genau die Stunden, die früher im Werbeanzeigenmanager oder im Backend verschwunden sind.
+
+## Ohne Erfahrung geht es trotzdem nicht
+
+Und noch etwas habe ich gelernt, teilweise schmerzhaft: Die KI ist über MCP erstaunlich fähig – und erstaunlich bequem. Wenn ich den Auftrag nicht genau genug formuliere, nimmt sie den einfachsten Weg. Wie ein fauler Praktikant. Die Kampagne ist dann angelegt, technisch korrekt, aber mit der falschen Zielgruppe, dem falschen Ziel, Standard-Einstellungen überall.
+
+Das ist nicht die Schuld der KI. Das ist meine. Ich war als Manager nicht klar genug.
+
+Wer sich in seinem Bereich auskennt, weiß, was er will – und kann das in einem Auftrag sauber formulieren: Ziel, Zielgruppe, Budget, Ton, was auf keinen Fall passieren darf. Genau dann kommen optimale Ergebnisse raus. Die KI ersetzt also nicht die Erfahrung. Sie macht sie wertvoller. Wer weiß, was gutes Marketing ist, bekommt mit KI und MCP ein Team, das nie schläft. Wer es nicht weiß, bekommt sehr schnell sehr viel Mittelmaß.
+
 ## Die meisten Anbieter sind schon da. Der Rest kommt.
 
-Schau mal in die Liste deiner Software. Notion, Slack, HubSpot, Salesforce, Atlassian, Stripe, Shopify, Canva, Figma, Asana, monday – fast alle großen Namen bieten inzwischen einen offiziellen MCP-Server an. Bei den kleineren, gerade bei deutschen Branchenlösungen, fehlt er oft noch.
+Schau mal in die Liste der Software, die du jeden Tag nutzt. Microsoft 365 und Google Workspace, Banking und Buchhaltung wie Qonto, CRM wie HubSpot oder Salesforce, Shopify für den Onlineshop, Canva und Adobe für Grafik, Mailchimp für Newsletter, Meta und LinkedIn für Werbung, Slack, Notion, Asana für die Zusammenarbeit – die meisten großen Namen bieten inzwischen einen offiziellen MCP-Server an. Bei den kleineren, gerade bei deutschen Branchenlösungen und klassischer Buchhaltungssoftware, fehlt er oft noch.
 
 Ich sage voraus: nicht mehr lange. Wer 2027 keinen MCP-Server anbietet, ist für jeden Kunden, der mit KI arbeitet, einfach unsichtbar. Seine Daten liegen in einem Silo, an das die KI nicht rankommt. Und dann wechselt der Kunde zu dem Anbieter, bei dem es geht.
 
