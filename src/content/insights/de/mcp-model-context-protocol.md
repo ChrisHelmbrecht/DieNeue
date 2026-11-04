@@ -1,11 +1,13 @@
 ---
-title: "MCP: Warum deine Software bald kein Frontend mehr braucht"
+title: "Schon mal von MCP (KI) gehört?"
 description: "Was ein MCP ist, wie du deine KI an Mail, Office, Buchhaltung und Werbekonto anschließt, wo die Grenzen liegen – und warum die Oberfläche, wie wir sie kennen, ausstirbt."
 date: 2026-11-04
 lang: de
 slug: mcp-model-context-protocol
 tags: [ki, technik]
-draft: true
+cover: ../../../assets/insights/mcp-model-context-protocol/MCPHeader.webp
+coverAlt: "MCP – dieneue.social"
+draft: false
 ---
 
 Heute Morgen habe ich drei Programme nicht geöffnet. Nicht Gmail, nicht den Kalender, nicht den Werbeanzeigenmanager von Meta. Trotzdem waren die Mails sortiert, der Termin verschoben und der Bericht über die Kampagne lag auf dem Tisch.
