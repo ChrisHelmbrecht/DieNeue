@@ -19,5 +19,29 @@ Analyse → Lösung → Umsetzung (KI + Netzwerk) → Messen & nachsteuern. KI w
 Themen: KI im Unternehmen, Social-Media-Algorithmen, SEO & GEO (Sichtbarkeit in KI-Suchen), Barrierefreiheit, Datensicherung, Usability. /insights
 
 ## Kontakt
-info@dieneue.social · +49 176 843 93190 · /kontakt
-English version: /en
+Preise auf Anfrage – jedes Projekt wird individuell kalkuliert. info@dieneue.social · +49 176 843 93190 · /kontakt
+
+---
+
+# Die Neue – Chris Helmbrecht (English)
+
+> Marketing, AI consulting, paid social and web from Munich. For associations, mid-sized companies, start-ups and brands – in Germany and internationally. Online since 1995, agencies in New York and Moscow, today Die Neue in Munich and fractional Head of Marketing at VGAN Chocolate.
+
+## Services
+- AI consulting & rollout: audit, workshops, tool setup, data protection rules, ongoing support. /en/services#ai
+- Marketing management on demand: strategy, brand, content, social, website, reporting. /en/services#marketing
+- Paid social & content production: campaigns, creatives, video, landing pages for Meta, TikTok, LinkedIn, YouTube. /en/services#paid
+
+## Method
+Analysis → solution → execution (AI + network) → measure & adjust. AI output is checked in loops across several models; experience goes into the briefing and the final review. /en/method
+
+## Cases
+- BLSV Sportcamps: social media from zero, accessible websites, enquiries multiplied. /en/cases/blsv-sportcamps
+- VGAN Chocolate: repositioning and US launch 2027. /en/cases/vgan-chocolate
+- German School Moscow, Volvo USA, Leopolis Hotel. /en/cases
+
+## Articles
+Topics: AI in companies, social media algorithms, SEO & GEO (visibility in AI search), accessibility, data backup, usability. All articles are available in German and English. /en/insights
+
+## Contact
+Pricing on request – every project is scoped individually. info@dieneue.social · +49 176 843 93190 · /en/contact

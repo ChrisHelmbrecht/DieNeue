@@ -4,8 +4,6 @@ import { localePath, t, type Lang } from '@/i18n';
 import { home } from '@/lib/copy';
 import { videos, work } from '@/lib/media';
 import InsightCard from '@/components/InsightCard.astro';
-import Experience from '@/components/Experience.astro';
-import MethodWheel from '@/components/MethodWheel.astro';
 import VideoSlider from '@/components/VideoSlider.astro';
 import WorkStrip from '@/components/WorkStrip.astro';
 interface Props { lang: Lang }
@@ -44,7 +42,10 @@ const de = lang === 'de';
           <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} class:list={['panel', { active: i === 0 }]} aria-hidden={i !== 0 ? 'true' : undefined} inert={i !== 0 ? true : undefined}>
             <h2 class="statement">{p.statement}</h2>
             <p class="answer">{p.answer}</p>
-            <a class="btn" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
+            <p class="actions">
+              <a class="btn" href={localePath(lang, ui.contactPath)}>{de ? 'Schreib mir' : 'Get in touch'}</a>
+              <a class="btn btn--ghost" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
+            </p>
           </div>
         ))}
         </div>
@@ -53,47 +54,8 @@ const de = lang === 'de';
   </div>
 </section>
 
-<!-- FILME -->
-<section class="section reel on-ink">
-  <div class="wrap">
-    <h2>{de ? 'Filme' : 'Films'}</h2>
-    <p class="lede">{de ? 'Imagefilme, Spots, Interviews, Social-Clips – von der Idee bis zum Schnitt.' : 'Image films, spots, interviews, social clips – from idea to final cut.'}</p>
-    <VideoSlider videos={videos} lang={lang} />
-  </div>
-</section>
-
-<!-- INTRO -->
+<!-- LEISTUNGEN: die drei Wege, mit denen ich helfe -->
 <section class="section">
-  <div class="wrap split">
-    <h2>{c.intro.h}</h2>
-    <div>
-      {c.intro.p.map((p) => <p class="lede">{p}</p>)}
-      <a href={localePath(lang, de ? '/ueber-mich' : '/about')}>{de ? 'Mehr über mich' : 'More about me'}</a>
-    </div>
-  </div>
-</section>
-
-<!-- ERFAHRUNG -->
-<section class="section alt">
-  <div class="wrap">
-    <h2>{de ? 'Erfahrung' : 'Experience'}</h2>
-    <p class="lede">{de ? 'Seit 1995 in Agenturen, Konzernen und eigenen Firmen. New York, Moskau, München.' : 'Since 1995 in agencies, corporations and my own companies. New York, Moscow, Munich.'}</p>
-    <Experience lang={lang} />
-  </div>
-</section>
-
-<!-- METHODE: interaktiver Kreis -->
-<section class="section">
-  <div class="wrap">
-    <h2>{c.method.h}</h2>
-    <p class="lede">{c.method.lede}</p>
-    <MethodWheel steps={c.method.steps} lang={lang} />
-    <a class="btn btn--ghost" href={localePath(lang, c.method.href)}>{c.method.more}</a>
-  </div>
-</section>
-
-<!-- LEISTUNGEN -->
-<section class="section alt">
   <div class="wrap">
     <h2>{c.services.h}</h2>
     <p class="lede">{c.services.lede}</p>
@@ -106,29 +68,43 @@ const de = lang === 'de';
         </a>
       ))}
     </div>
+    <p class="more"><a href={localePath(lang, c.method.href)}>{de ? 'So arbeite ich: Analyse, Lösung, Umsetzung, Messen' : 'How I work: analysis, solution, execution, measurement'}</a></p>
   </div>
 </section>
 
-<!-- ARBEITEN: Bildleiste -->
+<!-- ARBEITEN: Bildleiste mit Kunden -->
 <section class="section on-ink work">
   <div class="wrap">
     <h2>{de ? 'Arbeiten' : 'Work'}</h2>
     <p class="lede">{de ? 'Filme, Kampagnen, Webseiten, Social – eine Auswahl aus drei Jahrzehnten.' : 'Films, campaigns, websites, social – a selection from three decades.'}</p>
   </div>
   <WorkStrip items={work[lang]} lang={lang} />
+  <div class="wrap"><p class="more"><a href={localePath(lang, '/cases')}>{de ? 'Alle Cases mit Zahlen' : 'All cases with numbers'}</a></p></div>
 </section>
 
-<!-- NETZWERK -->
+<!-- FILME -->
+<section class="section reel on-ink">
+  <div class="wrap">
+    <h2>{de ? 'Filme' : 'Films'}</h2>
+    <p class="lede">{de ? 'Imagefilme, Spots, Interviews, Social-Clips – von der Idee bis zum Schnitt.' : 'Image films, spots, interviews, social clips – from idea to final cut.'}</p>
+    <VideoSlider videos={videos} lang={lang} />
+  </div>
+</section>
+
+<!-- WER: kurz, Details auf „Über mich“ -->
 <section class="section">
   <div class="wrap split">
-    <h2>{c.network.h}</h2>
-    <div>{c.network.p.map((p) => <p class="lede">{p}</p>)}</div>
+    <h2>{c.intro.h}</h2>
+    <div>
+      {c.intro.p.map((p) => <p class="lede">{p}</p>)}
+      <a href={localePath(lang, de ? '/ueber-mich' : '/about')}>{de ? 'Mehr über mich' : 'More about me'}</a>
+    </div>
   </div>
 </section>
 
 <!-- INSIGHTS -->
 {posts.length > 0 && (
-  <section class="section">
+  <section class="section alt">
     <div class="wrap">
       <h2>Insights</h2>
       <div class="grid grid-3">
@@ -213,7 +189,11 @@ const de = lang === 'de';
   .panel.active { opacity: 1; visibility: visible; transition: opacity 1.2s ease-out .9s, visibility 0s linear .9s; }
   @media (prefers-reduced-motion: reduce) { .panel, .panel.active { transition: none; } }
 
+  .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; }
+  .hero .btn--ghost { color: #fff; border-color: var(--on-ink-mute); }
+  .more { margin-top: 1.6rem; }
   .reel { padding-top: 0; }
+  .work .more a { color: #fff; }
   .hero { padding-bottom: clamp(2rem, 5vw, 4rem); }
 
   .services { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); border-top: 1px solid var(--line); margin-top: 2rem; }
