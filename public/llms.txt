@@ -1,11 +1,11 @@
 # Die Neue – Chris Helmbrecht
 
-> Marketing, KI-Beratung, Paid Social und Web aus München. Für Verbände, Mittelstand, Start-ups und Marken – in Deutschland und international. Seit 1995 online, Agenturen in New York und Moskau, heute Die Neue in München und Head of Marketing (fractional) bei VGAN Chocolate.
+> Marketing, Social Media und KI-Beratung aus München. Für Verbände, Mittelstand, Start-ups und Marken – in Deutschland und international. Seit 1995 online, Agenturen in New York und Moskau, heute Die Neue in München und Head of Marketing (fractional) bei VGAN Chocolate.
 
 ## Leistungen
 - KI-Beratung & Einführung: Audit, Workshops, Tool-Setup, Datenschutz-Regeln, Begleitung. /leistungen#ki
 - Marketing-Management auf Zeit: Strategie, Marke, Content, Social, Website, Reporting. /leistungen#marketing
-- Paid Social & Content-Produktion: Kampagnen, Creatives, Video, Landingpages für Meta, TikTok, LinkedIn, YouTube. /leistungen#paid
+- Social Media & Paid Ads: Strategie, Redaktionsplan, Community, Kampagnen, Creatives, Video, Landingpages für Instagram, TikTok, LinkedIn, Facebook. /leistungen#paid
 
 ## Methode
 Analyse → Lösung → Umsetzung (KI + Netzwerk) → Messen & nachsteuern. KI wird in Schleifen mit mehreren Modellen geprüft, Erfahrung steckt im Briefing und in der letzten Kontrolle. /methode
@@ -25,12 +25,12 @@ Preise auf Anfrage – jedes Projekt wird individuell kalkuliert. info@dieneue.s
 
 # Die Neue – Chris Helmbrecht (English)
 
-> Marketing, AI consulting, paid social and web from Munich. For associations, mid-sized companies, start-ups and brands – in Germany and internationally. Online since 1995, agencies in New York and Moscow, today Die Neue in Munich and fractional Head of Marketing at VGAN Chocolate.
+> Marketing, social media and AI consulting from Munich. For associations, mid-sized companies, start-ups and brands – in Germany and internationally. Online since 1995, agencies in New York and Moscow, today Die Neue in Munich and fractional Head of Marketing at VGAN Chocolate.
 
 ## Services
 - AI consulting & rollout: audit, workshops, tool setup, data protection rules, ongoing support. /en/services#ai
 - Marketing management on demand: strategy, brand, content, social, website, reporting. /en/services#marketing
-- Paid social & content production: campaigns, creatives, video, landing pages for Meta, TikTok, LinkedIn, YouTube. /en/services#paid
+- Social media & paid ads: strategy, content calendar, community, campaigns, creatives, video, landing pages for Instagram, TikTok, LinkedIn, Facebook. /en/services#paid
 
 ## Method
 Analysis → solution → execution (AI + network) → measure & adjust. AI output is checked in loops across several models; experience goes into the briefing and the final review. /en/method

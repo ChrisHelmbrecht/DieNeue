@@ -30,7 +30,7 @@ const orgLd = {
   '@graph': [
     {
       '@type': 'ProfessionalService', '@id': `${Astro.site}#org`, name: 'Die Neue', url: Astro.site?.href, logo: new URL('/apple-touch-icon.png', Astro.site).href,
-      description: lang === 'de' ? 'Marketing, KI-Beratung, Paid Social und Web – Chris Helmbrecht, München. Für Verbände, Mittelstand, Start-ups und Marken.' : 'Marketing, AI consulting, paid social and web – Chris Helmbrecht, Munich. For associations, mid-sized companies, start-ups and brands.',
+      description: lang === 'de' ? 'Marketing, Social Media und KI-Beratung – Chris Helmbrecht, München. Für Verbände, Mittelstand, Start-ups und Marken.' : 'Marketing, social media and AI consulting – Chris Helmbrecht, Munich. For associations, mid-sized companies, start-ups and brands.',
       founder: { '@id': `${Astro.site}#chris` }, areaServed: ['DE', 'EU', 'US', 'NO'], email: 'info@dieneue.social', telephone: '+49 176 843 93190',
       address: { '@type': 'PostalAddress', streetAddress: 'Hauzenberger Str. 6', postalCode: '80687', addressLocality: 'München', addressCountry: 'DE' },
       knowsAbout: ['AI consulting', 'Marketing management', 'Paid social', 'Content production', 'Social media', 'Web design', 'SEO', 'GEO', 'Accessibility'],

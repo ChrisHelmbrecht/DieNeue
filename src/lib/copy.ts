@@ -45,9 +45,9 @@ export const home: Record<Lang, HomeCopy> = {
         {
           statement: 'Deine Ads laufen. Nur das Geschäft nicht.',
           answer:
-            'Paid Social funktioniert nur mit dem richtigen Content, der richtigen Zielgruppe und einem Budget, das nicht verpufft. Ich plane alle drei zusammen – und produziere, was fehlt.',
+            'Social Media und Anzeigen funktionieren nur mit dem richtigen Content, der richtigen Zielgruppe und einem Budget, das nicht verpufft. Ich plane alle drei zusammen – und produziere, was fehlt.',
           href: '/leistungen#paid',
-          cta: 'Paid Social & Content',
+          cta: 'Social Media & Paid Ads',
         },
       ],
     },
@@ -76,7 +76,7 @@ export const home: Record<Lang, HomeCopy> = {
       items: [
         { name: 'KI-Beratung & Einführung', who: 'Für Geschäftsführer und Teams, die KI nutzen wollen, statt nur davon zu lesen.', what: 'Audit der Abläufe, Workshops mit deinem Team, Einrichtung der Tools, Regeln für Datenschutz und Qualität. Bis es im Alltag läuft.', href: '/leistungen#ki' },
         { name: 'Marketing-Management', who: 'Für Unternehmen, die einen erfahrenen Marketingkopf brauchen – ohne Festanstellung.', what: 'Strategie, Markenführung, Content, Social Media, Website. Interim, auf Abruf oder als fester Tag pro Woche.', href: '/leistungen#marketing' },
-        { name: 'Paid Social & Content-Produktion', who: 'Für Marken, deren Anzeigen Reichweite bringen, aber keine Kunden.', what: 'Kampagnenplanung, Budgetstruktur, Creatives, Video, Landingpages. Meta, TikTok, LinkedIn, YouTube.', href: '/leistungen#paid' },
+        { name: 'Social Media & Paid Ads', who: 'Für Marken, deren Kanäle und Anzeigen Reichweite bringen, aber keine Kunden.', what: 'Strategie, Redaktionsplan, Community, Kampagnen, Budget, Creatives, Video, Landingpages. Instagram, TikTok, LinkedIn, Facebook.', href: '/leistungen#paid' },
       ],
     },
     network: {
@@ -125,9 +125,9 @@ export const home: Record<Lang, HomeCopy> = {
         {
           statement: 'Your ads are running. Your business isn’t.',
           answer:
-            'Paid social only works with the right content, the right audience and a budget that doesn’t evaporate. I plan all three together – and produce what’s missing.',
+            'Social media and ads only work with the right content, the right audience and a budget that doesn’t evaporate. I plan all three together – and produce what’s missing.',
           href: '/services#paid',
-          cta: 'Paid social & content',
+          cta: 'Social media & paid ads',
         },
       ],
     },
@@ -156,7 +156,7 @@ export const home: Record<Lang, HomeCopy> = {
       items: [
         { name: 'AI consulting & rollout', who: 'For founders, CEOs and teams who want to use AI instead of just reading about it.', what: 'Audit of your workflows, workshops with your team, tool setup, rules for data protection and quality. Until it runs day to day.', href: '/services#ai' },
         { name: 'Marketing management', who: 'For companies that need an experienced marketing lead – without a full-time hire.', what: 'Strategy, brand, content, social media, website. Interim, on call, or one fixed day a week.', href: '/services#marketing' },
-        { name: 'Paid social & content production', who: 'For brands whose ads bring reach but no customers.', what: 'Campaign planning, budget structure, creatives, video, landing pages. Meta, TikTok, LinkedIn, YouTube.', href: '/services#paid' },
+        { name: 'Social media & paid ads', who: 'For brands whose channels and ads bring reach but no customers.', what: 'Strategy, content calendar, community, campaigns, budget, creatives, video, landing pages. Instagram, TikTok, LinkedIn, Facebook.', href: '/services#paid' },
       ],
     },
     network: {
