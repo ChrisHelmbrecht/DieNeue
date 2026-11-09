@@ -23,18 +23,6 @@ const insights = defineCollection({
       cover: image().optional(),
       coverAlt: z.string().optional(),
       draft: z.boolean().default(false),
-      // Optional: YouTube-Video zum Artikel. Nur die ID (11 Zeichen), z. B. "VXGDHZIGf40".
-      // duration im ISO-Format (PT6M30S), uploadDate = Veröffentlichung auf YouTube.
-      // transcript: Klartext, Absätze durch Leerzeilen getrennt.
-      video: z
-        .object({
-          youtube: z.string().regex(/^[\w-]{11}$/),
-          title: z.string().optional(),
-          duration: z.string().regex(/^PT(\d+H)?(\d+M)?(\d+S)?$/).optional(),
-          uploadDate: z.coerce.date().optional(),
-          transcript: z.string().optional(),
-        })
-        .optional(),
     }),
 });
 

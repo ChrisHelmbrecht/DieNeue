@@ -4,7 +4,6 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import InsightCard from '@/components/InsightCard.astro';
-import ArticleVideo from '@/components/ArticleVideo.astro';
 import { localePath, t, type Lang } from '@/i18n';
 import { tagLabel } from '@/lib/tags';
 interface Props { post: CollectionEntry<'insights'>; lang: Lang }
@@ -43,28 +42,9 @@ const jsonLd = {
   publisher: { '@type': 'Organization', name: 'Die Neue', url: Astro.site?.href },
   mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
 };
-
-// Video zum Artikel als eigenes VideoObject – damit Suchmaschinen und KI-Systeme Video, Artikel und Autor verknüpfen
-const v = d.video;
-const videoLd = v && {
-  '@context': 'https://schema.org',
-  '@type': 'VideoObject',
-  name: v.title ?? d.title,
-  description: d.description,
-  inLanguage: lang,
-  thumbnailUrl: d.cover ? new URL(d.cover.src, Astro.site).href : `https://i.ytimg.com/vi/${v.youtube}/maxresdefault.jpg`,
-  uploadDate: (v.uploadDate ?? d.date).toISOString(),
-  duration: v.duration,
-  contentUrl: `https://www.youtube.com/watch?v=${v.youtube}`,
-  embedUrl: `https://www.youtube-nocookie.com/embed/${v.youtube}`,
-  transcript: v.transcript,
-  author: jsonLd.author,
-  publisher: jsonLd.publisher,
-};
 ---
 <Base lang={lang} title={d.title} description={d.description} type="article" ogImage={d.cover?.src} alt={twin ? undefined : { [other]: localePath(other, '/insights') }}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
-  {videoLd && <script type="application/ld+json" slot="head" set:html={JSON.stringify(videoLd)} />}
   <article>
     <header class="section--tight">
       <div class="col">
@@ -73,9 +53,7 @@ const videoLd = v && {
         <h1 class="title">{d.title}</h1>
         <p class="lede">{d.description}</p>
         {d.tags.length > 0 && <ul class="tags">{d.tags.map((x) => <li><a href={`${backHref}#${x}`}>{tagLabel(x, lang)}</a></li>)}</ul>}
-        {v
-          ? <ArticleVideo youtubeId={v.youtube} title={v.title ?? d.title} poster={d.cover} transcript={v.transcript} lang={lang} />
-          : d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} width="1200" height="675" class="cover" />}
+        {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} width="1200" height="675" class="cover" />}
       </div>
     </header>
     <div class="col prose"><Content /></div>
