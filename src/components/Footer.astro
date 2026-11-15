@@ -1,11 +1,24 @@
 ---
 import { nav, t, localePath, type Lang } from '@/i18n';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+import { home } from '@/lib/copy';
+interface Props { lang: Lang; big?: boolean }
+const { lang, big = false } = Astro.props;
+const cta = home[lang].cta;
 const ui = t(lang);
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer on-ink">
+  {big && (
+    <div class="wrap big">
+      <h2 data-reveal><img src="/images/chris-avatar.webp" alt="" width="120" height="120" loading="lazy" />{cta.h}</h2>
+      <p class="lede" data-reveal>{cta.p}</p>
+      <div class="line"><a class="round" data-magnetic="0.35" href={localePath(lang, ui.contactPath)}>{cta.button}</a></div>
+      <p class="pills">
+        <a class="pill" data-magnetic="0.2" href="mailto:info@dieneue.social">info@dieneue.social</a>
+        <a class="pill" data-magnetic="0.2" href="tel:+4917684393190">+49 176 843 93190</a>
+      </p>
+    </div>
+  )}
   <div class="wrap grid grid-3">
     <div>
       <p class="brand">Die Neue</p>
@@ -32,6 +45,16 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer { padding-block: 3.5rem 1.5rem; margin-top: 0; }
+  .big { padding-block: clamp(3rem, 9vw, 8rem) clamp(3rem, 6vw, 5rem); }
+  .big h2 { font-size: clamp(2.3rem, 7vw, 6.4rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.02; max-width: 14ch; margin-bottom: 1.5rem; }
+  .big h2 img { display: inline-block; width: .82em; height: .82em; border-radius: 50%; object-fit: cover; margin-right: .22em; vertical-align: -0.06em; }
+  .big .lede { color: var(--on-ink-mute); }
+  .line { position: relative; border-top: 1px solid var(--ink-2); margin-top: clamp(4.5rem, 9vw, 8rem); }
+  .round { position: absolute; right: clamp(0rem, 10vw, 12rem); top: 0; translate: 0 -50%; width: clamp(7.5rem, 13vw, 11.5rem); aspect-ratio: 1; border-radius: 50%; background: var(--signal); color: #fff; display: grid; place-content: center; text-align: center; padding: 1rem; font-family: var(--font-display); font-weight: 600; line-height: 1.15; transition: background .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
+  .round:hover { background: var(--signal-hover); color: #fff; }
+  .pills { display: flex; flex-wrap: wrap; gap: .8rem; margin: clamp(5rem, 9vw, 7.5rem) 0 0; max-width: none; }
+  .pill { border: 1px solid var(--on-ink-mute); border-radius: 999px; padding: 1rem 1.8rem; font-family: var(--font-display); font-weight: 500; transition: background .3s, color .3s, border-color .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
+  .pill:hover { background: var(--paper); color: var(--ink) !important; border-color: var(--paper); }
   .brand { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-3); margin-bottom: .3rem; }
   ul { list-style: none; margin: 0; padding: 0; }
   li { margin-bottom: .4rem; }

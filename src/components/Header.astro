@@ -1,13 +1,13 @@
 ---
 import { nav, t, localePath, switchLang, type Lang } from '@/i18n';
-interface Props { lang: Lang; alt?: Partial<Record<Lang, string>> }
-const { lang, alt } = Astro.props;
+interface Props { lang: Lang; alt?: Partial<Record<Lang, string>>; over?: boolean }
+const { lang, alt, over = false } = Astro.props;
 const ui = t(lang);
 const other: Lang = lang === 'de' ? 'en' : 'de';
 const path = Astro.url.pathname;
 const isActive = (href: string) => path === localePath(lang, href) || path.startsWith(localePath(lang, href) + '/');
 ---
-<header class="site-header">
+<header class:list={['site-header', { over }]}>
   <div class="wrap bar">
     <a class="brand" href={localePath(lang)} aria-label="Die Neue – Start">
       <img src="/logo.svg" alt="" width="36" height="36" />
@@ -37,6 +37,14 @@ const isActive = (href: string) => path === localePath(lang, href) || path.start
 
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  /* Startseite: liegt durchsichtig über dem Hero, wird nach dem Hero zur normalen Leiste */
+  .site-header { transition: background .35s ease, border-color .35s ease, color .35s ease; }
+  .site-header.over { position: fixed; left: 0; right: 0; }
+  .site-header.over:not(.scrolled) { background: transparent; backdrop-filter: none; border-bottom-color: transparent; color: #fff; }
+  .site-header.over:not(.scrolled) .brand img { filter: invert(1); }
+  .site-header.over:not(.scrolled) .name small, .site-header.over:not(.scrolled) .lang { color: rgba(255,255,255,.75); }
+  .site-header.over:not(.scrolled) a:hover { color: #fff; opacity: .8; }
+  .site-header.over:not(.scrolled) .mobile ul { color: var(--ink); }
   .bar { display: flex; align-items: center; gap: 1.5rem; min-height: 4.25rem; }
   .brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-2); letter-spacing: -0.01em; }
   .name { display: grid; line-height: 1.05; }

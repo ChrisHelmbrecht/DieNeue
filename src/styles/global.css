@@ -102,3 +102,23 @@ a:hover { color: var(--signal); }
 .prose li + li { margin-top: .3em; }
 .prose code { font-size: .9em; background: var(--paper-2); padding: .1em .3em; border-radius: 3px; }
 .prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+
+/* ---------- Bewegung (nur mit JS und ohne „Bewegung reduzieren“, siehe Base.astro) ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.btn { transition: background .15s ease, border-color .15s ease, transform .45s cubic-bezier(.2, .8, .2, 1); will-change: transform; }
+.js .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1) calc(var(--d, 0) * 90ms), transform .9s cubic-bezier(.2, .7, .2, 1) calc(var(--d, 0) * 90ms); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .sw.rv { opacity: 1; transform: none; }
+.sw .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em 0 .14em; margin: -.06em 0 -.14em; }
+.sw .w > span { display: inline-block; transform: translateY(110%); transition: transform .9s cubic-bezier(.2, .8, .2, 1) calc(var(--i) * 45ms); }
+.sw.in .w > span { transform: none; }
+
+/* Bogen am Ende einer Fläche: flacht beim Scrollen ab */
+.curve { --ch: clamp(50px, 11vh, 130px); position: relative; z-index: 3; height: var(--ch); margin-bottom: calc(-1 * var(--ch)); pointer-events: none; overflow: hidden; transform-origin: top; transform: scaleY(var(--p, 0)); }
+.js .curve { --p: 1; }
+.curve::before { content: ''; position: absolute; left: -15%; width: 130%; top: -100%; height: 200%; border-radius: 50%; background: var(--curve, var(--ink)); }
+
+/* Laufschrift */
+.mq { overflow: hidden; white-space: nowrap; }
+.mq-track { display: inline-flex; will-change: transform; }
+.mq-track > * { flex: none; }

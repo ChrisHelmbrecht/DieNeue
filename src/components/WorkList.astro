@@ -1,0 +1,63 @@
+---
+/* Arbeiten als große Zeilen; das passende Bild folgt dem Mauszeiger. Nur für Geräte mit Maus – auf Touch zeigt die Startseite die Bildleiste. */
+import type { Lang } from '@/i18n';
+import type { WorkItem } from '@/lib/media';
+interface Props { items: WorkItem[]; lang: Lang }
+const { items, lang } = Astro.props;
+---
+<div class="wl" data-worklist>
+  <ul>
+    {items.map((w, i) => (
+      <li data-i={i}>
+        {w.href
+          ? <a href={w.href}><strong>{w.client}</strong><span>{w.kind}</span></a>
+          : <div class="row"><strong>{w.client}</strong><span>{w.kind}</span></div>}
+      </li>
+    ))}
+  </ul>
+  <div class="preview" aria-hidden="true">
+    <div class="reel">
+      {items.map((w) => <img src={w.image} alt="" width="640" height="400" loading="lazy" />)}
+    </div>
+    <span class="tag">{lang === 'de' ? 'Ansehen' : 'View'}</span>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-worklist]').forEach((root) => {
+    const preview = root.querySelector<HTMLElement>('.preview')!;
+    const reel = root.querySelector<HTMLElement>('.reel')!;
+    const tag = root.querySelector<HTMLElement>('.tag')!;
+    let x = 0, y = 0, tx = 0, ty = 0, on = false, raf = 0;
+    const loop = () => {
+      x += (tx - x) * 0.14; y += (ty - y) * 0.14;
+      preview.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translate(-50%,-50%) scale(${on ? 1 : 0})`;
+      raf = on || Math.abs(tx - x) > 0.5 ? requestAnimationFrame(loop) : 0;
+    };
+    root.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); });
+    root.querySelectorAll<HTMLElement>('li').forEach((li) => {
+      li.addEventListener('mouseenter', (e) => {
+        if (!on) { x = tx = e.clientX; y = ty = e.clientY; }
+        on = true;
+        reel.style.transform = `translateY(${-Number(li.dataset.i) * 100}%)`;
+        tag.hidden = !li.querySelector('a');
+        if (!raf) raf = requestAnimationFrame(loop);
+      });
+    });
+    root.querySelector('ul')!.addEventListener('mouseleave', () => { on = false; if (!raf) raf = requestAnimationFrame(loop); });
+  });
+</script>
+
+<style>
+  ul { list-style: none; margin: 2.5rem 0 0; padding: 0; max-width: none; border-top: 1px solid var(--ink-2); }
+  li { border-bottom: 1px solid var(--ink-2); margin: 0; }
+  a, .row { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; padding: clamp(1.4rem, 2.6vw, 2.4rem) 0; text-decoration: none; color: var(--on-ink); transition: padding .45s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
+  strong { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 4vw, 3.6rem); letter-spacing: -0.025em; line-height: 1.05; }
+  span { color: var(--on-ink-mute); font-size: var(--fs-0); text-align: right; }
+  ul:hover a, ul:hover .row { opacity: .45; }
+  ul li:hover a, ul li:hover .row { opacity: 1; padding-inline: 1.2rem; color: #fff; }
+  .preview { position: fixed; left: 0; top: 0; z-index: 40; width: min(30vw, 420px); aspect-ratio: 16/10; overflow: hidden; border-radius: var(--radius); pointer-events: none; transform: translate(-50%, -50%) scale(0); transition: scale .4s; background: var(--ink-2); }
+  .reel { height: 100%; transition: transform .55s cubic-bezier(.7, 0, .2, 1); }
+  .reel img { width: 100%; height: 100%; object-fit: cover; }
+  .tag { position: absolute; inset: 0; margin: auto; width: 5rem; height: 5rem; border-radius: 50%; background: var(--signal); color: #fff; display: grid; place-content: center; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
+</style>

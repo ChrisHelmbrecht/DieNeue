@@ -69,15 +69,17 @@ const orgLd = {
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js');</script>
     {isHome && <script type="application/ld+json" set:html={JSON.stringify(orgLd)} />}
     <slot name="head" />
   </head>
   <body>
     <a class="skip" href="#main">{t(lang).skip}</a>
-    <Header lang={lang} alt={altOverride} />
+    <Header lang={lang} alt={altOverride} over={isHome} />
     <main id="main">
       <slot />
     </main>
-    <Footer lang={lang} />
+    <Footer lang={lang} big={isHome} />
+    <script>import '@/scripts/motion';</script>
   </body>
 </html>
