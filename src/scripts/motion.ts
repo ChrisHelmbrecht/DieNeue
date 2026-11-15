@@ -83,7 +83,7 @@ if (!reduce) {
       if (top > vh * 1.1 || top < -50) continue;
       d.style.setProperty('--p', clamp((vh - top) / (vh * 0.7)).toFixed(3));
     }
-    if (scrollY < vh * 1.5) {
+    if (scrollY < vh * 2.5) {
       for (const r of rotates) r.el.style.transform = `rotate(${(scrollY * r.f).toFixed(2)}deg)`;
       for (const sh of shifts) sh.el.style.transform = `translate3d(${(scrollY * sh.f).toFixed(1)}px,0,0)`;
     }
