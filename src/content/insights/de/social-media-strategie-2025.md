@@ -28,9 +28,12 @@ Eine gute Strategie sorgt dafür, dass:
 
 ## Die 3 wichtigsten Säulen einer erfolgreichen Strategie
 
-1. **Content-Säulen definieren**Welche Themen möchtest du besetzen? Wo bist du Experte? Beispiele: Tipps & Tricks, Behind the Scenes, Kundenerfolge, Fachwissen.
-2. **Konsistenz ist König**Lieber regelmäßig kleine Impulse setzen als sporadisch große Aktionen. Besser 3 gute Posts pro Woche als einmal im Monat ein Feuerwerk.
-3. **Tools nutzen, um Arbeit zu erleichtern**Redaktionspläne, Automatisierungen und Tools wie **Later**, **Buffer** oder **Metricool** helfen dir, Zeit zu sparen und den Überblick zu behalten.
+1. **Content-Säulen definieren**
+   Welche Themen möchtest du besetzen? Wo bist du Experte? Beispiele: Tipps & Tricks, Behind the Scenes, Kundenerfolge, Fachwissen.
+2. **Konsistenz ist König**
+   Lieber regelmäßig kleine Impulse setzen als sporadisch große Aktionen. Besser 3 gute Posts pro Woche als einmal im Monat ein Feuerwerk.
+3. **Tools nutzen, um Arbeit zu erleichtern**
+   Redaktionspläne, Automatisierungen und Tools wie **Later**, **Buffer** oder **Metricool** helfen dir, Zeit zu sparen und den Überblick zu behalten.
 
 ## Fazit: 2025 gehört den Planern, nicht den Zufälligen
 

@@ -24,17 +24,22 @@ Wie einfach ist es, sich zu orientieren? Wie intuitiv ist die Bedienung? Wie sch
 
 Eine gute Usability sorgt für:
 
-- mehr Verweildauer
+- mehr Verweildauer,
 - höhere Conversion-Raten,
 - bessere Platzierungen bei Google.
 
 ## 5 einfache Regeln für bessere Usability
 
-1. **Navigation, die sofort Sinn ergibt**Klare Menüstruktur. Keine zehn Unterpunkte. Wichtiges zuerst.Regel: Weniger denken, mehr finden.
-2. **Call-to-Actions, die gesehen und verstanden werden**Ein Button wie „Jetzt kostenlos anfragen“ ist besser als „Weiter“.Sag den Leuten, was sie tun sollen – und warum.
-3. **Mobile First – wirklich**Über 70 % der Nutzer sind mobil unterwegs. Deine Seite muss mobil perfekt funktionieren – schnell, lesbar, klickbar.Teste sie auf echten Geräten!
-4. **Kurze Ladezeiten**Wenn deine Seite lahmt, bist du weg.Ziel: unter 2 Sekunden. Tools wie PageSpeed Insights helfen.
-5. **Lesbare Texte**Kein Textwust, keine Romane. Klare Zwischenüberschriften, kurze Absätze, einfache Sprache.Mach’s deinen Besuchern leicht.
+1. **Navigation, die sofort Sinn ergibt**
+   Klare Menüstruktur. Keine zehn Unterpunkte. Wichtiges zuerst. Regel: Weniger denken, mehr finden.
+2. **Call-to-Actions, die gesehen und verstanden werden**
+   Ein Button wie „Jetzt kostenlos anfragen“ ist besser als „Weiter“. Sag den Leuten, was sie tun sollen – und warum.
+3. **Mobile First – wirklich**
+   Über 70 % der Nutzer sind mobil unterwegs. Deine Seite muss mobil perfekt funktionieren – schnell, lesbar, klickbar. Teste sie auf echten Geräten!
+4. **Kurze Ladezeiten**
+   Wenn deine Seite lahmt, bist du weg. Ziel: unter 2 Sekunden. Tools wie PageSpeed Insights helfen.
+5. **Lesbare Texte**
+   Kein Textwust, keine Romane. Klare Zwischenüberschriften, kurze Absätze, einfache Sprache. Mach’s deinen Besuchern leicht.
 
 ## Fazit
 

@@ -78,11 +78,16 @@ Ab Mitte 2025 kann fehlende Barrierefreiheit nicht nur abgemahnt, sondern auch s
 
 ## Was du als Unternehmen jetzt tun solltest
 
-1. **Audit durchführen**Wie barrierefrei ist deine Website oder App wirklich? Tools wie Wave oder axe helfen beim ersten Check – aber auch ein professionelles Accessibility-Audit lohnt sich.
-2. **WCAG-konforme Struktur umsetzen**Saubere Überschriften-Hierarchie, sprechende Links, klare Navigation – das ist nicht nur für Blinde hilfreich.
-3. **ALT-Texte und Bildbeschreibungen einpflegen**Bilder ohne Beschreibung sind für Screenreader ein schwarzes Loch. ALT-Texte schaffen Abhilfe – und helfen gleichzeitig bei SEO.
-4. **PDFs und Dokumente prüfen**Viele Unternehmen vergessen: Barrierefreiheit endet nicht bei der Website. Auch angehängte Dokumente müssen lesbar, durchsuchbar und strukturiert sein.
-5. **Eine barrierefreie UX ist gute UX**Nicht nur Menschen mit Behinderung profitieren. Eine klare, zugängliche Seite hilft allen: Senioren, gestressten Eltern, Usern mit schlechter Internetverbindung – und ja, auch dem Google-Bot.
+1. **Audit durchführen**
+   Wie barrierefrei ist deine Website oder App wirklich? Tools wie Wave oder axe helfen beim ersten Check – aber auch ein professionelles Accessibility-Audit lohnt sich.
+2. **WCAG-konforme Struktur umsetzen**
+   Saubere Überschriften-Hierarchie, sprechende Links, klare Navigation – das ist nicht nur für Blinde hilfreich.
+3. **ALT-Texte und Bildbeschreibungen einpflegen**
+   Bilder ohne Beschreibung sind für Screenreader ein schwarzes Loch. ALT-Texte schaffen Abhilfe – und helfen gleichzeitig bei SEO.
+4. **PDFs und Dokumente prüfen**
+   Viele Unternehmen vergessen: Barrierefreiheit endet nicht bei der Website. Auch angehängte Dokumente müssen lesbar, durchsuchbar und strukturiert sein.
+5. **Eine barrierefreie UX ist gute UX**
+   Nicht nur Menschen mit Behinderung profitieren. Eine klare, zugängliche Seite hilft allen: Senioren, gestressten Eltern, Usern mit schlechter Internetverbindung – und ja, auch dem Google-Bot.
 
 ## Wer Barrierefreiheit als Chance versteht, ist ab 2025 im Vorteil
 
