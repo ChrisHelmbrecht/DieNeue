@@ -26,12 +26,6 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
     <img src="/images/hero-chris.webp" srcset="/images/hero-chris-1280.webp 1280w, /images/hero-chris.webp 2000w" sizes="100vw" alt="Chris Helmbrecht" width="2000" height="1116" fetchpriority="high" />
   </picture>
   <div class="hero-shade"></div>
-  <p class="hero-pill">
-    <span>{de ? 'Sitz in München,' : 'Based in Munich,'}<br />{de ? 'weltweit im Einsatz' : 'working worldwide'}</span>
-    <span class="globe" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9.2"/><ellipse cx="12" cy="12" rx="4" ry="9.2"/><path d="M3 12h18M4.6 7h14.8M4.6 17h14.8"/></svg>
-    </span>
-  </p>
   <div class="hero-role">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 8v11H8"/></svg>
     <h1>{de ? 'KI-Beratung &' : 'AI Consulting &'}<br />{de ? 'Marketing-Management' : 'Marketing Management'}<span class="sr-only">{de ? ' in München – Chris Helmbrecht, Die Neue' : ', Munich – Chris Helmbrecht, Die Neue'}</span></h1>
@@ -194,10 +188,6 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
   .hero-img { position: absolute; inset: 0; display: block; will-change: transform; }
   .hero-img img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 18%; }
   .hero-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26, 24, 28, .62), rgba(26, 24, 28, 0) 42%), linear-gradient(to bottom, rgba(26, 24, 28, .35), rgba(26, 24, 28, 0) 22%); }
-  .hero-pill { position: absolute; left: 0; top: 43%; margin: 0; display: flex; align-items: center; gap: 1.3rem; padding: .65rem .65rem .65rem var(--gutter); background: var(--ink); border-radius: 0 999px 999px 0; font-size: var(--fs-0); line-height: 1.3; }
-  .globe { width: 3.6rem; height: 3.6rem; border-radius: 50%; background: #8d8990; display: grid; place-content: center; }
-  .globe svg { max-width: none; animation: spin 14s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
   .hero-role { position: absolute; right: max(var(--gutter), 6vw); top: 33%; }
   .hero-role svg { margin-bottom: 1.6rem; }
   .hero-role h1 { font-weight: 500; font-size: clamp(1.25rem, 2.25vw, 2.1rem); line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
@@ -205,14 +195,10 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
   .hero-name i { font-style: normal; opacity: .9; }
   @media (max-width: 899px) {
     .hero-img img { object-position: 50% 0; }
-    .hero-pill { top: auto; bottom: calc(var(--name) + clamp(1rem, 5vh, 3.5rem) + 7.2rem); padding-block: .45rem; gap: .8rem; }
-    .globe { width: 2.6rem; height: 2.6rem; }
-    .globe svg { width: 20px; height: 20px; }
     .hero-role { right: auto; left: var(--gutter); top: auto; bottom: calc(var(--name) + clamp(1rem, 5vh, 3.5rem) + 1.4rem); }
     .hero-role svg { display: none; }
     .hero-shade { background: linear-gradient(to top, rgba(26, 24, 28, .8), rgba(26, 24, 28, 0) 55%), linear-gradient(to bottom, rgba(26, 24, 28, .35), rgba(26, 24, 28, 0) 18%); }
   }
-  @media (prefers-reduced-motion: reduce) { .globe svg { animation: none; } }
 
   /* Drei Probleme */
   .problems { padding-bottom: clamp(2.5rem, 6vw, 5rem); }
