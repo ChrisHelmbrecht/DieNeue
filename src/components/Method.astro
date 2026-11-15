@@ -10,10 +10,15 @@ const { lang } = Astro.props;
 const m = method[lang];
 const ui = t(lang);
 ---
-<section class="section hero">
+<section class="section on-ink pagehead hero" data-hero>
   <div class="wrap">
     <h1>{m.title}</h1>
     <p class="lede">{m.lede}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" data-reveal>
     <MethodWheel steps={home[lang].method.steps} lang={lang} />
   </div>
 </section>
@@ -86,16 +91,8 @@ const ui = t(lang);
   </div>
 </section>
 
-<section class="section cta">
-  <div class="wrap">
-    <h2>{m.cta.h}</h2>
-    <p class="lede">{m.cta.p}</p>
-    <a class="btn" href={localePath(lang, ui.contactPath)}>{ui.contact}</a>
-  </div>
-</section>
 
 <style>
-  .hero h1 { font-size: var(--fs-6); }
   .phase .wrap { display: grid; gap: var(--gutter); grid-template-columns: 1fr; }
   @media (min-width: 900px) { .phase .wrap { grid-template-columns: 4fr 7fr; } .head { position: sticky; top: 6rem; align-self: start; } }
   .num { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-6); color: var(--signal); line-height: 1; display: block; margin-bottom: .3rem; }
@@ -114,8 +111,4 @@ const ui = t(lang);
   @media (min-width: 900px) { .split-d { grid-template-columns: 7fr 5fr; } }
   .split-d p { max-width: 58ch; }
   .photo { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; }
-  .cta { background: var(--signal); color: #fff; }
-  .cta .btn { background: #fff; color: var(--signal); border-color: #fff; }
-  .cta .btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
-  .cta .lede { color: #f3d3cf; }
 </style>

@@ -5,7 +5,7 @@ interface Props { title: string; description: string; lang: Lang; lede?: string 
 const { title, description, lang, lede } = Astro.props;
 ---
 <Base lang={lang} title={title} description={description}>
-  <section class="section">
+  <section class="section on-ink pagehead" data-hero>
     <div class="wrap">
       <h1 class="page-title">{title}</h1>
       {lede && <p class="lede">{lede}</p>}
@@ -18,7 +18,6 @@ const { title, description, lang, lede } = Astro.props;
   </section>
 </Base>
 <style>
-  .page-title { font-size: var(--fs-6); max-width: 18ch; }
   :global(.objection) { border-left: 4px solid var(--signal); background: color-mix(in srgb, var(--signal) 6%, transparent); padding: 1rem 1.4rem; margin: 2rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
   :global(.objection h2) { margin-top: 0; }
 </style>

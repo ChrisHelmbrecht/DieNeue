@@ -7,7 +7,7 @@ const { lang } = Astro.props;
 const de = lang === 'de';
 const cases = (await getCollection('cases', (e) => e.data.lang === lang && !e.data.draft)).sort((a, b) => a.data.order - b.data.order);
 ---
-<section class="section">
+<section class="section on-ink pagehead" data-hero>
   <div class="wrap">
     <h1>Cases</h1>
     <p class="lede">{de ? 'Ausgangslage, Lösung, Umsetzung, Ergebnis. Keine Hochglanz-Referenzen, sondern was tatsächlich passiert ist – mit Zahlen, wo es welche gibt.' : 'Situation, solution, execution, result. No glossy references – what actually happened, with numbers where there are any.'}</p>
@@ -40,7 +40,6 @@ const cases = (await getCollection('cases', (e) => e.data.lang === lang && !e.da
   </div>
 </section>
 <style>
-  h1 { font-size: var(--fs-6); }
   .cases { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; gap: 2.5rem; }
   .card { display: grid; gap: var(--gutter); text-decoration: none; grid-template-columns: 1fr; border-top: 1px solid var(--line); padding-top: 2rem; }
   @media (min-width: 820px) { .card { grid-template-columns: 5fr 7fr; } }

@@ -12,7 +12,7 @@ const L = de
   ? { who: 'Für wen', problem: 'Das typische Problem', what: 'Was passiert', deliver: 'Was du bekommst', kpis: 'Woran wir Erfolg messen', formats: 'Formate', jump: 'Direkt zu' }
   : { who: 'For whom', problem: 'The typical problem', what: 'What happens', deliver: 'What you get', kpis: 'How we measure success', formats: 'Formats', jump: 'Jump to' };
 ---
-<section class="section hero">
+<section class="section on-ink pagehead hero" data-hero>
   <div class="wrap">
     <h1>{de ? 'Leistungen' : 'Services'}</h1>
     <p class="lede">{de ? 'Drei Dinge, die ich richtig gut kann. Alles andere – Design, Film, Entwicklung, Media – holt mein Netzwerk, und ich koordiniere.' : 'Three things I do really well. Everything else – design, film, development, media – comes from my network, and I coordinate.'}</p>
@@ -64,7 +64,9 @@ const L = de
 ))}
 
 <style>
-  .hero h1 { font-size: var(--fs-6); }
+  .hero .jump a { border-color: var(--on-ink-mute); }
+  .hero .jump .n { background: var(--signal); color: #fff; }
+  .hero .jump a:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
   .jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.2rem; }
   .jump a { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; border: 1px solid var(--ink); border-radius: 999px; padding: .4rem 1rem .4rem .4rem; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); }
   .jump .n { display: grid; place-content: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--ink); color: var(--on-ink); font-size: .8rem; }

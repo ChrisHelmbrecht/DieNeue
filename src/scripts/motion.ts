@@ -4,16 +4,20 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
+function hero0() { return document.querySelector('[data-hero]'); }
 /* Kopfzeile über dem Hero: durchsichtig, bis man am Hero vorbei ist */
-const header = document.querySelector<HTMLElement>('.site-header.over');
+const header = hero0() ? document.querySelector<HTMLElement>('.site-header') : null;
 const hero = document.querySelector<HTMLElement>('[data-hero]');
-const headerState = () => header?.classList.toggle('scrolled', scrollY > (hero ? hero.offsetHeight - 90 : 40));
+const headerState = () => header?.classList.toggle('scrolled', scrollY > Math.max(40, (hero ? hero.offsetHeight : 0) - 90));
 headerState();
 addEventListener('scroll', headerState, { passive: true });
 
 if (!reduce) {
+  /* 0. Unterseiten: Bogen unter dem dunklen Seitenkopf */
+  document.querySelectorAll('.pagehead').forEach((h) => { const c = document.createElement('div'); c.className = 'curve'; c.dataset.curve = ''; h.after(c); });
+
   /* 1. Überschriften in Wörter teilen, damit sie zeilenweise hochfahren */
-  document.querySelectorAll<HTMLElement>('main h2:not(.statement):not([data-no-split]), [data-split]').forEach((h) => {
+  document.querySelectorAll<HTMLElement>('main h2:not(.statement):not([data-no-split]), .pagehead h1, [data-split]').forEach((h) => {
     if (h.children.length || h.closest('.prose')) return;
     const text = h.textContent!.trim();
     h.setAttribute('aria-label', text);
