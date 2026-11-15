@@ -5,7 +5,6 @@ import { home } from '@/lib/copy';
 import { videos, work } from '@/lib/media';
 import InsightCard from '@/components/InsightCard.astro';
 import VideoSlider from '@/components/VideoSlider.astro';
-import WorkStrip from '@/components/WorkStrip.astro';
 import WorkList from '@/components/WorkList.astro';
 import { topBrands } from '@/lib/experience';
 interface Props { lang: Lang }
@@ -19,52 +18,51 @@ const de = lang === 'de';
 const half = Math.ceil(topBrands.length / 2);
 const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
 ---
-<!-- HERO: Bühne mit Porträt und Laufschrift -->
-<section class="hero" data-hero>
-  <picture class="hero-img" data-parallax="0.22">
-    <source media="(max-width: 899px)" srcset="/images/hero-chris-m.webp" />
-    <img src="/images/hero-chris.webp" srcset="/images/hero-chris-1280.webp 1280w, /images/hero-chris.webp 2000w" sizes="100vw" alt="Chris Helmbrecht" width="2000" height="1116" fetchpriority="high" />
-  </picture>
-  <div class="hero-shade"></div>
-  <div class="hero-role">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 8v11H8"/></svg>
-    <h1>{de ? 'KI-Beratung &' : 'AI Consulting &'}<br />{de ? 'Marketing-Management' : 'Marketing Management'}<span class="sr-only">{de ? ' in München – Chris Helmbrecht, Die Neue' : ', Munich – Chris Helmbrecht, Die Neue'}</span></h1>
-  </div>
-  <div class="hero-name mq" data-marquee data-speed="85" aria-hidden="true">
-    <div class="mq-track">{[0, 1, 2, 3].map(() => <span>Chris Helmbrecht <i>—</i> Die Neue <i>—</i>&nbsp;</span>)}</div>
-  </div>
-</section>
-
-<!-- DREI PROBLEME -->
-<section class="section on-ink problems">
-  <div class="wrap">
-    <p class="question" data-reveal>{c.hero.question}</p>
-    <div class="tabs" data-tabs>
-      <div class="tablist" role="tablist" aria-label={de ? 'Typische Probleme' : 'Typical problems'}>
-        {c.hero.problems.map((p, i) => (
-          <button role="tab" id={`tab-${i}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`panel-${i}`} tabindex={i === 0 ? 0 : -1}>{p.cta}</button>
-        ))}
-        <button type="button" class="pause" data-pause aria-pressed="false" aria-label={de ? 'Automatischen Wechsel anhalten' : 'Pause automatic rotation'} title={de ? 'Anhalten' : 'Pause'}>
-          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-pause"><rect x="3" y="2" width="3.5" height="12" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" fill="currentColor"/></svg>
-          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-play"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
-        </button>
-      </div>
-      <div class="stack">
-      {c.hero.problems.map((p, i) => (
-        <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} class:list={['panel', { active: i === 0 }]} aria-hidden={i !== 0 ? 'true' : undefined} inert={i !== 0 ? true : undefined}>
-          <h2 class="statement">{p.statement}</h2>
-          <p class="answer">{p.answer}</p>
-          <p class="actions">
-            <a class="btn" href={localePath(lang, ui.contactPath)}>{de ? 'Schreib mir' : 'Get in touch'}</a>
-            <a class="btn btn--ghost" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
-          </p>
+<!-- HERO: die drei Probleme groß, Porträt als Spalte, Logo und Wortmarke als Gestaltung -->
+<section class="hero on-ink" data-hero>
+  <div class="hero-logo" data-rotate="0.045" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1 class="kicker">{c.hero.kicker}</h1>
+      <p class="question">{c.hero.question}</p>
+      <div class="tabs" data-tabs>
+        <div class="tablist" role="tablist" aria-label={de ? 'Typische Probleme' : 'Typical problems'}>
+          {c.hero.problems.map((p, i) => (
+            <button role="tab" id={`tab-${i}`} aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`panel-${i}`} tabindex={i === 0 ? 0 : -1}>{p.cta}</button>
+          ))}
+          <button type="button" class="pause" data-pause aria-pressed="false" aria-label={de ? 'Automatischen Wechsel anhalten' : 'Pause automatic rotation'} title={de ? 'Anhalten' : 'Pause'}>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-pause"><rect x="3" y="2" width="3.5" height="12" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" fill="currentColor"/></svg>
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" class="i-play"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>
+          </button>
         </div>
-      ))}
+        <div class="stack">
+        {c.hero.problems.map((p, i) => (
+          <div role="tabpanel" id={`panel-${i}`} aria-labelledby={`tab-${i}`} class:list={['panel', { active: i === 0 }]} aria-hidden={i !== 0 ? 'true' : undefined} inert={i !== 0 ? true : undefined}>
+            <h2 class="statement">{p.statement}</h2>
+            <p class="answer">{p.answer}</p>
+            <p class="actions">
+              <a class="btn" href={localePath(lang, ui.contactPath)}>{de ? 'Schreib mir' : 'Get in touch'}</a>
+              <a class="btn btn--ghost" href={localePath(lang, p.href)}>{de ? 'Mehr dazu' : 'Read more'}</a>
+            </p>
+          </div>
+        ))}
+        </div>
       </div>
     </div>
+    <figure class="hero-portrait">
+      <div class="block" data-parallax="-0.06" aria-hidden="true"></div>
+      <picture>
+        <img src="/images/hero-chris-m.webp" alt="Chris Helmbrecht" width="760" height="902" fetchpriority="high" />
+      </picture>
+      <figcaption>Chris Helmbrecht</figcaption>
+    </figure>
   </div>
+  <p class="stations" aria-hidden="true"><span></span>New York — {de ? 'Moskau' : 'Moscow'} — {de ? 'München' : 'Munich'} · {de ? 'seit 1995' : 'since 1995'}</p>
+  <div class="wordmark" data-shift="-0.18" aria-hidden="true">Die Neue</div>
 </section>
 
+<div class="after">
+<div class="draw" data-draw></div>
 <!-- LEISTUNGEN: große Zeilen -->
 <section class="section">
   <div class="wrap">
@@ -83,17 +81,15 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
     <p class="more"><a class="btn btn--ghost" href={localePath(lang, c.method.href)}>{de ? 'So arbeite ich: Analyse, Lösung, Umsetzung, Messen' : 'How I work: analysis, solution, execution, measurement'}</a></p>
   </div>
 </section>
-<div class="curve" data-curve style="--curve: var(--paper)"></div>
 
 
-<!-- ARBEITEN: Liste mit Bild am Mauszeiger (Desktop), Bildleiste (Touch) -->
+<!-- ARBEITEN: Bild bleibt stehen, Liste scrollt, Bild wechselt mit dem Eintrag -->
 <section class="section on-ink work">
   <div class="wrap">
     <h2>{de ? 'Arbeiten' : 'Work'}</h2>
     <p class="lede">{de ? 'Filme, Kampagnen, Webseiten, Social – eine Auswahl aus drei Jahrzehnten.' : 'Films, campaigns, websites, social – a selection from three decades.'}</p>
-    <div class="work-list"><WorkList items={work[lang]} lang={lang} /></div>
+    <WorkList items={work[lang]} lang={lang} />
   </div>
-  <div class="work-strip"><WorkStrip items={work[lang]} lang={lang} /></div>
   <div class="wrap"><p class="more"><a class="btn btn--ghost" href={localePath(lang, '/cases')}>{de ? 'Alle Cases mit Zahlen' : 'All cases with numbers'}</a></p></div>
 </section>
 
@@ -107,7 +103,7 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
   </div>
 </section>
 
-<div class="curve" data-curve></div>
+<div class="draw" data-draw></div>
 
 <!-- INTRO -->
 <section class="section intro">
@@ -142,7 +138,7 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
     </div>
   </section>
 )}
-<div class="curve" data-curve style="--curve: var(--paper-2)"></div>
+</div>
 
 <script>
   // Tabs im Hero: Klick, Pfeiltasten, und sanfter Auto-Wechsel bis zur ersten Interaktion
@@ -184,30 +180,28 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
 
 <style>
   /* Hero */
-  .hero { --name: clamp(4.4rem, 13.5vw, 15rem); position: relative; height: 100svh; min-height: 540px; max-height: 1200px; overflow: hidden; background: #6c6870; color: #fff; isolation: isolate; }
-  .hero-img { position: absolute; inset: 0; display: block; will-change: transform; }
-  .hero-img img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 18%; }
-  .hero-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26, 24, 28, .62), rgba(26, 24, 28, 0) 42%), linear-gradient(to bottom, rgba(26, 24, 28, .35), rgba(26, 24, 28, 0) 22%); }
-  .hero-role { position: absolute; right: max(var(--gutter), 6vw); top: 33%; }
-  .hero-role svg { margin-bottom: 1.6rem; }
-  .hero-role h1 { font-weight: 500; font-size: clamp(1.25rem, 2.25vw, 2.1rem); line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
-  .hero-name { position: absolute; left: 0; right: 0; bottom: clamp(1rem, 5vh, 3.5rem); font-family: var(--font-display); font-weight: 500; font-size: var(--name); line-height: 1; letter-spacing: -0.035em; }
-  .hero-name i { font-style: normal; opacity: .9; }
-  @media (max-width: 899px) {
-    .hero-img img { object-position: 50% 0; }
-    .hero-role { right: auto; left: var(--gutter); top: auto; bottom: calc(var(--name) + clamp(1rem, 5vh, 3.5rem) + 1.4rem); }
-    .hero-role svg { display: none; }
-    .hero-shade { background: linear-gradient(to top, rgba(26, 24, 28, .8), rgba(26, 24, 28, 0) 55%), linear-gradient(to bottom, rgba(26, 24, 28, .35), rgba(26, 24, 28, 0) 18%); }
-  }
+  .hero { position: relative; overflow: hidden; isolation: isolate; padding-top: clamp(5.5rem, 8vw, 7rem); min-height: 100svh; display: flex; flex-direction: column; }
+  .hero-logo { position: absolute; z-index: -1; right: -14vw; top: -18vw; width: 62vw; aspect-ratio: 1; background: var(--ink-2); opacity: .55; -webkit-mask: url(/logo.svg) center / contain no-repeat; mask: url(/logo.svg) center / contain no-repeat; will-change: transform; }
+  .hero-grid { display: grid; gap: clamp(2rem, 5vw, 5rem); grid-template-columns: 1fr; align-items: center; flex: 1; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 3.6fr); } }
+  .kicker { color: var(--on-ink-mute); font-family: var(--font-body); font-weight: 400; font-size: var(--fs-0); line-height: 1.4; letter-spacing: 0; margin-bottom: 1rem; }
+  .hero-portrait { position: relative; margin: 0 1.2rem 0 0; }
+  .hero-portrait .block { position: absolute; inset: 1.4rem -1.2rem -1.4rem 1.2rem; background: var(--signal); }
+  .hero-portrait img { position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 12%; filter: grayscale(1) contrast(1.08); }
+  .hero-portrait figcaption { position: absolute; left: 0; bottom: -1.4rem; transform: translateY(100%); font-size: var(--fs-0); color: var(--on-ink-mute); }
+  @media (max-width: 899px) { .hero-portrait { max-width: 300px; } .hero-portrait img { aspect-ratio: 1; } }
+  .stations { display: flex; align-items: center; gap: 1rem; max-width: none; margin: clamp(2.2rem, 3.5vw, 3rem) 0 0; padding-inline: var(--gutter); font-family: var(--font-display); font-weight: 500; font-size: var(--fs-0); letter-spacing: .04em; text-transform: uppercase; color: var(--on-ink-mute); }
+  .stations span { width: 3rem; height: 2px; background: var(--signal-light); }
+  .wordmark { font-family: var(--font-display); font-weight: 700; font-size: clamp(6rem, 21vw, 22rem); line-height: .74; height: .6em; overflow: hidden; white-space: nowrap; letter-spacing: -0.05em; color: var(--ink-2); padding-left: var(--gutter); margin-top: 1rem; will-change: transform; user-select: none; }
+  .after { position: relative; z-index: 1; background: var(--paper); }
 
   /* Drei Probleme */
-  .problems { padding-bottom: clamp(2.5rem, 6vw, 5rem); }
   .question { font-family: var(--font-display); font-size: var(--fs-3); color: var(--on-ink-mute); margin-bottom: 1.2rem; }
-  .tablist { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+  .tablist { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
   .tablist button { font: inherit; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-0); color: var(--on-ink-mute); background: transparent; border: 1px solid var(--ink-2); border-radius: 999px; padding: .55rem 1.1rem; cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
   .tablist button[aria-selected='true'] { color: #fff; border-color: var(--signal-light); background: var(--signal); }
   .tablist button:hover { color: #fff; }
-  .problems .statement { font-size: clamp(2.2rem, 5.2vw, 4.6rem); font-weight: 600; letter-spacing: -0.025em; max-width: 22ch; color: #fff; margin-bottom: 1.2rem; }
+  .hero .statement { font-size: clamp(2.3rem, 5.2vw, 4.8rem); line-height: 1; font-weight: 600; letter-spacing: -0.025em; max-width: 22ch; color: #fff; margin-bottom: 1.2rem; }
   .answer { font-size: var(--fs-2); line-height: 1.45; max-width: 50ch; color: var(--on-ink); }
   .pause { margin-left: auto; width: 2.1rem; height: 2.1rem; border-radius: 50%; border: 1px solid var(--ink-2); background: transparent; color: var(--on-ink-mute); display: grid; place-content: center; cursor: pointer; }
   .pause:hover { color: #fff; border-color: var(--on-ink-mute); }
@@ -223,11 +217,9 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
   @media (prefers-reduced-motion: reduce) { .panel, .panel.active { transition: none; transform: none; } }
 
   .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; }
-  .problems .btn--ghost, .work .btn--ghost { color: #fff; border-color: var(--on-ink-mute); }
+  .hero .btn--ghost, .work .btn--ghost { color: #fff; border-color: var(--on-ink-mute); }
   .more { margin-top: 2.2rem; max-width: none; }
   .reel { padding-top: 0; }
-  .work { padding-top: clamp(5rem, 12vw, 10rem); }
-  .intro { padding-top: clamp(5rem, 12vw, 10rem); }
   .section :global(h2) { font-size: clamp(2.074rem, 4vw, 3.4rem); letter-spacing: -0.025em; }
 
   /* Marken-Laufbänder */
@@ -257,7 +249,4 @@ const brandRows = [topBrands.slice(0, half), topBrands.slice(half)];
     .go { width: 2.6rem; height: 2.6rem; }
   }
 
-  /* Arbeiten: Liste nur mit Maus, sonst Bildleiste */
-  .work-list { display: none; }
-  @media (hover: hover) and (pointer: fine) and (min-width: 900px) { .work-list { display: block; } .work-strip { display: none; } }
 </style>

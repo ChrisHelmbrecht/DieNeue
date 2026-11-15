@@ -113,10 +113,9 @@ a:hover { color: var(--signal); }
 .sw .w > span { display: inline-block; transform: translateY(110%); transition: transform .9s cubic-bezier(.2, .8, .2, 1) calc(var(--i) * 45ms); }
 .sw.in .w > span { transform: none; }
 
-/* Bogen am Ende einer Fläche: flacht beim Scrollen ab */
-.curve { --ch: clamp(50px, 11vh, 130px); position: relative; z-index: 3; height: var(--ch); margin-bottom: calc(-1 * var(--ch)); pointer-events: none; overflow: hidden; transform-origin: top; transform: scaleY(var(--p, 0)); }
-.js .curve { --p: 1; }
-.curve::before { content: ''; position: absolute; left: -15%; width: 130%; top: -100%; height: 200%; border-radius: 50%; background: var(--curve, var(--ink)); }
+/* Rote Linie, die sich beim Scrollen von links nach rechts zieht */
+.draw { height: 3px; background: var(--signal); transform-origin: left; transform: scaleX(var(--p, 1)); position: relative; z-index: 2; }
+.js .draw { --p: 0; }
 
 /* Laufschrift */
 .mq { overflow: hidden; white-space: nowrap; }
@@ -137,4 +136,3 @@ body:has([data-hero]) .site-header:not(.scrolled) .mobile ul { color: var(--ink)
 .pagehead { padding-top: clamp(8.5rem, 17vw, 14rem); padding-bottom: clamp(3rem, 7vw, 6rem); }
 .pagehead h1 { font-size: clamp(2.25rem, 7.2vw, 6.2rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1; max-width: 15ch; margin-bottom: .45em; color: #fff; }
 .pagehead .lede { color: var(--on-ink); max-width: 56ch; }
-.pagehead + .curve + * { padding-top: clamp(5rem, 12vw, 9rem); }
