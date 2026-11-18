@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dieneue.social/sitemap-index.xml
